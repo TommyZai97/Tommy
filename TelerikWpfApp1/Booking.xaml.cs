@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Linq;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace TelerikWpfApp1
 {
@@ -57,7 +58,7 @@ namespace TelerikWpfApp1
         }
 
    
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
             //book button
             try
@@ -86,11 +87,21 @@ namespace TelerikWpfApp1
                 for (int i = 0; i < ResultTable.Rows.Count; i++)
                 {
                               
-                    if (Convert.ToDateTime(ResultTable.Rows[A]["BookingDate"]).Date < Start.Date && Start.TimeOfDay > CheckTime && Start.TimeOfDay < endTime)
+                    if (Start.Date > DateTime.Now && Convert.ToDateTime(ResultTable.Rows[A]["BookingDate"]).Date < Start.Date && Start.TimeOfDay > CheckTime && Start.TimeOfDay < endTime)
                     {
                         MyDAL.AddBookingTime(Start, CBBike.SelectedValue.ToString().Trim(), "A",TBCustomer.Text, null,TLUsername.Text,null,null, TBRemarks.Text);
                         Xceed.Wpf.Toolkit.MessageBox.Show("Booking made at :" + Start);
                         A++;
+                        break;
+                    }
+                    else if (Start.Date < DateTime.Now)
+                    {
+                        var res = await this.ShowMessageAsync("Error","Date must be booked 1 day ahead from today");
+                        break;
+                    }
+                    else if (Start.TimeOfDay < CheckTime || Start.TimeOfDay > endTime)
+                    {
+                        var res = await this.ShowMessageAsync("Error", "Booking must be booked at 8am-4pm");
                         break;
                     }
 

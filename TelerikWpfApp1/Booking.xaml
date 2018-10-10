@@ -32,6 +32,7 @@
                 <DataGridTextColumn Header="Booking Status" Binding="{Binding BookingStatusInFull}"/>
                 <DataGridTextColumn Header="Bicycle" Binding="{Binding BicycleName}"/>
                 <DataGridTextColumn Header="Booking Deposit" Binding="{Binding BookingDeposit}"/>
+                <DataGridTextColumn Header="Renter" Binding="{Binding Customer}"/>
             </DataGrid.Columns>
 
 

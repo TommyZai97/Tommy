@@ -45,21 +45,26 @@ namespace TelerikWpfApp1
             TBikeDAL MyDAL = new TBikeDAL();
             DataTable ResultTable = MyDAL.ShowAllBookingTable();
             DateTime date = DateTime.Now;
-            foreach(DataRow row in ResultTable.Rows)
+            int i = 0;
+            foreach (DataRow row in ResultTable.Rows)
             {
-                int i=0;
+            
                 DateTime D = Convert.ToDateTime(ResultTable.Rows[i]["BookingDate"]);
+                string ID = Convert.ToString(ResultTable.Rows[i]["BookingID"]);
                 string Status = Convert.ToString(ResultTable.Rows[i]["BookingStatus"]);
+                string Bike = Convert.ToString(ResultTable.Rows[i]["BicycleID"]);
+                string Customer = Convert.ToString(ResultTable.Rows[i]["Customer"]);
                 
-                if (date > D && Status == "A")
+                if (date.Date > D.Date && Status == "A")
                 {
-                    MyDAL.UpdateBookingDate(D,"E");
+                    MyDAL.UpdateBookingDate(D, "E", ID);
+                    MyDAL.UpdateBikeStatus(Bike, "");
                 }
-                else if (date > D && Status == "R")
+                else if (date.Date > D && Status == "R")
                 {
-                    MyDAL.UpdateBookingDate(D, "N");
+                    MyDAL.UpdateBookingDate(D, "N",ID);
                 }
-                i = i + 1;
+                 i = i + 1;
             }
         }
         private void Button_Click(object sender, RoutedEventArgs e)

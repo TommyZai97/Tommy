@@ -546,7 +546,7 @@ namespace TelerikWpfApp1
             }
             return BookingID;
         }
-        public DateTime UpdateBookingDate(DateTime date, string BookingStatus)
+        public DateTime UpdateBookingDate(DateTime date, string BookingStatus,string ID)
         {
             SqlConnection conn = new SqlConnection(constring);
             SqlCommand MyCmd = new SqlCommand("UpdBookingDate", conn);
@@ -556,6 +556,7 @@ namespace TelerikWpfApp1
             try
             {
                 MyCmd.Parameters.AddWithValue("@BookingDate", date);
+                MyCmd.Parameters.AddWithValue("@BookingID", ID);
                 MyCmd.Parameters.AddWithValue("@BookingStatus", BookingStatus);
                 MyCmd.ExecuteNonQuery();
             }
