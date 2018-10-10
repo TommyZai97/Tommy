@@ -13,16 +13,20 @@ using System.Windows.Media.Imaging;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.Sql;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace TelerikWpfApp1
 {
     /// <summary>
     /// Interaction logic for EmployeeManagement.xaml
     /// </summary>
-    public partial class EmployeeManagement : Window
+    public partial class EmployeeManagement : MetroWindow
     {
         int RankID;
         string username;
+        string id;
+        string self;
         public EmployeeManagement()
         {
             InitializeComponent();
@@ -98,7 +102,56 @@ namespace TelerikWpfApp1
 
         private void BTNSetRank_Click(object sender, RoutedEventArgs e)
         {
-
+            EmployeeRank Rank = new EmployeeRank();
+            Rank.PopulateDataFromLogin(username);
+            Rank.Show();
+            this.Close();
         }
+
+        private void dataGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataRowView dataRow = (DataRowView)dataGrid1.SelectedItem;
+            int index = dataGrid1.Items.IndexOf(dataGrid1.CurrentItem);
+            //string cellValue = dataRow.Row.ItemArray[index].ToString();
+
+            TBikeDAL MyDAL = new TBikeDAL();
+
+            DataTable ResultTable = MyDAL.ShowAllEmployeeDetails();
+            id = Convert.ToString(ResultTable.Rows[index]["EmployeeID"]);
+            self = Convert.ToString(ResultTable.Rows[index]["username"]);
+            if (RankID >= 4)
+            {
+                BTNPromote.Visibility = Visibility.Visible;
+            }
+        }
+
+        private async void BTNPromote_Click(object sender, RoutedEventArgs e)
+        {
+            if (id != null)
+            {
+                TBikeDAL MyDAL = new TBikeDAL();
+                DataTable ResultTable = MyDAL.SelectEmployeeByEmployeeID(id);
+                int Rank = Convert.ToInt32(ResultTable.Rows[0]["EmployeeRank"]);
+                if (RankID >= 4)
+                {
+                    if (self == username || RankID > Rank)
+                        if (id != null)
+                        {
+                            EmployeeModify mod = new EmployeeModify();
+                            mod.populateEmployee(id);
+                            mod.PopulateDataFromLogin(username);
+                            mod.Show();
+                            this.Close();
+                        }
+                }
+            }
+            else
+            {
+                var res = await this.ShowMessageAsync("Error", "Please Select Employee");
+
+            }
+        }
+
+      
     }
 }

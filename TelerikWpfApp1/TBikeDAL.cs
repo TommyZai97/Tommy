@@ -109,7 +109,35 @@ namespace TelerikWpfApp1
             return ResultDataTable;
 
         }
+        public DataTable ShowEmployeeRankByID(string RankID)
+        {
 
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelEmployeeRankByID", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+            MyCmd.Parameters.AddWithValue("@EmployeeRankID", RankID);
+            try
+            {
+                MyCon.Open();
+
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At ShowEmployeeRankByID : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+        }
         public string AddNewEmployeeDetails(string EmployeeName, DateTime DateOfBirth, string Email, string PhoneNo, string AddressLine1, string AddressLine2, string AddressLine3, string City, int ZipCode, string CreatedBy)
         {
             string EmployeeID="";
@@ -164,7 +192,7 @@ namespace TelerikWpfApp1
             catch (Exception e)
             {
 
-                throw new Exception("DB Operation Error At UpdNewEmployeeLoginInfo : " + e.Message);
+                throw new Exception("DB Operation Error At AddNewEmployeeLoginInfo : " + e.Message);
             }
             finally
             {
@@ -177,8 +205,127 @@ namespace TelerikWpfApp1
 
 
         }
-       
+        public string UpdateEmployeePromotion(string EmployeeID,  int Rank, string LastUpdatedBy)
+        {
+            SqlConnection conn = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("UpdEmployeePromotion", conn);
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+            try
+            {
+                MyCmd.Parameters.AddWithValue("@EmployeeID", EmployeeID);
+                MyCmd.Parameters.AddWithValue("@EmployeeRank", Rank);
+                MyCmd.Parameters.AddWithValue("@LastUpdatedBy", LastUpdatedBy);
 
+                MyCmd.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("DB Operation Error At UpdateEmployeeRank : " + e.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+                MyCmd.Dispose();
+            }
+            return EmployeeID;
+
+        }
+
+        public string AddNewEmployeeRank(string RankDesc, int Rank, string CreatedBy)
+        {
+            SqlConnection conn = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("AddNewEmployeeRank", conn);
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+            try
+            {
+                MyCmd.Parameters.AddWithValue("@EmployeeRankDesc", RankDesc);
+                MyCmd.Parameters.AddWithValue("@EmployeeRank", Rank);
+                MyCmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+
+                MyCmd.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("DB Operation Error At AddNewEmployeeRank : " + e.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+                MyCmd.Dispose();
+            }
+            return RankDesc;
+
+        }
+
+        public string UpdateEmployeeRank(string RankID,string RankDesc, int Rank, string LastUpdatedBy)
+        {
+            SqlConnection conn = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("UpdEmployeeRank", conn);
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+            try
+            {
+                MyCmd.Parameters.AddWithValue("@EmployeeRankID", RankID);
+                MyCmd.Parameters.AddWithValue("@EmployeeRankDesc", RankDesc);
+                MyCmd.Parameters.AddWithValue("@EmployeeRank", Rank);
+                MyCmd.Parameters.AddWithValue("@LastUpdatedBy", LastUpdatedBy);
+
+                MyCmd.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("DB Operation Error At UpdateEmployeeRank : " + e.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+                MyCmd.Dispose();
+            }
+            return RankDesc;
+
+        }
+        public DataTable SelectEmployeeByEmployeeID(string EmployeeID)
+        {
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelAllEmpDetailsByID", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            MyCmd.Parameters.AddWithValue("@EmployeeID", EmployeeID);
+          
+            //we will use SQLAdaptor due to huge amount of column
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+            try
+            {
+                MyCon.Open();
+                //string SQLStatement = (string)MyCmd.ExecuteScalar();
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelectEmployeeByEmployeeID : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+        }
+        
         public DataTable SelectEmployeeID(string EmployeeName, string Username)
         {
           
@@ -200,7 +347,7 @@ namespace TelerikWpfApp1
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("DB Operation Error At GetRequestDetailByRequestID : " + e.Message);
+                    throw new Exception("DB Operation Error At SelectEmployeeID : " + e.Message);
                 }
                 finally
                 {

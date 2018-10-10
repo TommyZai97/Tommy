@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Intern001.it\Desktop\TommyGit\TelerikWpfApp1\App.xaml
-11-749023706
+12-1387580677
 
-211647599128
+22-1533590576
 40397660608
-Booking.xaml;CreateNewUser.xaml;EmployeeManagement.xaml;EmployeeRank.xaml;InventoryManage.xaml;LoginMenu.xaml;MainWindow.xaml;RegisterPassword.xaml;rental.xaml;RentalProcessing.xaml;Return.xaml;
+Booking.xaml;CreateNewUser.xaml;EmployeeManagement.xaml;EmployeeModify.xaml;EmployeeRank.xaml;InventoryManage.xaml;LoginMenu.xaml;MainWindow.xaml;RegisterPassword.xaml;rental.xaml;RentalProcessing.xaml;Return.xaml;
 
-False
+True
 

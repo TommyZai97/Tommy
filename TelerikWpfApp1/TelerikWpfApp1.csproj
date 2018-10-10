@@ -126,6 +126,9 @@
     <Compile Include="EmployeeManagement.xaml.cs">
       <DependentUpon>EmployeeManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeModify.xaml.cs">
+      <DependentUpon>EmployeeModify.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EmployeeRank.xaml.cs">
       <DependentUpon>EmployeeRank.xaml</DependentUpon>
     </Compile>
@@ -161,6 +164,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EmployeeManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EmployeeModify.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

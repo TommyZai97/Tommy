@@ -84,8 +84,7 @@ namespace TelerikWpfApp1
                 RankID = Convert.ToInt32(ResultTable.Rows[0]["EmployeeRank"]);
 
 
-                res = await this.ShowMessageAsync("Complete", "Rented Out by " + TLUsername.Text);
-            }
+                    }
         }
         private void button_Click_1(object sender, RoutedEventArgs e)
         {

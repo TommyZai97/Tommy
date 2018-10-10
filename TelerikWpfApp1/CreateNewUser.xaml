@@ -15,7 +15,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="Image/background.jpg"/>
         </Grid.Background>
-        <Rectangle Fill="White" HorizontalAlignment="Center" Height="251"  Stroke="Black" VerticalAlignment="Center" Width="713" RadiusY="29.5" RadiusX="29.5" Margin="45,92,34,76"/>
+        <Rectangle Fill="White" HorizontalAlignment="Center" Height="251"  Stroke="Black" VerticalAlignment="Center" Width="735" RadiusY="29.5" RadiusX="29.5" Margin="34,92,23,76"/>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="20,22,0,0" Width="700">
 
