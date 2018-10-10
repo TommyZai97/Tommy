@@ -69,7 +69,7 @@ namespace TelerikWpfApp1 {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/TelerikWpfApp1;component/loginmenu.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/T-Bike;component/loginmenu.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\LoginMenu.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -40,6 +40,7 @@ namespace TelerikWpfApp1
 
             CreateNewUser emp = new CreateNewUser();
             this.Close();
+            emp.PopulateDataFromLogin(username);
             emp.Show();
             MessageBox.Show("Create New User Success!!!");
             

@@ -85,7 +85,7 @@ namespace TelerikWpfApp1 {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/TelerikWpfApp1;component/registerpassword.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/T-Bike;component/registerpassword.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\RegisterPassword.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

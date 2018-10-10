@@ -25,9 +25,11 @@
                 <ImageBrush ImageSource="Image/bck.png"/>
             </Button.Background>
         </Button>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Welcome, " VerticalAlignment="Bottom" Foreground="White" Margin="120,0,0,18.667" FontWeight="Bold"/>
-        <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="180,0,0,18.667"/>
-        <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="240,0,0,18.667"/>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="71,0,0,0" Width="302">
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Welcome, " VerticalAlignment="Bottom" Foreground="White" Margin="0,0,0,17" FontWeight="Bold"/>
+            <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="64,-33,19,18.667"/>
+            <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="136,-42,0,20"/>
+        </StackPanel>
 
     </Grid>
 

@@ -23,9 +23,6 @@
                 <ImageBrush ImageSource="Image/bck.png"/>
             </Button.Background>
         </Button>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Welcome, " VerticalAlignment="Bottom" Foreground="White" Margin="86,0,0,10" FontWeight="Bold"/>
-        <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="146,0,0,10"/>
-        <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="206,0,0,10"/>
         <StackPanel HorizontalAlignment="Left" Height="280" Margin="34,50,0,0" VerticalAlignment="Top" Width="324">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Employee ID" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="0,28,0,0"/>
             <TextBlock Name ="LBEmployeeID" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="White" FontSize="18" FontFamily="Calibri" Margin="0,-23,-1,0"/>
@@ -54,6 +51,11 @@
         <Button Name="BTNUpdate" Content="Update" HorizontalAlignment="Left" Margin="691,375,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Name="BTNDemote" Content="Demote" HorizontalAlignment="Left" Margin="534,375,0,0" VerticalAlignment="Top" Width="75" Click="BTNDemote_Click"/>
         <Button Name="BTNPromote" Content="Promote" HorizontalAlignment="Left" Margin="418,375,0,0" VerticalAlignment="Top" Width="75" Click="BTNPromote_Click"/>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="84,0,0,-3" Width="302">
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Welcome, " VerticalAlignment="Bottom" Foreground="White" Margin="0,0,0,17" FontWeight="Bold"/>
+            <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="64,-33,19,18.667"/>
+            <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="136,-42,0,20"/>
+        </StackPanel>
 
     </Grid>
 </Controls:MetroWindow>

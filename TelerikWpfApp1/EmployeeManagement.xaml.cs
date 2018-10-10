@@ -119,9 +119,22 @@ namespace TelerikWpfApp1
             DataTable ResultTable = MyDAL.ShowAllEmployeeDetails();
             id = Convert.ToString(ResultTable.Rows[index]["EmployeeID"]);
             self = Convert.ToString(ResultTable.Rows[index]["username"]);
-            if (RankID >= 4)
+
+            int Rank = Convert.ToInt32(ResultTable.Rows[index]["EmployeeRank"]);
+            if (RankID >= 4 || self == username)
             {
-                BTNPromote.Visibility = Visibility.Visible;
+                if (self == username || RankID > Rank)
+                {
+                    BTNPromote.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    BTNPromote.Visibility = Visibility.Hidden;
+                }
+            }
+            else
+            {
+                BTNPromote.Visibility = Visibility.Hidden;
             }
         }
 
@@ -132,7 +145,7 @@ namespace TelerikWpfApp1
                 TBikeDAL MyDAL = new TBikeDAL();
                 DataTable ResultTable = MyDAL.SelectEmployeeByEmployeeID(id);
                 int Rank = Convert.ToInt32(ResultTable.Rows[0]["EmployeeRank"]);
-                if (RankID >= 4)
+                if (RankID >= 4 || self == username)
                 {
                     if (self == username || RankID > Rank)
                         if (id != null)
@@ -144,6 +157,7 @@ namespace TelerikWpfApp1
                             this.Close();
                         }
                 }
+             
             }
             else
             {

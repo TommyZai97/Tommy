@@ -22,8 +22,10 @@
         <Button Content="Bicycles" HorizontalAlignment="Left" Margin="213,28,0,0" VerticalAlignment="Top" Width="141" Height="37" Click="Button_Click"/>
         <Button Content="Snacks" HorizontalAlignment="Left" Margin="213,96,0,0" VerticalAlignment="Top" Width="141" Height="37" Click="Button_Click"/>
         <Button Content="Beverages" HorizontalAlignment="Left" Margin="213,169,0,0" VerticalAlignment="Top" Width="141" Height="37" Click="Button_Click"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Welcome, " VerticalAlignment="Bottom" Foreground="White" Margin="120,0,0,18.627" FontWeight="Bold"/>
-        <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="180,0,0,18.627"/>
-        <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="240,0,0,18.627"/>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="84,0,0,10" Width="302">
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Welcome, " VerticalAlignment="Bottom" Foreground="White" Margin="0,0,0,17" FontWeight="Bold"/>
+            <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="64,-33,19,18.667"/>
+            <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="136,-42,0,20"/>
+        </StackPanel>
     </Grid>
 </Window>
