@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Intern001.it\Desktop\TBike\TelerikWpfApp1\obj\x86\Debug\
+C:\Users\Intern001.it\Desktop\TommyGit\TelerikWpfApp1\obj\x86\Debug\
 TelerikWpfApp1
 none
 false
 DEBUG;TRACE
-C:\Users\Intern001.it\Desktop\TBike\TelerikWpfApp1\App.xaml
-10-472927260
+C:\Users\Intern001.it\Desktop\TommyGit\TelerikWpfApp1\App.xaml
+11-749023706
 
-20-2118336165
-40-1477127502
-Booking.xaml;CreateNewUser.xaml;EmployeeManagement.xaml;InventoryManage.xaml;LoginMenu.xaml;MainWindow.xaml;RegisterPassword.xaml;rental.xaml;RentalProcessing.xaml;Return.xaml;
+211647599128
+40397660608
+Booking.xaml;CreateNewUser.xaml;EmployeeManagement.xaml;EmployeeRank.xaml;InventoryManage.xaml;LoginMenu.xaml;MainWindow.xaml;RegisterPassword.xaml;rental.xaml;RentalProcessing.xaml;Return.xaml;
 
 False
 
