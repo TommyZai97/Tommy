@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow  x:Class="TelerikWpfApp1.LoginMenu"
+﻿<Controls:MetroWindow  x:Class="TBike.LoginMenu"
         ShowTitleBar="False"
         ShowCloseButton="False"
         ShowMinButton="False"

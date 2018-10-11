@@ -17,7 +17,7 @@ using System.Configuration;
 using System.Data;
 using MahApps.Metro.Controls;
 
-namespace TelerikWpfApp1
+namespace TBike
 {
     /// <summary>
     /// Interaction logic for LoginMenu.xaml

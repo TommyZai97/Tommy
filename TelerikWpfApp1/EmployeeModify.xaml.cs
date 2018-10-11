@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
-namespace TelerikWpfApp1
+namespace TBike
 {
     /// <summary>
     /// Interaction logic for EmployeeModify.xaml

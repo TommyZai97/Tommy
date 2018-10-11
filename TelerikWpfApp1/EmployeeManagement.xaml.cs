@@ -16,7 +16,7 @@ using System.Data.Sql;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
-namespace TelerikWpfApp1
+namespace TBike
 {
     /// <summary>
     /// Interaction logic for EmployeeManagement.xaml

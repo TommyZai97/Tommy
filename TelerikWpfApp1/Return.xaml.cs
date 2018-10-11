@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using System.Windows.Navigation;
 
-namespace TelerikWpfApp1
+namespace TBike
 {
     /// <summary>
     /// Interaction logic for Return.xaml

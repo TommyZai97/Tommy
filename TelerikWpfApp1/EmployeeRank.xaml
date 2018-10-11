@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="TelerikWpfApp1.EmployeeRank"
+﻿<Controls:MetroWindow x:Class="TBike.EmployeeRank"
          ShowTitleBar="False"
     ShowCloseButton="False"
     ShowMinButton="False"
@@ -26,7 +26,7 @@
             </Button.Background>
 
         </Button>
-        <TextBox x:Name="TBRankNo" PreviewTextInput="TBRankNo_PreviewTextInput" HorizontalAlignment="Center" Height="23" Margin="63,138,244,257" TextWrapping="Wrap"  VerticalAlignment="Center" Width="100" Controls:TextBoxHelper.Watermark="RankNo (1-10)" Controls:TextBoxHelper.WatermarkTrimming="CharacterEllipsis" RenderTransformOrigin="0.575,-0.902"/>
+        <TextBox x:Name="TBRankNo" PreviewTextInput="TBRankNo_PreviewTextInput" HorizontalAlignment="Center" Height="23" Margin="63,138,150,257" TextWrapping="Wrap"  VerticalAlignment="Center" Width="194" Controls:TextBoxHelper.Watermark="RankNo (1-10)" Controls:TextBoxHelper.WatermarkTrimming="CharacterEllipsis" RenderTransformOrigin="0.575,-0.902"/>
         <Button Content="Apply" HorizontalAlignment="Left" Margin="44,315,0,0" VerticalAlignment="Top" Width="92" Click="Button_Click_2"/>
         <ComboBox x:Name="CBRankDesc" Visibility="Hidden" HorizontalAlignment="Left" Margin="63,75,0,320" VerticalAlignment="Center" Width="194" SelectionChanged="CBRankDesc_SelectionChanged" Controls:TextBoxHelper.UseFloatingWatermark="False" Controls:TextBoxHelper.Watermark="Rank Description"/>
         <Button Name="BTNModify" Content="Modify Existing" HorizontalAlignment="Left" Margin="265,315,0,0" VerticalAlignment="Top" Width="113" Click="Button_Click"/>

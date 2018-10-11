@@ -134,6 +134,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="InventoryModi.xaml.cs">
+      <DependentUpon>InventoryModi.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateNewUser.xaml.cs">
       <DependentUpon>CreateNewUser.xaml</DependentUpon>
     </Compile>
@@ -169,6 +172,10 @@
       <DependentUpon>Return.xaml</DependentUpon>
     </Compile>
     <Compile Include="TBIkeUtility.cs" />
+    <Page Include="InventoryModi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Booking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -299,6 +306,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\bck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\snack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\bike.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\edit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

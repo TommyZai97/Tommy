@@ -16,7 +16,7 @@ using System.Text.RegularExpressions;
 using System.Data.SqlClient;
 using MahApps.Metro.Controls.Dialogs;
 
-namespace TelerikWpfApp1
+namespace TBike
 {
     /// <summary>
     /// Interaction logic for EmployeeRank.xaml

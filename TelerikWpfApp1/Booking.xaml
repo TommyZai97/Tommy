@@ -8,11 +8,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 
-        xmlns:local="clr-namespace:TelerikWpfApp1"
+        xmlns:local="clr-namespace:TBike"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
           xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
-        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="TelerikWpfApp1.Booking"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="TBike.Booking"
         mc:Ignorable="d"
         
         Title="Booking" Height="539.237" Width="951.523" WindowStartupLocation="CenterScreen">
@@ -44,7 +44,7 @@
 
         </Button>
         <Button Content="Search" HorizontalAlignment="Left" Margin="750,426,0,0" VerticalAlignment="Top" Width="82" Height="24" Click="Button_Click"/>
-        <ComboBox x:Name="CBBike" ItemsSource="{Binding}" SelectedValue="BicycleID" DisplayMemberPath="BicycleName" HorizontalAlignment="Right" Margin="0,46,80,0" VerticalAlignment="Top" Width="215" Controls:TextBoxHelper.Watermark="Selec Bicycle..." Height="31" FontSize="14"/>
+        <ComboBox x:Name="CBBike" ItemsSource="{Binding}" SelectedValue="BicycleID" DisplayMemberPath="BicycleName" HorizontalAlignment="Right" Margin="0,46,354,0" VerticalAlignment="Top" Width="215" Controls:TextBoxHelper.Watermark="Selec Bicycle..." Height="31" FontSize="14" SelectionChanged="CBBike_SelectionChanged"/>
         <StackPanel Name="containerCanvas" HorizontalAlignment="Left" Height="196" VerticalAlignment="Top" Width="324" Margin="46,27,0,0">
             <wpfTool:DateTimePicker Name="StartDate"  Grid.Row="0" Height="66" Width="282" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="White" Margin="9,14,0,0">
 
@@ -76,10 +76,10 @@
 
         </StackPanel>
         <TextBox x:Name="TBRemarks" HorizontalAlignment="Left" Height="67" Margin="375,92,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="489" RenderTransformOrigin="0.434,0.043" Controls:TextBoxHelper.IsSpellCheckContextMenuEnabled="True" Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:TextBoxHelper.Watermark="Remarks..." Controls:TextBoxHelper.WatermarkAlignment="Center" Controls:TextBoxHelper.WatermarkTrimming="CharacterEllipsis"/>
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="83,0,0,0" Width="302">
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="68,0,0,0" Width="302">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Welcome, " VerticalAlignment="Bottom" Foreground="White" Margin="0,0,0,17" FontWeight="Bold"/>
-            <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="64,-33,19,18.667"/>
-            <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="136,-42,0,20"/>
+            <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="80,-33,19,18.667"/>
+            <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="178,-35,0,20"/>
         </StackPanel>
 
 

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MahApps.Metro.Controls.Dialogs;
 
-namespace TelerikWpfApp1
+namespace TBike
 {
     /// <summary>
     /// Interaction logic for Booking.xaml
@@ -139,11 +139,7 @@ namespace TelerikWpfApp1
         }
 
 
-        public void AddBookingTimeDate()
-        {
-            
-
-        }
+    
       
         public void PopulateDataFromLogin(string Values)
         {
@@ -189,7 +185,10 @@ namespace TelerikWpfApp1
             CBBike.SelectedValuePath = ds.Tables[0].Columns["BicycleID"].ToString();
         }
 
+        private void CBBike_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
+        }
     }
   
 }

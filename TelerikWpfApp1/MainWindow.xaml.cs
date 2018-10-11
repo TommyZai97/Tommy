@@ -18,7 +18,7 @@ using MahApps.Metro.Controls.Dialogs;
 using System.Threading.Tasks;
 
 
-namespace TelerikWpfApp1
+namespace TBike
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -34,7 +34,7 @@ namespace TelerikWpfApp1
             InitializeComponent();
             PopulateDataFromLogin("");
             CalculateDoneRentedTime();
-        
+            PopulateDataGrid();
 
 
         }
@@ -117,6 +117,16 @@ namespace TelerikWpfApp1
                 RankID = Convert.ToInt32(ResultTable.Rows[0]["EmployeeRank"]);
             }
 
+        }
+
+        public void PopulateDataGrid()
+        {
+            TBikeDAL MyDAL = new TBikeDAL();
+            DataTable ResultTable = MyDAL.ShowAllBookingTable();
+            TBIkeUtility.TranslateRecordStatusDescription(new List<string> { "BookingStatus" }, ref ResultTable);
+            dataGrid1.ItemsSource = ResultTable.DefaultView;
+            dataGrid1.AutoGenerateColumns = false;
+            dataGrid1.CanUserAddRows = false;
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

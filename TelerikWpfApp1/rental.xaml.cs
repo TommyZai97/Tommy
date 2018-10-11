@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
-namespace TelerikWpfApp1
+namespace TBike
 {
     /// <summary>
     /// Interaction logic for rental.xaml
@@ -30,6 +30,7 @@ namespace TelerikWpfApp1
         public rental()
         {
             InitializeComponent();
+            BindComboBoxBicycle(CBBicycle);
             BindComboBox(CBBike);
         }
 
@@ -43,31 +44,53 @@ namespace TelerikWpfApp1
             
             string Bike = Convert.ToString(ResultTable.Rows[0]["BicycleID"]);
             string BikeName = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
+            string customer = Convert.ToString(ResultTable.Rows[0]["CurrentRenter"]);
+            DateTime bookTime = Convert.ToDateTime(ResultTable.Rows[0]["BookingDate"]);
             //double Deposit = Convert.ToDouble(ResultTable.Rows[0]["BookingDeposit"]);
             double Price = Convert.ToDouble(ResultTable.Rows[0]["Price"]);
             try
             {
-                //if bicycle status is Renting, dont rent bike
-                if (Convert.ToString(ResultTable.Rows[0]["BicycleStatus"]) == "R")
+
+                if (TPStart.SelectedTime < bookTime.TimeOfDay)
                 {
-                    MessageBox.Show("This Bike Has been rented, Please wait for it to return");
+                    var res = await this.ShowMessageAsync("Sorry", "Can't rent time that is before booking time");
+          
                 }
-                //if able to rent start process add
                 else
                 {
-                    double TotalPrice =( ((int)duration.Hours) * Price);
-                    var res = await this.ShowMessageAsync("Confirm","Bicycle "+ BikeName + ", for Renter " + LBCustomer.Text + ", Duration is " + duration.Hours +" Hours, "+ " Total Price: RM"+ TotalPrice , MessageDialogStyle.AffirmativeAndNegative);
-                    Console.WriteLine(res);
-                    //MessageBox.Show("Rented For " + LBCustomer.Text + " Duration is " + Convert.ToString(duration.Hours).Trim() + " Hours","Question",MessageBoxButton.YesNo,MessageBoxImage.Information);
-                    if (res == MessageDialogResult.Affirmative)
-                    {
 
-                        MyDAL.AddBookingTime(Convert.ToDateTime(LBBookingDate.Text), Bike, "R", CBBike.SelectedValue.ToString().Trim(), TotalPrice, TLUsername.Text.Trim(), TPStart.SelectedTime, TPEnd.SelectedTime, TBRemarks.Text);
-                        res = await this.ShowMessageAsync("Complete", "Rented Out by " + TLUsername.Text );
+                    if (TPStart.SelectedTime < DateTime.Now.TimeOfDay)
+                    {
+                        var res = await this.ShowMessageAsync("Sorry", "Can't rent time that is before the current time");
+                      
                     }
                     else
                     {
-                        res = await this.ShowMessageAsync("Cancel", "Rented Canceled by " + TLUsername.Text);
+                        //if bicycle status is Renting, dont rent bike
+                        if (Convert.ToString(ResultTable.Rows[0]["BicycleStatus"]) == "R")
+                        {
+                            var res = await this.ShowMessageAsync("Sorry", "This Bike has been rented By, " + customer.Trim());
+                        }
+                        //if able to rent start process add
+                        else
+                        {
+                            double TotalPrice = (((double)duration.TotalHours) * Price);
+                            TotalPrice = System.Math.Round(TotalPrice, 2);
+                       
+                            var res = await this.ShowMessageAsync("Confirm", "Bicycle " + BikeName + ", for Renter " + LBCustomer.Text + ", Duration is " + duration + " Hours, " + " Total Price: RM" + TotalPrice, MessageDialogStyle.AffirmativeAndNegative);
+                            Console.WriteLine(res);
+                            //MessageBox.Show("Rented For " + LBCustomer.Text + " Duration is " + Convert.ToString(duration.Hours).Trim() + " Hours","Question",MessageBoxButton.YesNo,MessageBoxImage.Information);
+                            if (res == MessageDialogResult.Affirmative)
+                            {
+
+                                MyDAL.AddBookingTime(Convert.ToDateTime(LBBookingDate.Text), Bike, "R", CBBike.SelectedValue.ToString().Trim(), TotalPrice, TLUsername.Text.Trim(), TPStart.SelectedTime, TPEnd.SelectedTime, TBRemarks.Text);
+                                res = await this.ShowMessageAsync("Complete", "Rented Out by " + TLUsername.Text);
+                            }
+                            else
+                            {
+                                res = await this.ShowMessageAsync("Cancel", "Rented Canceled by " + TLUsername.Text);
+                            }
+                        }
                     }
                 }
             }
@@ -114,6 +137,14 @@ namespace TelerikWpfApp1
             LBBookingDate.Text = Convert.ToString(ResultTable.Rows[0]["BookingDate"]);
             LBBike.Text = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
             TBRemarks.Text = Convert.ToString(ResultTable.Rows[0]["Remark"]);
+            LBCustomer.Visibility = Visibility.Visible;
+            LBBike.Visibility = Visibility.Visible;
+            LBBookingDate.Visibility = Visibility.Visible;
+            rect.Visibility = Visibility.Visible;
+            TBRemarks.Visibility = Visibility.Visible;
+            LB1.Visibility = Visibility.Visible;
+            LB2.Visibility = Visibility.Visible;
+            LB3.Visibility = Visibility.Visible;
         }
 
         public void BindComboBox(ComboBox CBBike)
@@ -127,6 +158,40 @@ namespace TelerikWpfApp1
             CBBike.SelectedValuePath = ds.Tables[0].Columns["Customer"].ToString();
         }
 
-    
+        public void BindComboBoxBicycle(ComboBox CBBicycle)
+        {
+            SqlConnection conn = new SqlConnection(constring);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT BicycleID,BicycleName From BicycleMaster WHERE BicycleStatus = 'A'", conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "BicycleMaster");
+            CBBicycle.ItemsSource = ds.Tables[0].DefaultView;
+            CBBicycle.DisplayMemberPath = ds.Tables[0].Columns["BicycleName"].ToString();
+            CBBicycle.SelectedValuePath = ds.Tables[0].Columns["BicycleID"].ToString();
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (TBCustomer.Text != null && CBBicycle.SelectedValue != null)
+            {
+
+                LBCustomer.Text = TBCustomer.Text;
+                LBBike.Text = CBBicycle.SelectedValue.ToString().Trim() ;
+                LBBookingDate.Text = Convert.ToString(DateTime.Now);
+
+                LBCustomer.Visibility = Visibility.Visible;
+                LBBike.Visibility = Visibility.Visible;
+                LBBookingDate.Visibility = Visibility.Visible;
+                rect.Visibility = Visibility.Visible;
+                TBRemarks.Visibility = Visibility.Visible;
+                LB1.Visibility = Visibility.Visible;
+                LB2.Visibility = Visibility.Visible;
+                LB3.Visibility = Visibility.Visible;
+            }
+
+            else
+            {
+                var res = await this.ShowMessageAsync("Error","Please Fill in all blanks");
+            }
+        }
     }
 }

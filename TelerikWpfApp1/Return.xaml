@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="TelerikWpfApp1.Return"
+﻿<Controls:MetroWindow x:Class="TBike.Return"
                       ShowTitleBar="False"
     ShowCloseButton="False"
     ShowMinButton="False"

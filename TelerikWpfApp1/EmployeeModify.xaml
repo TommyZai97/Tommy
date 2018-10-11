@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="TelerikWpfApp1.EmployeeModify"
+﻿<Controls:MetroWindow x:Class="TBike.EmployeeModify"
         ShowTitleBar="False"
     ShowCloseButton="False"
     ShowMinButton="False"
@@ -15,7 +15,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="Image/background.jpg"/>
         </Grid.Background>
-        <Rectangle Visibility="Hidden" Fill="#7F00000A" HorizontalAlignment="Center" Height="311" Margin="24,19,26,89" Stroke="Black" VerticalAlignment="Center" Width="742"/>
+        <Rectangle Visibility="Visible" Fill="#7F00000A" HorizontalAlignment="Center" Height="311" Margin="10,31,10,77" Stroke="Black" VerticalAlignment="Center" Width="772" RadiusY="20.775" RadiusX="20.775"/>
 
 
         <Button Content="" x:Name="button" HorizontalAlignment="Left" Margin="10,371,0,0" VerticalAlignment="Top" Width="38" Height="38" Click="button_Click_1">
@@ -42,7 +42,7 @@
             <TextBox Name="LBDob" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="Black" FontSize="18" FontFamily="Calibri" Margin="0,-23,-1,0" Width="207"/>
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="PhoneNo" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="0,28,0,0"/>
             <TextBox Name="LBPhoneNo" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="Black" FontSize="18" FontFamily="Calibri" Margin="0,-23,-1,0" Width="207"/>
-               <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="City" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="0,28,0,0"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="City" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="0,28,0,0"/>
             <TextBox Name="LBCity" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="Black" FontSize="18" FontFamily="Calibri" Margin="0,-23,-1,0" Width="207"/>
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Last Login" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="0,28,0,0"/>
             <TextBlock Name="LBLastLogin" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="White" FontSize="18" FontFamily="Calibri" Margin="0,-23,-1,0" Width="207"/>

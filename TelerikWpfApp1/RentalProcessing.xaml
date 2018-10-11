@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="TelerikWpfApp1.RentalProcessing"
+﻿<Controls:MetroWindow x:Class="TBike.RentalProcessing"
         ShowTitleBar="False"
         ShowCloseButton="False"
         ShowMinButton="False"
@@ -16,9 +16,10 @@
             <ImageBrush ImageSource="Image/background.jpg"/>
         </Grid.Background>
         <DockPanel HorizontalAlignment="Left" Height="84" LastChildFill="False" Margin="10,10,0,0" VerticalAlignment="Top" Width="772" Background="#FF3C3C3C">
-            <Button Content="Booking" Height="69" VerticalAlignment="Top" Width="136" Margin="30,7,30,5" Click="Book_Click" Background="White"/>
-            <Button Content="Rental" Height="69" VerticalAlignment="Top" Width="136" Margin="30,7,30,5" Click="Rental_Click_2" Background="White"/>
-            <Button Content="Return" Height="69" VerticalAlignment="Top" Width="136" Margin="30,7,30,5" Click="Return_Click_1" Background="White"/>
+            <Button Content="Booking" Height="52" VerticalAlignment="Top" Width="110" Margin="65,16,30,0" Click="Book_Click" Background="White"/>
+            <Button Content="Rental" Height="52" VerticalAlignment="Top" Width="110" Margin="30,16,30,0"  Click="Rental_Click_2" Background="White"/>
+            <Button Content="Return" Height="52" VerticalAlignment="Top" Width="110" Margin="30,16,30,0"  Click="Return_Click_1" Background="White"/>
+            <Button Content="Service" Height="52" VerticalAlignment="Top" Width="110" Margin="30,16,30,0"  Click="Service_Click" Background="White"/>
         </DockPanel>
         <Button Content="" x:Name="button" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="38" Height="38" Click="button_Click_1">
             <Button.Background>

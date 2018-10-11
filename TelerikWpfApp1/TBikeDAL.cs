@@ -9,15 +9,44 @@ using System.Data;
 using System.Configuration;
 using System.Windows.Controls;
 
-namespace TelerikWpfApp1
+namespace TBike
 {
     public class TBikeDAL
     {
         static string constring = ConfigurationManager.ConnectionStrings["123"].ConnectionString;
-     
+
 
         #region BikeMaster
+        public DataTable SelectBicycleByID(string BicycleID)
+        {
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelBicycleMasterByID", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
 
+            //we will use SQLAdaptor due to huge amount of column
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+            try
+            {
+                MyCon.Open();
+                //string SQLStatement = (string)MyCmd.ExecuteScalar();
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelectEmployeeByEmployeeID : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+        }
         public DataTable ShowAllBikeTable()
         {
 
@@ -75,6 +104,76 @@ namespace TelerikWpfApp1
             }
             return ResultDataTable;
 
+        }
+
+        public string AddBicycleTable(string BicycleName,string BicycleType, double Price, string Color, string CreatedBy)
+        {
+            string BicycleID = "";
+            SqlConnection conn = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("AddBicycleMaster", conn);
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+            try
+            {
+
+      
+
+                MyCmd.Parameters.AddWithValue("@BicycleName", BicycleName);
+                MyCmd.Parameters.AddWithValue("@BicycleType", BicycleType);
+
+                MyCmd.Parameters.AddWithValue("@Price", Price);
+                MyCmd.Parameters.AddWithValue("@Color", Color);
+                MyCmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                MyCmd.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("DB Operation Error At UpdateBookingStatus : " + e.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+                MyCmd.Dispose();
+            }
+            return BicycleID;
+        }
+
+        public string UpdateBicycleTable(string BicycleID, string BicycleName,string BicycleType, double Price, string Color, string LastUpdatedBy)
+        {
+        
+            SqlConnection conn = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("UpdBicycleMaster", conn);
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+            try
+            {
+
+                MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
+
+                MyCmd.Parameters.AddWithValue("@BicycleName", BicycleName);
+                MyCmd.Parameters.AddWithValue("@BicycleType", BicycleType);
+
+                MyCmd.Parameters.AddWithValue("@Price", Price);
+                MyCmd.Parameters.AddWithValue("@Color", Color);
+                MyCmd.Parameters.AddWithValue("@LastUpdatedBy", LastUpdatedBy);
+                MyCmd.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("DB Operation Error At UpdateBookingStatus : " + e.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+                MyCmd.Dispose();
+            }
+            return BicycleID;
         }
         #endregion
 
@@ -422,6 +521,8 @@ namespace TelerikWpfApp1
             }
             return ResultDataTable;
         }
+
+
         public string UpdateBookingStatus(string BookingStatus,string BicycleID,  string Customer, string LastUpdatedBy)
         {
             string BookingID = "";
@@ -605,5 +706,137 @@ namespace TelerikWpfApp1
 
         #endregion
 
+        #region Snack
+        public DataTable SelectSnackByID(string SnackID)
+        {
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelSnackMasterByID", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            MyCmd.Parameters.AddWithValue("@SnackID", SnackID);
+
+            //we will use SQLAdaptor due to huge amount of column
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+            try
+            {
+                MyCon.Open();
+                //string SQLStatement = (string)MyCmd.ExecuteScalar();
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelectEmployeeByEmployeeID : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+        }
+
+        public DataTable ShowAllSnackTable()
+        {
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelAllSnackMaster", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+           
+
+            //we will use SQLAdaptor due to huge amount of column
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+            try
+            {
+                MyCon.Open();
+                //string SQLStatement = (string)MyCmd.ExecuteScalar();
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At ShowAllSnackTable : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+        }
+        public string AddSnackTable(string SnackName, string SnackType, double Price, int Quantity, string CreatedBy)
+        {
+            string SnackID = "";
+            SqlConnection conn = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("AddSnackMaster", conn);
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+            try
+            {
+
+              
+
+                MyCmd.Parameters.AddWithValue("@SnackName", SnackName);
+                MyCmd.Parameters.AddWithValue("@SnackType", SnackType);
+
+                MyCmd.Parameters.AddWithValue("@Price", Price);
+                MyCmd.Parameters.AddWithValue("@Quantity", Quantity);
+                MyCmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                MyCmd.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("DB Operation Error At UpdateSnackTable : " + e.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+                MyCmd.Dispose();
+            }
+            return SnackID;
+        }
+
+        public string UpdateSnackTable(string SnackID, string SnackName, string SnackType, double Price, int Quantity, string LastUpdatedBy)
+        {
+
+            SqlConnection conn = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("UpdSnackMaster", conn);
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+            try
+            {
+
+                MyCmd.Parameters.AddWithValue("@SnackID", SnackID);
+
+                MyCmd.Parameters.AddWithValue("@SnackName", SnackName);
+                MyCmd.Parameters.AddWithValue("@SnackType", SnackType);
+
+                MyCmd.Parameters.AddWithValue("@Price", Price);
+                MyCmd.Parameters.AddWithValue("@Quantity", Quantity);
+                MyCmd.Parameters.AddWithValue("@LastUpdatedBy", LastUpdatedBy);
+                MyCmd.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("DB Operation Error At UpdateSnackTable : " + e.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+                MyCmd.Dispose();
+            }
+            return SnackID;
+        }
+        #endregion
     }
 }

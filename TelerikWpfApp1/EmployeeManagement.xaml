@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="TelerikWpfApp1.EmployeeManagement"
+﻿<Controls:MetroWindow x:Class="TBike.EmployeeManagement"
         ShowTitleBar="False"
     ShowCloseButton="False"
     ShowMinButton="False"

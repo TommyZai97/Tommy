@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 
-namespace TelerikWpfApp1
+namespace TBike
 {
     /// <summary>
     /// Interaction logic for RentalProcessing.xaml
@@ -77,6 +77,10 @@ namespace TelerikWpfApp1
 
 
             }
+
+        }
+        private void Service_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }
