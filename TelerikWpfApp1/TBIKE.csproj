@@ -26,7 +26,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -134,73 +134,94 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="InventoryModi.xaml.cs">
+    <Compile Include="BookingMaster\Service.xaml.cs">
+      <DependentUpon>Service.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeMaster\FinalizeReports.xaml.cs">
+      <DependentUpon>FinalizeReports.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryMaster\InventoryModi.xaml.cs">
       <DependentUpon>InventoryModi.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreateNewUser.xaml.cs">
+    <Compile Include="EmployeeMaster\CreateNewUser.xaml.cs">
       <DependentUpon>CreateNewUser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EmployeeManagement.xaml.cs">
+    <Compile Include="EmployeeMaster\EmployeeManagement.xaml.cs">
       <DependentUpon>EmployeeManagement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EmployeeModify.xaml.cs">
+    <Compile Include="EmployeeMaster\EmployeeModify.xaml.cs">
       <DependentUpon>EmployeeModify.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EmployeeRank.xaml.cs">
+    <Compile Include="EmployeeMaster\EmployeeRank.xaml.cs">
       <DependentUpon>EmployeeRank.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InventoryManage.xaml.cs">
+    <Compile Include="InventoryMaster\InventoryManage.xaml.cs">
       <DependentUpon>InventoryManage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RegisterPassword.xaml.cs">
+    <Compile Include="InventoryMaster\Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoginUser\RegisterPassword.xaml.cs">
       <DependentUpon>RegisterPassword.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TBikeDAL.cs" />
-    <Compile Include="Booking.xaml.cs">
+    <Compile Include="AppData\TBikeDAL.cs" />
+    <Compile Include="BookingMaster\Booking.xaml.cs">
       <DependentUpon>Booking.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LoginMenu.xaml.cs">
+    <Compile Include="LoginUser\LoginMenu.xaml.cs">
       <DependentUpon>LoginMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="rental.xaml.cs">
+    <Compile Include="BookingMaster\rental.xaml.cs">
       <DependentUpon>rental.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RentalProcessing.xaml.cs">
+    <Compile Include="BookingMaster\RentalProcessing.xaml.cs">
       <DependentUpon>RentalProcessing.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Return.xaml.cs">
+    <Compile Include="BookingMaster\Return.xaml.cs">
       <DependentUpon>Return.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TBIkeUtility.cs" />
-    <Page Include="InventoryModi.xaml">
+    <Compile Include="AppData\TBIkeUtility.cs" />
+    <Page Include="BookingMaster\Service.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Booking.xaml">
+    <Page Include="EmployeeMaster\FinalizeReports.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateNewUser.xaml">
+    <Page Include="InventoryMaster\InventoryModi.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EmployeeManagement.xaml">
+    <Page Include="BookingMaster\Booking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EmployeeModify.xaml">
+    <Page Include="EmployeeMaster\CreateNewUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EmployeeRank.xaml">
+    <Page Include="EmployeeMaster\EmployeeManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InventoryManage.xaml">
+    <Page Include="EmployeeMaster\EmployeeModify.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginMenu.xaml">
+    <Page Include="EmployeeMaster\EmployeeRank.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InventoryMaster\InventoryManage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InventoryMaster\Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginUser\LoginMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -215,19 +236,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="RegisterPassword.xaml">
+    <Page Include="LoginUser\RegisterPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="rental.xaml">
+    <Page Include="BookingMaster\rental.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RentalProcessing.xaml">
+    <Page Include="BookingMaster\RentalProcessing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Return.xaml">
+    <Page Include="BookingMaster\Return.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -270,9 +291,7 @@
   <ItemGroup>
     <Resource Include="Image\back.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AppData\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Image\vertical.jpg" />
   </ItemGroup>

@@ -58,11 +58,12 @@ namespace TBike
                 if (date.Date > D.Date && Status == "A")
                 {
                     MyDAL.UpdateBookingDate(D, "E", ID);
-                    MyDAL.UpdateBikeStatus(Bike, "");
+                    MyDAL.UpdateBikeStatus(Bike, "","A","");
                 }
                 else if (date.Date > D && Status == "R")
                 {
                     MyDAL.UpdateBookingDate(D, "N",ID);
+                    MyDAL.UpdateBikeStatus(Bike, "","N","");
                 }
                  i = i + 1;
             }
@@ -134,6 +135,39 @@ namespace TBike
             LoginMenu log = new LoginMenu();
             log.Show();
             this.Close();
+        }
+
+        private void dataGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TBikeDAL MyDAL = new TBikeDAL();
+            int index = dataGrid1.Items.IndexOf(dataGrid1.CurrentItem);
+
+            DataTable ResultTable = MyDAL.ShowAllBookingTable();
+            string Customer = Convert.ToString(ResultTable.Rows[index]["Customer"]);
+            string Status = Convert.ToString(ResultTable.Rows[index]["BookingStatus"]);
+
+
+            if (Customer != null)
+            {
+                if (Status == "A")
+                {
+                    rental rent = new rental();
+                    rent.Show();
+                    rent.PopulateDataFromLogin(username);
+                    rent.PopulateID(Customer, Status);
+                    this.Close();
+                }
+                else if(Status == "R")
+                {
+                    Return ret = new Return();
+                    ret.Show();
+                    ret.PopulateDataFromLogin(username);
+                    ret.PopulateID(Customer, Status);
+                    this.Close();
+                }
+
+            
+            }
         }
     }
 }

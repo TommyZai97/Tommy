@@ -56,7 +56,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="Image/background.jpg"/>
         </Grid.Background>
-        <Rectangle Opacity="0.5" HorizontalAlignment="Left" VerticalAlignment="Stretch" MinWidth="32" MaxWidth="300" Width="108" Fill="#FF03646E" Margin="-9,0,0,0"/>
+        <Rectangle Opacity="0.5" HorizontalAlignment="Left" VerticalAlignment="Stretch" MinWidth="32" MaxWidth="300" Width="108" Fill="#7F0B5476" Margin="-9,0,0,0"/>
         <StackPanel  Margin="0,34,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="50" MaxWidth="300" Width="99">
 
             <Button  HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Bottom" Width="36" Height="36" HorizontalContentAlignment="Left" BorderBrush="White" Foreground="White" Margin="0" FontWeight="Bold" Click="Button_Click_1"  >
@@ -112,12 +112,14 @@
             <TextBlock  Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="80,-33,19,18.667"/>
             <TextBlock  Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="178,-35,0,20"/>
         </StackPanel>
-        <DataGrid Name="dataGrid1" HorizontalAlignment="Left" Height="342" Margin="177,66,0,0" VerticalAlignment="Top" Width="574">
+        <DataGrid Name="dataGrid1" HorizontalAlignment="Left" Height="381" Margin="125,34,0,0" VerticalAlignment="Top" Width="634" SelectionChanged="dataGrid1_SelectionChanged" Background="#7FA8A8A8" 
+                  BorderBrush="#FF14568D" BorderThickness="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Booking ID" Binding="{Binding BookingID}"/>
                 <DataGridTextColumn Header="Bicycle" Binding="{Binding BicycleName}"/>
                 <DataGridTextColumn Header="Status" Binding="{Binding BookingStatusInFull}"/>
                 <DataGridTextColumn Header="Customer" Binding="{Binding Customer}"/>
+                
                 <DataGridTextColumn Header="Booking Date" Binding="{Binding BookingDate}"/>
                 <DataGridTextColumn Header="Start-Time" Binding="{Binding StartTime}"/>
                 <DataGridTextColumn Header="End-Time" Binding="{Binding EndTime}"/>

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Intern001.it\Desktop\TommyGit\TelerikWpfApp1\App.xaml
-13-359153232
+16398011991
 
-231581843554
+261409484823
 40397660608
-InventoryModi.xaml;Booking.xaml;CreateNewUser.xaml;EmployeeManagement.xaml;EmployeeModify.xaml;EmployeeRank.xaml;InventoryManage.xaml;LoginMenu.xaml;MainWindow.xaml;RegisterPassword.xaml;rental.xaml;RentalProcessing.xaml;Return.xaml;
+BookingMaster\Service.xaml;EmployeeMaster\FinalizeReports.xaml;InventoryMaster\InventoryModi.xaml;BookingMaster\Booking.xaml;EmployeeMaster\CreateNewUser.xaml;EmployeeMaster\EmployeeManagement.xaml;EmployeeMaster\EmployeeModify.xaml;EmployeeMaster\EmployeeRank.xaml;InventoryMaster\InventoryManage.xaml;InventoryMaster\Window1.xaml;LoginUser\LoginMenu.xaml;MainWindow.xaml;LoginUser\RegisterPassword.xaml;BookingMaster\rental.xaml;BookingMaster\RentalProcessing.xaml;BookingMaster\Return.xaml;
 
-True
+False
 
