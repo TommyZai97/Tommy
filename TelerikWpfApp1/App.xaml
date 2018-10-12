@@ -2,9 +2,11 @@
     <Application x:Class="TelerikWpfApp1.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-         StartupUri="LoginMenu.xaml">
+         StartupUri="LoginUser\LoginMenu.xaml">
         <Application.Resources>
+            
             <ResourceDictionary>
+                
                 <ResourceDictionary.MergedDictionaries>
                     <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
                     <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
@@ -13,6 +15,7 @@
                     <!-- Accent and AppTheme setting -->
                     <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                     <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                    
                 </ResourceDictionary.MergedDictionaries>
       
             </ResourceDictionary>
