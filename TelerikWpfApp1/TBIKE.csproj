@@ -291,7 +291,11 @@
   <ItemGroup>
     <Resource Include="Image\back.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Image\booking.png" />
+    <Resource Include="Image\return.png" />
+    <Resource Include="Image\Service.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\vertical.jpg" />
   </ItemGroup>

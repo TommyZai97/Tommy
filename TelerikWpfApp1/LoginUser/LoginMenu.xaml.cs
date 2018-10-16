@@ -42,7 +42,7 @@ namespace TBike
             SqlConnection conn = new SqlConnection(constring);
             try
             {
-                if (TBUsername.Text == "" && TBPassword.Text == "")
+                if (TBUsername.Text == "" && TBPassword.Password.ToString().Trim() == "")
                 {
                     MessageBox.Show("Please Fill in all text");
                 }
@@ -54,7 +54,7 @@ namespace TBike
                     SqlCommand MyCmd = new SqlCommand("SelVerifyLoginInfo", conn);
                     MyCmd.CommandType = CommandType.StoredProcedure;
                     MyCmd.Parameters.AddWithValue("@Username", TBUsername.Text);
-                    MyCmd.Parameters.AddWithValue("@Password", TBPassword.Text);
+                    MyCmd.Parameters.AddWithValue("@Password", TBPassword.Password.ToString().Trim());
 
                     int count = Convert.ToInt32(MyCmd.ExecuteScalar());
                     if (count == 1)
@@ -63,7 +63,7 @@ namespace TBike
                         main.PopulateDataFromLogin(TBUsername.Text);
 
                         main.Show();
-                        this.Hide();
+                        this.Close();
                     }
                     else
                     {
@@ -91,8 +91,8 @@ namespace TBike
         {
             //go to register page
             RegisterPassword reg = new RegisterPassword();
-            reg.Show();
-            this.Close();
+            reg.ShowDialog();
+           
         }
     }
 }

@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace TBike
 {
@@ -35,7 +36,7 @@ namespace TBike
             TBikeDAL MyDal = new TBikeDAL();
            
             try {
-                if (TBEmail.Text == "" && TBPassword.Text == "" && TBUsername.Text == "")
+                if (TBEmail.Text == "" && TBPassword.Password.ToString().Trim() == "" && TBUsername.Text == "")
                 {
                     MessageBox.Show("Please Fill in all text");
 
@@ -54,24 +55,26 @@ namespace TBike
 
         }
 
-        public void VerifyRequirements()
+        public async void VerifyRequirements()
         {
             TBikeDAL MyDal = new TBikeDAL();
             DataTable ResultTable = MyDal.SelectEmployeeID("", TBUsername.Text);
             if (ResultTable.Rows.Count > 0)
             {
 
-
+                
                 
                 if (TBUsername.Text == Convert.ToString(ResultTable.Rows[0]["Username"]).Trim())
                 {
                     MessageBox.Show("This username has been used");
                 }
 
-                else
+                
+              
+                else if (TBConfirmPassword != TBPassword)
                 {
-                    MyDal.AddNewEmployeeLoginInfo(TBEmail.Text, TBUsername.Text, TBPassword.Text);
-                    MessageBox.Show("Registration Completed Please go back and Login");
+                    var res = await this.ShowMessageAsync("Password Not Match","Password not match with confirm pasword");
+
                 }
 
                 //TLRankDesc.Text = Convert.ToString(ResultTable.Rows[0]["EmployeeRankDesc"]).Trim();
@@ -83,8 +86,18 @@ namespace TBike
             }
             else
             {
-                MyDal.AddNewEmployeeLoginInfo(TBEmail.Text, TBUsername.Text, TBPassword.Text);
-                MessageBox.Show("Registration Completed Please go back and Login");
+                if (TBConfirmPassword != TBPassword)
+                {
+                    var res = await this.ShowMessageAsync("Password Not Match", "Password not match with confirm pasword");
+
+                }
+                else
+                {
+                    //var res = await this.ShowMessageAsync("No Record", "No Email address record found ");
+                    MyDal.AddNewEmployeeLoginInfo(TBEmail.Text, TBUsername.Text, TBPassword.Password.ToString().Trim());
+                    var res = await this.ShowMessageAsync("Registration Completed", " Please go back and Login");
+
+                }
             }
 
         }

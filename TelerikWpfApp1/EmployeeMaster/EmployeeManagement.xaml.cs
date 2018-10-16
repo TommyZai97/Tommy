@@ -100,12 +100,19 @@ namespace TBike
 
         }
 
-        private void BTNSetRank_Click(object sender, RoutedEventArgs e)
+        private async void BTNSetRank_Click(object sender, RoutedEventArgs e)
         {
-            EmployeeRank Rank = new EmployeeRank();
-            Rank.PopulateDataFromLogin(username);
-            Rank.Show();
-            this.Close();
+            if (RankID > 5)
+            {
+                EmployeeRank Rank = new EmployeeRank();
+                Rank.PopulateDataFromLogin(username);
+                Rank.ShowDialog();
+                
+            }
+            else
+            {
+                var res = await this.ShowMessageAsync("Authority!!", "Rank too low to access this function");
+            }
         }
 
         private void dataGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)

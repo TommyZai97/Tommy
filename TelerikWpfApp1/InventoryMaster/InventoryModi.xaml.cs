@@ -34,46 +34,49 @@ namespace TBike
 
         public void DetermineItemStatus() 
         {
-            if (CBStatus.Text == "Active")
+            if (CBStatus.Visibility != Visibility.Hidden || CBSnackStatus.Visibility != Visibility.Hidden)
             {
-                ItemStatus = "A";
-            }
-            else if (CBStatus.Text == "Expired")
-            {
-                ItemStatus = "E";
-            }
-            else if (CBStatus.Text == "Not Returned")
-            {
-                ItemStatus = "N";
-            }
-            else if (CBStatus.Text == "Succesful")
-            {
-                ItemStatus = "S";
-            }
-            else if (CBStatus.Text == "Renting")
-            {
-                ItemStatus = "R";
-            }
-            else if (CBStatus.Text == "Inactive")
-            {
-                ItemStatus = "I";
-            }
-            else if (CBStatus.Text == "Maintainence")
-            {
-                ItemStatus = "M";
-            }
+                if (CBStatus.Text == "Active")
+                {
+                    ItemStatus = "A";
+                }
+                else if (CBStatus.Text == "Expired")
+                {
+                    ItemStatus = "E";
+                }
+                else if (CBStatus.Text == "Not Returned")
+                {
+                    ItemStatus = "N";
+                }
+                else if (CBStatus.Text == "Succesful")
+                {
+                    ItemStatus = "S";
+                }
+                else if (CBStatus.Text == "Renting")
+                {
+                    ItemStatus = "R";
+                }
+                else if (CBStatus.Text == "Inactive")
+                {
+                    ItemStatus = "I";
+                }
+                else if (CBStatus.Text == "Maintainence")
+                {
+                    ItemStatus = "M";
+                }
 
-            if (CBSnackStatus.Text == "Active")
-            {
-                ItemStatus = "A";
-            }
-            else if (CBSnackStatus.Text == "Inactive")
-            {
-                ItemStatus = "I";
-            }
-            else if (CBSnackStatus.Text == "Out Of Stock")
-            {
-                ItemStatus = "O";
+                if (CBSnackStatus.Text == "Active")
+                {
+                    ItemStatus = "A";
+                }
+                else if (CBSnackStatus.Text == "Inactive")
+                {
+                    ItemStatus = "I";
+                }
+                else if (CBSnackStatus.Text == "Out Of Stock")
+                {
+                    ItemStatus = "O";
+                }
             }
 
         }
@@ -147,7 +150,8 @@ namespace TBike
             TBikeDAL MyDAL = new TBikeDAL();
        
             DataTable ResultTable = MyDAL.ShowAllSnackTable();
-           
+
+            Column1.Header = "Snack ID";
             Column1.Binding = new Binding("SnackID");
             Column2.Header = "Snack Name";
             Column2.Binding = new Binding("SnackName");
@@ -301,7 +305,10 @@ namespace TBike
         {
             try
             {
-
+                if (CBStatus.Visibility == Visibility.Hidden || CBSnackStatus.Visibility == Visibility.Hidden)
+                {
+                    ItemStatus = CBStatus.Text;
+                }
 
                 if (LBTitle.Text == "Bicycle")
                 {

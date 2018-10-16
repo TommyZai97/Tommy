@@ -1,13 +1,9 @@
 ﻿<Controls:MetroWindow   x:Class="TBike.MainWindow"
-                    
-        ShowTitleBar="False"
-        ShowCloseButton="False"
-        ShowMinButton="False"
-        ShowMaxRestoreButton="False"
+  
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="600" Width="850" WindowStartupLocation="CenterScreen" Icon="Image/download.jpg">
+        Title="MainWindow"  MinHeight="600" MinWidth="850" WindowStartupLocation="CenterScreen" Icon="Image/download.jpg" WindowState="Maximized" >
     <Window.Resources>
         <SolidColorBrush x:Key="GotFocusColor" Color="Green" />
         <SolidColorBrush x:Key="LostFocusColor" Color="Transparent" />
@@ -59,29 +55,43 @@
         <Rectangle Opacity="0.5" HorizontalAlignment="Left" VerticalAlignment="Stretch" MinWidth="32" MaxWidth="300" Width="108" Fill="#7F0B5476" Margin="-9,0,0,0"/>
         <StackPanel  Margin="0,34,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="50" MaxWidth="300" Width="99">
 
-            <Button  HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Bottom" Width="36" Height="36" HorizontalContentAlignment="Left" BorderBrush="White" Foreground="White" Margin="0" FontWeight="Bold" Click="Button_Click_1"  >
+            <Button  HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Bottom" Width="36" Height="36" HorizontalContentAlignment="Left" BorderBrush="White" Foreground="White" Margin="0,0,0,15" FontWeight="Bold" Click="Button_Click_1"  >
                 <Button.Background>
                     <ImageBrush ImageSource="Image/rent.jpg"/>
                 </Button.Background>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">Rental Menu</TextBlock>
+                            <TextBlock >Rent,Book,Return,Service</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
 
             </Button>
-            <TextBlock HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" Text="Rental" VerticalAlignment="Top" Margin="0,3,0,0" FontWeight="Bold" Foreground="#FFCBCBCB"/>
 
 
 
-            <Button HorizontalAlignment="Center"  FontSize="16" VerticalAlignment="Bottom" Width="36" Height="36" HorizontalContentAlignment="Left"  BorderBrush="White" Foreground="White" Margin="0,25,0,0" FontWeight="Bold" Click="Button_Click" Tag="asdasd">
+            <Button HorizontalAlignment="Center"  FontSize="16" VerticalAlignment="Bottom" Width="36" Height="36" HorizontalContentAlignment="Left"  BorderBrush="White" Foreground="White" Margin="0,25,0,15" FontWeight="Bold" Click="Button_Click" Tag="asdasd">
                 <Button.Background>
                     <ImageBrush ImageSource="Image/box.jpg"/>
                 </Button.Background>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">Inventory/Store Managing</TextBlock>
+                            <TextBlock >Add new products/Modify products</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
 
             </Button>
-            <TextBlock HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" Text="Store" VerticalAlignment="Top" Margin="0,3,0,0" FontWeight="Bold" Foreground="#FFCBCBCB"/>
 
             <!--<Button Content="Employee" HorizontalAlignment="Center" VerticalAlignment="Top"  MinWidth="150" MaxWidth="400" Height="48"  Click="employee_Click" FontWeight="Bold" FontSize="16"  Width="150" Margin="0,0,0,10" Background="White">
                 <Button.Effect>
@@ -94,15 +104,22 @@
                 <Button.Background>
                     <ImageBrush ImageSource="Image/Employeen.jpg"/>
                 </Button.Background>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold">Employee Menu</TextBlock>
+                            <TextBlock >Maintain Employee's Ranks/Create New Users/etc </TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
 
             </Button>
-            <TextBlock  Name="EmployeeLabel"  HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" Text="Employee" VerticalAlignment="Top" Margin="0" FontWeight="Bold" Foreground="#FFCBCBCB" Padding="0,3,0,0"/>
 
         </StackPanel>
-        <Button Content="" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="50" Height="50" Click="Button_Click_2">
+        <Button Content="" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="39" Height="39" Click="Button_Click_2">
             <Button.Background>
                 <ImageBrush ImageSource="Image/logo.jpg"/>
             </Button.Background>
@@ -112,14 +129,15 @@
             <TextBlock  Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="80,-33,19,18.667"/>
             <TextBlock  Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="178,-35,0,20"/>
         </StackPanel>
-        <DataGrid Name="dataGrid1" HorizontalAlignment="Left" Height="381" Margin="125,34,0,0" VerticalAlignment="Top" Width="634" SelectionChanged="dataGrid1_SelectionChanged" Background="#7FA8A8A8" 
+
+        <DataGrid Name="dataGrid1" HorizontalAlignment="Stretch" MinHeight="300" MaxHeight="800" Margin="161,82,47,106" VerticalAlignment="Stretch" MinWidth="600" MaxWidth="1200" SelectionChanged="dataGrid1_SelectionChanged" Background="#7FA8A8A8" 
                   BorderBrush="#FF14568D" BorderThickness="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Booking ID" Binding="{Binding BookingID}"/>
                 <DataGridTextColumn Header="Bicycle" Binding="{Binding BicycleName}"/>
                 <DataGridTextColumn Header="Status" Binding="{Binding BookingStatusInFull}"/>
                 <DataGridTextColumn Header="Customer" Binding="{Binding Customer}"/>
-                
+
                 <DataGridTextColumn Header="Booking Date" Binding="{Binding BookingDate}"/>
                 <DataGridTextColumn Header="Start-Time" Binding="{Binding StartTime}"/>
                 <DataGridTextColumn Header="End-Time" Binding="{Binding EndTime}"/>

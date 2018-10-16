@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/add.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/booking.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/return.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/service.png")]
 
 

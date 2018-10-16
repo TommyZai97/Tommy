@@ -119,10 +119,10 @@ namespace TBike
 
         }
 
-        private void BTNReturn_Click(object sender, RoutedEventArgs e)
+        private async void BTNReturn_Click(object sender, RoutedEventArgs e)
         {
             string DamageStatus = "A";
-        if(CBStatus.IsChecked ?? true)
+            if ((CBStatus.IsChecked ?? true) || (CBStatus_Copy.IsChecked ?? true))
             {
                 DamageStatus = "I";
             }
@@ -133,12 +133,12 @@ namespace TBike
                 {
 
                     MyDAL.UpdateBookingStatus("S", CBBike.SelectedValue.ToString().Trim(), Customer, TLUsername.Text);
-                    MyDAL.UpdateBikeStatus(CBBike.SelectedValue.ToString().Trim(),"", DamageStatus, TBCondition.Text);
+                    MyDAL.UpdateBikeStatus(CBBike.SelectedValue.ToString().Trim(),"", DamageStatus, TBCondition.Text, null, Convert.ToDateTime(null), TLUsername.Text);
                     Return ret = new Return();
                     this.Close();
                     ret.PopulateDataFromLogin(username);
                     ret.Show();
-                    MessageBox.Show("Bicycle: " + CBBike.SelectedValue.ToString().Trim() + " Returned");
+                   var res = await this.ShowMessageAsync("Bicycle: " , CBBike.SelectedValue.ToString().Trim() + " Returned");
                 }
 
                 else
@@ -151,12 +151,12 @@ namespace TBike
                 if (CBCustomer.SelectedValue != null)
                 {
                     MyDAL.UpdateBookingStatus("S", ListBicycle.SelectedValue.ToString().Trim(), CBCustomer.SelectedValue.ToString().Trim(), TLUsername.Text);
-                    MyDAL.UpdateBikeStatus(ListBicycle.SelectedValue.ToString().Trim(),"", DamageStatus,TBCondition.Text);
+                    MyDAL.UpdateBikeStatus(ListBicycle.SelectedValue.ToString().Trim(),"", DamageStatus,TBCondition.Text,null, Convert.ToDateTime(null), TLUsername.Text);
                     Return ret = new Return();
                     this.Close();
                     ret.PopulateDataFromLogin(username);
                     ret.Show();
-                    MessageBox.Show("Late Returned Bicycle: " + ListBicycle.SelectedValue.ToString().Trim() + " Returned");
+                    var res = await this.ShowMessageAsync("Late Returned Bicycle: " , ListBicycle.SelectedValue.ToString().Trim() + " Returned");
                 }
                 else
                 {
@@ -193,6 +193,8 @@ namespace TBike
             
             if (ExpiredStack.Visibility == Visibility.Visible)
             {
+                StackHelo.Visibility = Visibility.Visible;
+                Rect1.Visibility = Visibility.Visible;
                 CBBike.Visibility = Visibility.Visible;
                 LBCustomer.Visibility = Visibility.Visible;
                 LBBookingDate.Visibility = Visibility.Visible;
@@ -204,6 +206,8 @@ namespace TBike
             }
             else
             {
+                StackHelo.Visibility = Visibility.Hidden;
+                Rect1.Visibility = Visibility.Hidden;
                 LBBookingDate.Visibility = Visibility.Hidden;
                 LBBicycle.Visibility = Visibility.Hidden;
                 LBRemarks.Visibility = Visibility.Hidden;
@@ -225,6 +229,18 @@ namespace TBike
             BindCBExpired(ListBicycle);
 
 
+        }
+
+        private void CBStatus_Checked(object sender, RoutedEventArgs e)
+        {
+            if ((CBStatus.IsChecked ?? true) || (CBStatus_Copy.IsChecked ?? true))
+            {
+                TBCondition.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                TBCondition.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

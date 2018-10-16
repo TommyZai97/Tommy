@@ -33,14 +33,7 @@ namespace TBike
             BindComboBox(CBRankDesc);
         }
 
-        private void button_Click_1(object sender, RoutedEventArgs e)
-        {
-            ///back button
-            EmployeeManagement Emp = new EmployeeManagement();
-            Emp.PopulateDataFromLogin(username);
-            Emp.Show();
-            this.Close();
-        }
+
 
         public void PopulateDataFromLogin(string Values)
         {
@@ -90,28 +83,36 @@ namespace TBike
         {
             try
             {
-                if (TBRankDesc.Text != null && TBRankNo.Text != null)
+                if (Convert.ToInt32(TBRankNo.Text) >= RankID)
                 {
-                    //Apply Data To EmployeeRank
-                    if (CBRankDesc.Visibility == Visibility.Hidden)
+                    if (TBRankDesc.Text != null && TBRankNo.Text != null)
                     {
-                        //set new rank
-                        TBikeDAL MyDAL = new TBikeDAL();
-                        MyDAL.AddNewEmployeeRank(TBRankDesc.Text, Convert.ToInt32(TBRankNo.Text), username);
-                        var res = await this.ShowMessageAsync("ADD NEW", "Employee Rank " + TBRankDesc.Text + " Has Been Added.", MessageDialogStyle.AffirmativeAndNegative);
+                        //Apply Data To EmployeeRank
+                        if (CBRankDesc.Visibility == Visibility.Hidden)
+                        {
+                            //set new rank
+                            TBikeDAL MyDAL = new TBikeDAL();
+                            MyDAL.AddNewEmployeeRank(TBRankDesc.Text, Convert.ToInt32(TBRankNo.Text), username);
+                            var res = await this.ShowMessageAsync("ADD NEW", "Employee Rank " + TBRankDesc.Text + " Has Been Added.", MessageDialogStyle.AffirmativeAndNegative);
 
+                        }
+                        else
+                        {
+                            TBikeDAL MyDAL = new TBikeDAL();
+                            MyDAL.UpdateEmployeeRank(CBRankDesc.SelectedValue.ToString().Trim(), TBRankDescModify.Text, Convert.ToInt32(TBRankNo.Text), username);
+                            var res = await this.ShowMessageAsync("MODIFY", "Employee Rank " + TBRankDesc.Text + " Has Been Modified.", MessageDialogStyle.AffirmativeAndNegative);
+
+                        }
                     }
                     else
                     {
-                        TBikeDAL MyDAL = new TBikeDAL();
-                        MyDAL.UpdateEmployeeRank(CBRankDesc.SelectedValue.ToString().Trim(),TBRankDescModify.Text, Convert.ToInt32(TBRankNo.Text), username);
-                        var res = await this.ShowMessageAsync("MODIFY", "Employee Rank " + TBRankDesc.Text + " Has Been Modified.", MessageDialogStyle.AffirmativeAndNegative);
+                        var res = await this.ShowMessageAsync("Error", "Please Fill in all texts");
 
                     }
                 }
                 else
                 {
-                    var res = await this.ShowMessageAsync("Error", "Please Fill in all texts", MessageDialogStyle.AffirmativeAndNegative);
+                    var res = await this.ShowMessageAsync("Error", "Rank same or higher than self cannot be created!!");
 
                 }
 
