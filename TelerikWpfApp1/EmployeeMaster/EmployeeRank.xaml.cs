@@ -83,7 +83,7 @@ namespace TBike
         {
             try
             {
-                if (Convert.ToInt32(TBRankNo.Text) >= RankID)
+                if (Convert.ToInt32(TBRankNo.Text) <= RankID)
                 {
                     if (TBRankDesc.Text != null && TBRankNo.Text != null)
                     {

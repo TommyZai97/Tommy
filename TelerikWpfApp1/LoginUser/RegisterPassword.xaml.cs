@@ -59,6 +59,23 @@ namespace TBike
         {
             TBikeDAL MyDal = new TBikeDAL();
             DataTable ResultTable = MyDal.SelectEmployeeID("", TBUsername.Text);
+            DataTable ResultTableEmployee = MyDal.ShowAllEmployeeDetails();
+            int i = 0;
+            int a = 0;
+            string Email;
+            foreach (DataRow row in ResultTableEmployee.Rows)
+            {
+                Email = Convert.ToString(ResultTableEmployee.Rows[i]["Email"]);
+                if ( Email == TBEmail.Text){
+                    
+                    a = a + 1;
+                }
+                
+                
+                i++;
+            }
+            
+
             if (ResultTable.Rows.Count > 0)
             {
 
@@ -86,17 +103,21 @@ namespace TBike
             }
             else
             {
-                if (TBConfirmPassword != TBPassword)
+                if ((TBConfirmPassword.Password.ToString().Trim()) != (TBPassword.Password.ToString().Trim()))
                 {
                     var res = await this.ShowMessageAsync("Password Not Match", "Password not match with confirm pasword");
 
+                }
+                else if (a == 0)
+                {
+                    var res = await this.ShowMessageAsync("Sorry", "This Email has no record");
                 }
                 else
                 {
                     //var res = await this.ShowMessageAsync("No Record", "No Email address record found ");
                     MyDal.AddNewEmployeeLoginInfo(TBEmail.Text, TBUsername.Text, TBPassword.Password.ToString().Trim());
                     var res = await this.ShowMessageAsync("Registration Completed", " Please go back and Login");
-
+                    this.Close();
                 }
             }
 
@@ -106,9 +127,7 @@ namespace TBike
 
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
-            //back button
-            LoginMenu Emp = new LoginMenu();
-            Emp.Show();
+            
             this.Close();
         }
 

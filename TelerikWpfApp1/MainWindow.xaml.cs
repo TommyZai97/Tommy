@@ -166,7 +166,16 @@ namespace TBike
                     this.Close();
                 }
 
-            
+                else if (Status == "N")
+                {
+                    Return ret = new Return();
+                    ret.Show();
+                    ret.PopulateDataFromLogin(username);
+                    ret.PopulateID(Customer, Status);
+                    this.Close();
+                }
+
+
             }
         }
     }

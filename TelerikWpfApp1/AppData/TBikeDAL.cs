@@ -752,6 +752,7 @@ namespace TBike
                     MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
                     MyCmd.Parameters.AddWithValue("@Customer", customer);
                     MyCmd.Parameters.AddWithValue("@Condition", "");
+                    MyCmd.Parameters.AddWithValue("@LastUpdatedBy", CreatedBy);
                     MyCmd.ExecuteNonQuery();
                     MyCmd.Parameters.Clear();
 

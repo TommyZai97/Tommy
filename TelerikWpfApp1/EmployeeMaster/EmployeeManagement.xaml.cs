@@ -53,7 +53,7 @@ namespace TBike
 
 
             dataGrid1.ItemsSource = ResultTable.DefaultView;
-            dataGrid1.AutoGenerateColumns = true;
+            dataGrid1.AutoGenerateColumns = false;
             dataGrid1.CanUserAddRows = false;
 
 

@@ -49,6 +49,9 @@ namespace TBike
                     DateTime bookTime = Convert.ToDateTime(ResultTable.Rows[0]["BookingDate"]);
                     //double Deposit = Convert.ToDouble(ResultTable.Rows[0]["BookingDeposit"]);
                     double Price = Convert.ToDouble(ResultTable.Rows[0]["Price"]);
+
+
+                    //This is for booked rents
                     if (TPStart.SelectedTime < bookTime.TimeOfDay)
                     {
                         var res = await this.ShowMessageAsync("Sorry", "Can't rent time that is before booking time");
@@ -56,15 +59,94 @@ namespace TBike
                     }
                     else
                     {
+                        TimeSpan CheckTime = new TimeSpan(08, 00, 00);
+                        TimeSpan endTime = new TimeSpan(20, 00, 00);
 
-                        if (TPStart.SelectedTime < DateTime.Now.TimeOfDay)
+                        if (TPEnd.SelectedTime < CheckTime || TPEnd.SelectedTime > endTime)
                         {
-                            var res = await this.ShowMessageAsync("Sorry", "Can't rent time that is before the current time");
+                            var res = await this.ShowMessageAsync("Error", "Please rent in working hours about 8am to 8pm");
 
                         }
                         else
                         {
-                            //if bicycle status is Renting, dont rent bike
+                            if (TPEnd.SelectedTime - TPStart.SelectedTime <= endTime.Subtract(new TimeSpan(0, 30, 0)))
+                            {
+                                var res = await this.ShowMessageAsync("Error", "Please rent At least 30mins");
+
+                            }
+                            else
+                            {
+                                //if bicycle status is Renting, dont rent bike
+                                if (Convert.ToString(ResultTable.Rows[0]["BicycleStatus"]) == "R")
+                                {
+                                    var res = await this.ShowMessageAsync("Sorry", "This Bike has been rented By, " + customer.Trim());
+                                }
+                                //if able to rent start process add
+                                else
+                                {
+                                    double TotalPrice = (((double)duration.TotalHours) * Price);
+                                    TotalPrice = System.Math.Round(TotalPrice, 2);
+
+                                    var res = await this.ShowMessageAsync("Confirm", "Bicycle " + BikeName + ", for Renter " + LBCustomer.Text + ", Duration is " + duration + " Hours, " + " Total Price: RM" + TotalPrice, MessageDialogStyle.AffirmativeAndNegative);
+                                    Console.WriteLine(res);
+                                    //MessageBox.Show("Rented For " + LBCustomer.Text + " Duration is " + Convert.ToString(duration.Hours).Trim() + " Hours","Question",MessageBoxButton.YesNo,MessageBoxImage.Information);
+                                    if (res == MessageDialogResult.Affirmative)
+                                    {
+
+                                        MyDAL.UpdateBikeStatus(Bike, LBCustomer.Text.Trim(), "R", "", null, null, TLUsername.Text);
+                                        MyDAL.UpdateBookingDate(Convert.ToDateTime(LBBookingDate.Text), Bike, LBCustomer.Text.Trim(), TotalPrice, "R", TLUsername.Text.Trim(), TPStart.SelectedTime, TPEnd.SelectedTime, TBRemarks.Text);
+                                        res = await this.ShowMessageAsync("Complete", "Rented Out by " + TLUsername.Text);
+                                        RentalProcessing rent = new RentalProcessing();
+                                        rent.Show();
+                                        rent.PopulateDataFromLogin(username);
+                                        this.Close();
+                                    }
+                                    else
+                                    {
+                                        res = await this.ShowMessageAsync("Cancel", "Rented Canceled by " + TLUsername.Text);
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+
+                }
+                // This is for adding new rent
+                if (TPStart.SelectedTime < DateTime.Now.TimeOfDay)
+                {
+                    var res = await this.ShowMessageAsync("Sorry", "Can't rent time that is before the current time");
+
+                }
+                else if (CBBicycle.SelectedIndex != -1)
+                {
+                    TimeSpan CheckTime = new TimeSpan(08, 00, 00);
+                    TimeSpan endTime = new TimeSpan(20, 00, 00);
+
+
+                    if (TPEnd.SelectedTime < CheckTime || TPEnd.SelectedTime > endTime)
+                    {
+                        var res = await this.ShowMessageAsync("Error", "Please rent in working hours about 8am to 8pm");
+
+                    }
+                    else
+                    {
+                        if (TPEnd.SelectedTime - TPStart.SelectedTime <= endTime.Subtract(new TimeSpan(0, 30, 0)))
+                        {
+                            var res = await this.ShowMessageAsync("Error", "Please rent At least 30mins");
+
+                        }
+                        else
+                        {
+                            DataTable ResultTable = MyDAL.SelectBicycleByID(CBBicycle.SelectedValue.ToString().Trim());
+                            string Bike = Convert.ToString(ResultTable.Rows[0]["BicycleID"]);
+                            string BikeName = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
+                            string customer = TBCustomer.Text;
+
+                            //double Deposit = Convert.ToDouble(ResultTable.Rows[0]["BookingDeposit"]);
+                            double Price = Convert.ToDouble(ResultTable.Rows[0]["Price"]);
+
                             if (Convert.ToString(ResultTable.Rows[0]["BicycleStatus"]) == "R")
                             {
                                 var res = await this.ShowMessageAsync("Sorry", "This Bike has been rented By, " + customer.Trim());
@@ -81,58 +163,18 @@ namespace TBike
                                 if (res == MessageDialogResult.Affirmative)
                                 {
 
-                                    MyDAL.UpdateBikeStatus( Bike,  LBCustomer.Text.Trim(), "R", "",null,null,TLUsername.Text);
-                                    MyDAL.UpdateBookingDate(Convert.ToDateTime(LBBookingDate.Text), Bike, LBCustomer.Text.Trim(), TotalPrice, "R",TLUsername.Text.Trim(), TPStart.SelectedTime, TPEnd.SelectedTime, TBRemarks.Text);
+                                    MyDAL.AddBookingTime(Convert.ToDateTime(LBBookingDate.Text), Bike, "R", LBCustomer.Text.Trim(), TotalPrice, TLUsername.Text.Trim(), TPStart.SelectedTime, TPEnd.SelectedTime, TBRemarks.Text);
                                     res = await this.ShowMessageAsync("Complete", "Rented Out by " + TLUsername.Text);
+                                    RentalProcessing rent = new RentalProcessing();
+                                    rent.Show();
+                                    rent.PopulateDataFromLogin(username);
+                                    this.Close();
                                 }
                                 else
                                 {
                                     res = await this.ShowMessageAsync("Cancel", "Rented Canceled by " + TLUsername.Text);
                                 }
                             }
-                        }
-                    }
-
-
-                }
-                // This is for adding new rent
-                if (TPStart.SelectedTime < DateTime.Now.TimeOfDay)
-                {
-                    var res = await this.ShowMessageAsync("Sorry", "Can't rent time that is before the current time");
-
-                }
-                else if (CBBicycle.SelectedIndex != -1)
-                {
-                    DataTable ResultTable = MyDAL.SelectBicycleByID(CBBicycle.SelectedValue.ToString().Trim());
-                    string Bike = Convert.ToString(ResultTable.Rows[0]["BicycleID"]);
-                    string BikeName = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
-                    string customer = TBCustomer.Text;
-                    
-                    //double Deposit = Convert.ToDouble(ResultTable.Rows[0]["BookingDeposit"]);
-                    double Price = Convert.ToDouble(ResultTable.Rows[0]["Price"]);
-
-                    if (Convert.ToString(ResultTable.Rows[0]["BicycleStatus"]) == "R")
-                    {
-                        var res = await this.ShowMessageAsync("Sorry", "This Bike has been rented By, " + customer.Trim());
-                    }
-                    //if able to rent start process add
-                    else
-                    {
-                        double TotalPrice = (((double)duration.TotalHours) * Price);
-                        TotalPrice = System.Math.Round(TotalPrice, 2);
-
-                        var res = await this.ShowMessageAsync("Confirm", "Bicycle " + BikeName + ", for Renter " + LBCustomer.Text + ", Duration is " + duration + " Hours, " + " Total Price: RM" + TotalPrice, MessageDialogStyle.AffirmativeAndNegative);
-                        Console.WriteLine(res);
-                        //MessageBox.Show("Rented For " + LBCustomer.Text + " Duration is " + Convert.ToString(duration.Hours).Trim() + " Hours","Question",MessageBoxButton.YesNo,MessageBoxImage.Information);
-                        if (res == MessageDialogResult.Affirmative)
-                        {
-
-                            MyDAL.AddBookingTime(Convert.ToDateTime(LBBookingDate.Text), Bike, "R", LBCustomer.Text.Trim(), TotalPrice, TLUsername.Text.Trim(), TPStart.SelectedTime, TPEnd.SelectedTime, TBRemarks.Text);
-                            res = await this.ShowMessageAsync("Complete", "Rented Out by " + TLUsername.Text);
-                        }
-                        else
-                        {
-                            res = await this.ShowMessageAsync("Cancel", "Rented Canceled by " + TLUsername.Text);
                         }
                     }
                 }
@@ -149,6 +191,7 @@ namespace TBike
 
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
+            //back button
             RentalProcessing rent = new RentalProcessing();
             rent.PopulateDataFromLogin(username);
             rent.Show();
@@ -156,6 +199,7 @@ namespace TBike
         }
         public void PopulateDataFromLogin(string Values)
         {
+            // to populate the ranks and usernames
             TBikeDAL MyDAL = new TBikeDAL();
             DataTable ResultTable = MyDAL.SelectEmployeeID("", Values);
 
@@ -175,7 +219,7 @@ namespace TBike
 
         public async void PopulateID(string Customer, string Status)
         {
-            
+            //Populate items from the booking datatable
             TBikeDAL MyDAL = new TBikeDAL();
 
             DataTable ResultTable = MyDAL.ShowBookingTableByCustomer(Customer);
@@ -196,7 +240,7 @@ namespace TBike
                 LB1.Visibility = Visibility.Visible;
                 LB2.Visibility = Visibility.Visible;
                 LB3.Visibility = Visibility.Visible;
-
+                stack1.Visibility = Visibility.Visible;
                 TBCustomer.Visibility = Visibility.Hidden;
                 BTNNext.Visibility = Visibility.Hidden;
                 CBBicycle.Visibility = Visibility.Hidden;
@@ -226,7 +270,7 @@ namespace TBike
             LB1.Visibility = Visibility.Visible;
             LB2.Visibility = Visibility.Visible;
             LB3.Visibility = Visibility.Visible;
-
+            stack1.Visibility = Visibility.Visible;
             TBCustomer.Visibility = Visibility.Hidden;
             CBBicycle.Visibility = Visibility.Hidden;
             BTNNext.Visibility = Visibility.Hidden;
@@ -257,11 +301,12 @@ namespace TBike
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
+            //the next button
             if (TBCustomer.Text != null && CBBicycle.SelectedValue != null)
             {
-
+                stack1.Visibility = Visibility.Visible;
                 LBCustomer.Text = TBCustomer.Text;
-                LBBike.Text = CBBicycle.SelectedValue.ToString().Trim() ;
+                LBBike.Text = CBBicycle.Text;
                 LBBookingDate.Text = Convert.ToString(DateTime.Now);
 
                 LBCustomer.Visibility = Visibility.Visible;

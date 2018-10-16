@@ -12,8 +12,25 @@
         <Grid.Background>
             <ImageBrush ImageSource="/T-Bike;component/Image/background.jpg"/>
         </Grid.Background>
-        <DataGrid Name="dataGrid1" HorizontalAlignment="Stretch" MinHeight="281" Margin="223,29,25,72" VerticalAlignment="Stretch" MinWidth="544" SelectionChanged="dataGrid1_SelectionChanged" Background="#7FA8A8A8"
-                     BorderBrush="#FF14568D" BorderThickness="2"/>
+        <DataGrid Name="dataGrid1"  HorizontalAlignment="Stretch" MinHeight="281" Margin="223,29,25,72" VerticalAlignment="Stretch" MinWidth="544" SelectionChanged="dataGrid1_SelectionChanged" Background="#7FA8A8A8"
+                     BorderBrush="#FF14568D" BorderThickness="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Employee ID" Binding="{Binding EmployeeID}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding EmployeeName}"/>
+                <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
+                <DataGridTextColumn Header="Rank" Binding="{Binding EmployeeRankDesc}"/>
+
+                <DataGridTextColumn Header="Address Location" Binding="{Binding Address}"/>
+                <DataGridTextColumn Header="Email Address" Binding="{Binding Email}"/>
+                <DataGridTextColumn Header="Date Of Birth" Binding="{Binding DateOfBirth}"/>
+                <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNo}"/>
+                <DataGridTextColumn Header="Last Login" Binding="{Binding LastLoginTime}"/>
+                <DataGridTextColumn Header="Created By" Binding="{Binding CreatedBy}"/>
+                <DataGridTextColumn Header="Created At" Binding="{Binding CreatedAt}"/>
+                <DataGridTextColumn Header="Last Updated By" Binding="{Binding LastUpdatedBy}"/>
+                <DataGridTextColumn Header="Last Updated At" Binding="{Binding LastUpdatedAt}"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button Content="" x:Name="button" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="38" Height="38" Click="button_Click_1">
             <Button.Background>
                 <ImageBrush ImageSource="/T-Bike;component/Image/bck.png"/>

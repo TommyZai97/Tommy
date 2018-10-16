@@ -42,10 +42,10 @@
             </CheckBox>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="51,124,0,116" Height="179" >
-            <TextBlock x:Name="LBCustomer" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="250" TextWrapping="Wrap" Height="25" Text="dd"  FontSize="14" Foreground="White" FontWeight="Bold" Margin="0,0,0,20"/>
-            <TextBlock x:Name="LBRemarks" TextWrapping="Wrap" Text="asd" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="250" Height="25"  FontSize="14" Foreground="White" FontWeight="Bold" Grid.Row="1" Margin="0,0,0,20"/>
-            <TextBlock x:Name="LBBicycle" TextWrapping="Wrap" Text="asd" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="250" Height="25"  FontSize="14" Foreground="White" FontWeight="Bold" Margin="0,0,0,20"/>
-            <TextBlock x:Name="LBBookingDate" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="250" Text="asd" Height="25" FontSize="14" Foreground="White" FontWeight="Bold"/>
+            <TextBlock x:Name="LBCustomer" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="250" TextWrapping="Wrap" Height="25" Text=""  FontSize="14" Foreground="White" FontWeight="Bold" Margin="0,0,0,20"/>
+            <TextBlock x:Name="LBRemarks" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="250" Height="25"  FontSize="14" Foreground="White" FontWeight="Bold" Grid.Row="1" Margin="0,0,0,20"/>
+            <TextBlock x:Name="LBBicycle" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="250" Height="25"  FontSize="14" Foreground="White" FontWeight="Bold" Margin="0,0,0,20"/>
+            <TextBlock x:Name="LBBookingDate" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="250" Text="" Height="25" FontSize="14" Foreground="White" FontWeight="Bold"/>
         </StackPanel>
         <Button Content="" x:Name="button" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="38" Height="38" Click="button_Click_1" RenderTransformOrigin="0.786,-0.043" BorderBrush="{x:Null}" Grid.Row="1">
             <Button.Background>

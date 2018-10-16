@@ -7,13 +7,13 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:TelerikWpfApp1"
         mc:Ignorable="d"  
-        Title="rental" Height="450" Width="800" WindowStartupLocation="CenterScreen" Icon="/T-Bike;component/Image/logo.jpg">
+        Title="rental" Height="450" Width="852.436" WindowStartupLocation="CenterScreen" Icon="/T-Bike;component/Image/logo.jpg">
 
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/T-Bike;component/Image/background.jpg"/>
         </Grid.Background>
-        <Rectangle x:Name="rect" HorizontalAlignment="Right"  VerticalAlignment="Stretch" MinWidth="317" MaxWidth="600" Fill="#7F000000" Visibility="Visible"/>
+        <Rectangle x:Name="rect" HorizontalAlignment="Right"  VerticalAlignment="Stretch" MinWidth="317" MaxWidth="600" Fill="#7F000000" Visibility="Hidden" Width="369"/>
 
         <ComboBox x:Name="CBBike" HorizontalAlignment="Left" Margin="29,41,0,0" VerticalAlignment="Top" Width="206" Height="23" SelectionChanged="ComboBox_SelectionChanged" Controls:TextBoxHelper.Watermark="Reserved Customers..."/>
         <Controls:TimePicker x:Name="TPStart" Height="34" Width="206" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,77,0,308" Controls:TextBoxHelper.Watermark="Select starting time" />
@@ -37,7 +37,7 @@
         </Button>
         <Button x:Name="BTNRent" Content="Rent" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Width="89" Margin="0,0,29.333,24.667" Height="33" FontSize="12" Click="BTNRent_Click"/>
 
-        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="317">
+        <StackPanel Name="stack1" Visibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="369">
 
             <StackPanel Orientation="Horizontal">
 
