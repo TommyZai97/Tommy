@@ -1,8 +1,5 @@
 ﻿<Controls:MetroWindow x:Class="TBike.CreateNewUser"
-        ShowTitleBar="False"
-        ShowCloseButton="False"
-        ShowMinButton="False"
-        ShowMaxRestoreButton="False"
+    
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -10,55 +7,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TelerikWpfApp1"
         mc:Ignorable="d"
-        Title="CreateNewUser" Height="450" Width="800" WindowStartupLocation="CenterScreen" Icon="/T-Bike;component/Image/logo.jpg">
+        Title="CreateNewUser" MinHeight="512.924" MinWidth="800" Width="930.614" WindowStartupLocation="CenterScreen" Icon="/T-Bike;component/Image/logo.jpg">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/T-Bike;component/Image/background.jpg"/>
         </Grid.Background>
-        <Rectangle Fill="White" HorizontalAlignment="Center" Height="262"  Stroke="Black" VerticalAlignment="Center" Width="735" RadiusY="29.5" RadiusX="29.5" Margin="34,81,23,76"/>
+        <Rectangle Fill="#A1FFFFFF" HorizontalAlignment="Stretch" MinHeight="282" MaxHeight="800"  Stroke="Black" VerticalAlignment="Center" MinWidth="735" MaxWidth="1200" RadiusY="29.5" RadiusX="29.5" Margin="34,65,23,86" Height="331"/>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="20,22,0,0" Width="700">
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" MinHeight="600" MaxHeight="800"  MinWidth="700" MaxWidth="1000" Margin="90,112,59,-230">
 
-            <StackPanel Orientation="Horizontal">
+            <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                 <TextBlock TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="90" FontWeight="Bold"/>
-                <TextBox Name="TBEmpName" TextWrapping="Wrap" MinWidth="250" MaxWidth="300" HorizontalAlignment="Stretch" />
-                <TextBlock TextWrapping="Wrap" Text="Date Of Birth"  Width="75" Margin="30,0,0,0" FontWeight="Bold"/>
-                <DatePicker Name="DOBText" Width="250"/>
+                <TextBox Name="TBEmpName" TextWrapping="Wrap" MinWidth="250" MaxWidth="700" HorizontalAlignment="Stretch" />
+                <TextBlock TextWrapping="Wrap" Text="Date Of Birth"  Width="75" Margin="30,4,10,0" FontWeight="Bold"/>
+                <DatePicker x:Name="DOBText" MinWidth="250" MaxWidth="700" DisplayDate="01/01/2000"/>
 
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+            </DockPanel>
+            <DockPanel  LastChildFill="True"  Margin="0,15,0,0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <TextBlock TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="90" FontWeight="Bold"/>
-                <TextBox  Name="TBEmail" TextWrapping="Wrap" MinWidth="250" MaxWidth="300" HorizontalAlignment="Stretch" />
-                <TextBlock TextWrapping="Wrap" Text="PhoneNo"  Width="75"  Margin="30,0,0,0" FontWeight="Bold"/>
-                <TextBox Name="TBPhoneNo"  TextWrapping="Wrap" MinWidth="250" MaxWidth="300" HorizontalAlignment="Stretch" />
-            </StackPanel>
+                <TextBox  Name="TBEmail" TextWrapping="Wrap" MinWidth="250" MaxWidth="700" HorizontalAlignment="Stretch" />
+                <TextBlock TextWrapping="Wrap" Text="PhoneNo"  Width="75"  Margin="30,4,10,0" FontWeight="Bold"/>
+                <TextBox Name="TBPhoneNo"  TextWrapping="Wrap" MinWidth="250" MaxWidth="700" HorizontalAlignment="Stretch" />
+            </DockPanel>
 
 
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                <TextBlock TextWrapping="Wrap" Text="Address Line 1" VerticalAlignment="Top" Width="90" FontWeight="Bold"/>
-                <TextBox Name="TBAddress1" TextWrapping="Wrap"  MinWidth="605" />
+            <DockPanel LastChildFill="True"  Margin="0,15,0,0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBlock TextWrapping="Wrap" Text="Address Line 1" VerticalAlignment="Center" Width="90" FontWeight="Bold"/>
+                <TextBox Name="TBAddress1" TextWrapping="Wrap"  MinWidth="605" MaxWidth="1400" />
+            </DockPanel>
 
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+            <DockPanel LastChildFill="True"  Margin="0,15,0,0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <TextBlock TextWrapping="Wrap" Text="Address Line 2" VerticalAlignment="Top" Width="90" FontWeight="Bold"/>
-                <TextBox Name="TBAddress2" TextWrapping="Wrap"  MinWidth="605" />
+                <TextBox Name="TBAddress2" TextWrapping="Wrap"  MinWidth="605" MaxWidth="1400"/>
 
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+            </DockPanel>
+
+            <DockPanel LastChildFill="True"  Margin="0,15,0,0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <TextBlock TextWrapping="Wrap" Text="Address Line 3" VerticalAlignment="Top" Width="90" FontWeight="Bold"/>
-                <TextBox Name="TBAddress3" TextWrapping="Wrap"  MinWidth="605" />
+                <TextBox Name="TBAddress3" TextWrapping="Wrap"  MinWidth="605" MaxWidth="1400"/>
 
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+            </DockPanel>
+
+            <DockPanel  LastChildFill="True"  Margin="0,15,0,0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <TextBlock TextWrapping="Wrap" Text="City" VerticalAlignment="Top" Width="90" FontWeight="Bold"/>
-                <TextBox Name="TBCity" TextWrapping="Wrap" MinWidth="250" MaxWidth="300" HorizontalAlignment="Stretch" />
-                <TextBlock TextWrapping="Wrap" Text="ZipCode"  Width="75" Margin="30,0,0,0" FontWeight="Bold"/>
-                <TextBox Name="TBZipCode" TextWrapping="Wrap" MinWidth="250" MaxWidth="300" HorizontalAlignment="Stretch" />
-            </StackPanel>
-            <StackPanel>
+                <TextBox Name="TBCity" TextWrapping="Wrap" MinWidth="250" MaxWidth="700" HorizontalAlignment="Stretch" />
+                <TextBlock TextWrapping="Wrap" Text="ZipCode"  Width="75" Margin="30,4,10,0" FontWeight="Bold"/>
+                <TextBox Name="TBZipCode" TextWrapping="Wrap" MinWidth="250" MaxWidth="700" HorizontalAlignment="Stretch" />
+            </DockPanel>
+            <DockPanel>
                 <Button Content="Add New" Width="70" HorizontalAlignment="Right" Margin="0,10,20,0" Click="Button_Click"/>
-            </StackPanel>
+            </DockPanel>
         </StackPanel>
+
         <Button Content="" x:Name="button" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="38" Height="38" Click="button_Click_1" RenderTransformOrigin="0.786,-0.043" BorderBrush="{x:Null}">
             <Button.Background>
                 <ImageBrush ImageSource="/T-Bike;component/Image/bck.png"/>
@@ -70,7 +70,7 @@
             <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="64,-33,19,18.667"/>
             <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="136,-42,0,20"/>
         </StackPanel>
-        <TextBlock HorizontalAlignment="Left" Margin="56,88,0,0" FontSize="14px" TextWrapping="Wrap" Text="Create New User" VerticalAlignment="Top" FontWeight="Bold" TextDecorations="Underline"/>
+        <TextBlock HorizontalAlignment="Stretch"  FontSize="14px" TextWrapping="Wrap" Text="Create New User" VerticalAlignment="Center" FontWeight="Bold" TextDecorations="Underline" Height="28" Margin="90,78,704,376" Width="129"/>
 
     </Grid>
 </Controls:MetroWindow>

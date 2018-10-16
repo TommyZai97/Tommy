@@ -108,36 +108,7 @@ namespace TBike
             return ResultDataTable;
         }
 
-        public DataTable SelBicycleDetailsByBikeID(string BicycleID)
-        {
-            SqlConnection MyCon = new SqlConnection(constring);
-            SqlCommand MyCmd = new SqlCommand("SelBicycleDetailsByID", MyCon);
-            MyCmd.CommandTimeout = 600;
-            MyCmd.CommandType = CommandType.StoredProcedure;
-            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
-            DataTable ResultDataTable = new DataTable("ResultDataTable");
-
-            try
-            {
-                MyCon.Open();
-                MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
-
-                MyDA.Fill(ResultDataTable);
-            }
-            catch (Exception e)
-            {
-                throw new Exception("DB Operation Error At ShowAllBikeTable : " + e.Message);
-            }
-            finally
-            {
-                MyCon.Close();
-                MyCon.Dispose();
-                MyCmd.Dispose();
-            }
-            return ResultDataTable;
-
-        }
-
+       
         public string AddBicycleTable(string BicycleName,string BicycleType, double Price, string Color, string CreatedBy)
         {
             string BicycleID = "";
@@ -171,6 +142,92 @@ namespace TBike
                 MyCmd.Dispose();
             }
             return BicycleID;
+        }
+        public DataTable SelectServiceByBike(string BicycleID)
+        {
+
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelBicycleServiceMasterByBike", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+            MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
+            try
+            {
+                MyCon.Open();
+
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelectServiceByBike : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+        }
+
+        public string UpdateBikeStatus(string BicycleID, string Customer, string BicycleStatus, string Condition, DateTime? ServiceStart, DateTime? ServiceEnd, string LastUpdatedBy)
+        {
+            string BookingID = "";
+            SqlConnection conn = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("UpdBikeStatus", conn);
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+            try
+            {
+
+
+                MyCmd.Parameters.AddWithValue("@BicycleStatus", BicycleStatus);
+                MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
+                MyCmd.Parameters.AddWithValue("@Customer", Customer);
+                MyCmd.Parameters.AddWithValue("@Condition", Condition);
+                MyCmd.Parameters.AddWithValue("@LastUpdatedBy", LastUpdatedBy);
+                MyCmd.ExecuteNonQuery();
+                MyCmd.Parameters.Clear();
+                if (BicycleStatus == "M")
+                {
+                    MyCmd.CommandText = "AddBikeService";
+                    MyCmd.Parameters.AddWithValue("@Status", BicycleStatus);
+                    MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
+                    MyCmd.Parameters.AddWithValue("@ServiceEnd", ServiceEnd);
+                    MyCmd.Parameters.AddWithValue("@Remark", Condition);
+                    MyCmd.Parameters.AddWithValue("@ServiceStart", ServiceStart);
+                    MyCmd.Parameters.AddWithValue("@CreatedBy", LastUpdatedBy);
+                    MyCmd.ExecuteNonQuery();
+                    MyCmd.Parameters.Clear();
+                }
+            
+                 if (BicycleStatus == "A" && ServiceStart != null )
+                {
+                    MyCmd.CommandText = "UpdBikeService";
+                    MyCmd.Parameters.AddWithValue("@Status", "S");
+                    MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
+                    MyCmd.Parameters.AddWithValue("@ServiceEnd", ServiceEnd);
+                    MyCmd.Parameters.AddWithValue("@Remark", Condition);
+                    MyCmd.Parameters.AddWithValue("@ServiceStart", ServiceStart);
+                    MyCmd.Parameters.AddWithValue("@LastUpdatedBy", LastUpdatedBy);
+                    MyCmd.ExecuteNonQuery();
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("DB Operation Error At UpdateBikeStatus : " + e.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+                MyCmd.Dispose();
+            }
+            return BookingID;
         }
 
         public string UpdateBicycleTable(string BicycleID, string BicycleName,string BicycleType, string ItemStatus,double Price, string Color, string LastUpdatedBy)
@@ -270,7 +327,7 @@ namespace TBike
             }
             return ResultDataTable;
         }
-        public string AddNewEmployeeDetails(string EmployeeName, DateTime DateOfBirth, string Email, string PhoneNo, string AddressLine1, string AddressLine2, string AddressLine3, string City, int ZipCode, string CreatedBy)
+        public string AddNewEmployeeDetails(string EmployeeName, DateTime DateOfBirth, string Email, string PhoneNo, string Address, string CreatedBy)
         {
             string EmployeeID="";
             SqlConnection conn = new SqlConnection(constring);
@@ -284,11 +341,8 @@ namespace TBike
                 MyCmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
                 MyCmd.Parameters.AddWithValue("@Email", Email);
                 MyCmd.Parameters.AddWithValue("@PhoneNo", PhoneNo);
-                MyCmd.Parameters.AddWithValue("@AddressLine1", AddressLine1);
-                MyCmd.Parameters.AddWithValue("@AddressLine2", AddressLine2);
-                MyCmd.Parameters.AddWithValue("@AddressLine3", AddressLine3);
-                MyCmd.Parameters.AddWithValue("@City", City);
-                MyCmd.Parameters.AddWithValue("@ZipCode", ZipCode);
+                MyCmd.Parameters.AddWithValue("@Address", Address);
+              
                 MyCmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
                 MyCmd.ExecuteNonQuery();
 
@@ -337,6 +391,47 @@ namespace TBike
 
 
         }
+
+        public string UpdateEmployee(string EmployeeID,string EmployeeName, DateTime DateOfBirth, string Username,string RankDesc,string Email, string PhoneNo, string Address, string LastUpdatedBy)
+        {
+            SqlConnection conn = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("UpdEmpMaster", conn);
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+            try
+            {
+
+                MyCmd.Parameters.AddWithValue("@EmployeeID", EmployeeID);
+                MyCmd.Parameters.AddWithValue("@EmployeeName", EmployeeName);
+                MyCmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
+                MyCmd.Parameters.AddWithValue("@Email", Email);
+                MyCmd.Parameters.AddWithValue("@PhoneNo", PhoneNo);
+                MyCmd.Parameters.AddWithValue("@Address", Address);
+                MyCmd.Parameters.AddWithValue("@Username", Username);
+                MyCmd.Parameters.AddWithValue("@RankDesc", RankDesc);
+                MyCmd.Parameters.AddWithValue("@LastUpdatedBy", LastUpdatedBy);
+       
+                MyCmd.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("DB Operation Error At UpdateEmployee : " + e.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+                MyCmd.Dispose();
+            }
+            return Username;
+
+
+
+        }
+
+
         public string UpdateEmployeePromotion(string EmployeeID,  int Rank, string LastUpdatedBy)
         {
             SqlConnection conn = new SqlConnection(constring);
@@ -589,28 +684,32 @@ namespace TBike
             return BookingID;
         }
 
-        public string UpdateBikeStatus(string BicycleID,string Customer,string BicycleStatus,string Condition)
+     
+        public string UpdateBookingDate(DateTime BookingDate, string BicycleID, string customer, double? TotalPrice, string BookingStatus,string CreatedBy, TimeSpan? StartTime, TimeSpan? Endtime, string Remarks)
         {
             string BookingID = "";
             SqlConnection conn = new SqlConnection(constring);
-            SqlCommand MyCmd = new SqlCommand("UpdBikeStatus", conn);
+            SqlCommand MyCmd = new SqlCommand("UpdBookingTable", conn);
             MyCmd.CommandType = CommandType.StoredProcedure;
             conn.Open();
             try
             {
-
-
-                MyCmd.Parameters.AddWithValue("@BicycleStatus", BicycleStatus);
+           
+                MyCmd.Parameters.AddWithValue("@BookingDate", BookingDate);
                 MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
-                MyCmd.Parameters.AddWithValue("@Customer", Customer);
-                MyCmd.Parameters.AddWithValue("@Condition", Condition);
+                MyCmd.Parameters.AddWithValue("@StartTime", StartTime);
+                MyCmd.Parameters.AddWithValue("@Endtime", Endtime);
+                MyCmd.Parameters.AddWithValue("@TotalPrice", TotalPrice);
+                MyCmd.Parameters.AddWithValue("@BookingStatus", BookingStatus);
+                MyCmd.Parameters.AddWithValue("@Customer", customer);
+                MyCmd.Parameters.AddWithValue("@Remarks", Remarks);
+                MyCmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
                 MyCmd.ExecuteNonQuery();
-
             }
             catch (Exception e)
             {
 
-                throw new Exception("DB Operation Error At UpdateBikeStatus : " + e.Message);
+                throw new Exception("DB Operation Error At AddBookingTime : " + e.Message);
             }
             finally
             {
@@ -621,7 +720,7 @@ namespace TBike
             return BookingID;
         }
 
-        public string AddBookingTime(DateTime BookingDate, string BicycleID,string BicycleStatus,string customer, double? TotalPrice,string CreatedBy,TimeSpan? StartTime, TimeSpan? Endtime,string Remarks)
+        public string AddBookingTime(DateTime BookingDate, string BicycleID, string BicycleStatus, string customer, double? TotalPrice, string CreatedBy, TimeSpan? StartTime, TimeSpan? Endtime, string Remarks)
         {
             string BookingID = "";
             SqlConnection conn = new SqlConnection(constring);
@@ -633,11 +732,16 @@ namespace TBike
                 if (BicycleStatus == "A")
                 {
                     MyCmd.Parameters.AddWithValue("@BookingDate", BookingDate);
-
                     MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
+                    MyCmd.Parameters.AddWithValue("@StartTime", DBNull.Value);
+                    MyCmd.Parameters.AddWithValue("@Endtime", DBNull.Value);
+                    MyCmd.Parameters.AddWithValue("@TotalPrice", DBNull.Value);
+                    MyCmd.Parameters.AddWithValue("@BookingStatus", "A");
                     MyCmd.Parameters.AddWithValue("@Customer", customer);
                     MyCmd.Parameters.AddWithValue("@Remarks", Remarks);
                     MyCmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+
+
                     MyCmd.ExecuteNonQuery();
                     MyCmd.Parameters.Clear();
                 }
@@ -648,10 +752,11 @@ namespace TBike
                     MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
                     MyCmd.Parameters.AddWithValue("@Customer", customer);
                     MyCmd.Parameters.AddWithValue("@Condition", "");
+                    MyCmd.Parameters.AddWithValue("@LastUpdatedBy", CreatedBy);
                     MyCmd.ExecuteNonQuery();
                     MyCmd.Parameters.Clear();
 
-                    MyCmd.CommandText = "UpdBookingTable";
+                    MyCmd.CommandText = "AddNewBookTime";
                     MyCmd.Parameters.AddWithValue("@BookingDate", BookingDate);
                     MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
                     MyCmd.Parameters.AddWithValue("@StartTime", StartTime);
@@ -661,8 +766,8 @@ namespace TBike
                     MyCmd.Parameters.AddWithValue("@Customer", customer);
                     MyCmd.Parameters.AddWithValue("@Remarks", Remarks);
                     MyCmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
-                
-                
+
+
                     MyCmd.ExecuteNonQuery();
                 }
 
@@ -682,6 +787,7 @@ namespace TBike
             }
             return BookingID;
         }
+        
         public DateTime UpdateBookingDate(DateTime date, string BookingStatus,string ID)
         {
             SqlConnection conn = new SqlConnection(constring);

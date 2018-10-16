@@ -44,7 +44,7 @@ namespace TBike
                 LBEmail.Text = Convert.ToString(ResultTable.Rows[0]["Email"]).Trim();
                 LBDob.Text = Convert.ToString(ResultTable.Rows[0]["DateOfBirth"]).Trim();
                 LBPhoneNo.Text = Convert.ToString(ResultTable.Rows[0]["PhoneNo"]).Trim();
-                LBCity.Text = Convert.ToString(ResultTable.Rows[0]["City"]).Trim();
+                LBCity.Text = Convert.ToString(ResultTable.Rows[0]["Address"]).Trim();
                 LBLastLogin.Text = Convert.ToString(ResultTable.Rows[0]["LastLoginTime"]).Trim();
             }
             else
@@ -143,6 +143,38 @@ namespace TBike
             catch (Exception ex)
             {
                 var res = await this.ShowMessageAsync("Error", Convert.ToString(ex).Trim());
+            }
+        }
+
+        private async void BTNUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                TBikeDAL MyDAL = new TBikeDAL();
+                username = LBUsername.Text;
+                var res = await this.ShowMessageAsync("Update", "Are you sure to modify these changes?", MessageDialogStyle.AffirmativeAndNegative);
+                if (res == MessageDialogResult.Affirmative)
+                {
+                    MyDAL.UpdateEmployee(LBEmployeeID.Text, LBEmployeeName.Text, Convert.ToDateTime(LBDob.Text), LBUsername.Text, LBEmployeeRankDesc.Text, LBEmail.Text, LBPhoneNo.Text, LBCity.Text, TLUsername.Text);
+                    DataTable ResultTable = MyDAL.SelectEmployeeByEmployeeID(LBEmployeeID.Text);
+                    
+                        
+                        LBEmployeeName.Text = Convert.ToString(ResultTable.Rows[0]["EmployeeName"]).Trim();
+                        LBEmployeeRankDesc.Text = Convert.ToString(ResultTable.Rows[0]["EmployeeRankDesc"]).Trim();
+                        LBUsername.Text = Convert.ToString(ResultTable.Rows[0]["Username"]).Trim();
+                        LBEmail.Text = Convert.ToString(ResultTable.Rows[0]["Email"]).Trim();
+                        LBDob.Text = Convert.ToString(ResultTable.Rows[0]["DateOfBirth"]).Trim();
+                        LBPhoneNo.Text = Convert.ToString(ResultTable.Rows[0]["PhoneNo"]).Trim();
+                        LBCity.Text = Convert.ToString(ResultTable.Rows[0]["Address"]).Trim();
+                        LBLastLogin.Text = Convert.ToString(ResultTable.Rows[0]["LastLoginTime"]).Trim();
+
+                    PopulateDataFromLogin(username);
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                var res = await this.ShowMessageAsync("Error", ex.Message);
             }
         }
     }

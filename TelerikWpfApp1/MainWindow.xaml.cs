@@ -58,12 +58,12 @@ namespace TBike
                 if (date.Date > D.Date && Status == "A")
                 {
                     MyDAL.UpdateBookingDate(D, "E", ID);
-                    MyDAL.UpdateBikeStatus(Bike, "","A","");
+                    MyDAL.UpdateBikeStatus(Bike, "","A","", null, null, TLUsername.Text);
                 }
                 else if (date.Date > D && Status == "R")
                 {
                     MyDAL.UpdateBookingDate(D, "N",ID);
-                    MyDAL.UpdateBikeStatus(Bike, "","N","");
+                    MyDAL.UpdateBikeStatus(Bike, "","N","", null, null, TLUsername.Text);
                 }
                  i = i + 1;
             }
@@ -111,7 +111,7 @@ namespace TBike
 
             if (ResultTable.Rows.Count > 0)
             {
-               
+              
                 TLUsername.Text = Convert.ToString(ResultTable.Rows[0]["EmployeeName"]).Trim();
                 TLRankDesc.Text = Convert.ToString(ResultTable.Rows[0]["EmployeeRankDesc"]).Trim();
                 username = Convert.ToString(ResultTable.Rows[0]["Username"]).Trim();
@@ -166,7 +166,16 @@ namespace TBike
                     this.Close();
                 }
 
-            
+                else if (Status == "N")
+                {
+                    Return ret = new Return();
+                    ret.Show();
+                    ret.PopulateDataFromLogin(username);
+                    ret.PopulateID(Customer, Status);
+                    this.Close();
+                }
+
+
             }
         }
     }

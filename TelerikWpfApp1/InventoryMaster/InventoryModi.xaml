@@ -1,10 +1,5 @@
 ﻿
 <Controls:MetroWindow x:Class="TBike.InventoryModi"
-        ShowTitleBar="False"
-    ShowCloseButton="False"
-    ShowMinButton="False"
-    ShowMaxRestoreButton="False"
-
          xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,15 +7,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TBike"
         mc:Ignorable="d"
-        Title="Inventory Modification" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Inventory Modification" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized">
    
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/T-Bike;component/Image/background.jpg"/>
         </Grid.Background>
-        <Rectangle Visibility="Visible" Opacity="0.5" Fill="#FFA4A4A4" HorizontalAlignment="Left" Height="336" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="772" RadiusY="22.682" RadiusX="22.682"/>
+        <Rectangle Visibility="Visible" Opacity="0.5" Fill="#FFA4A4A4" HorizontalAlignment="Stretch" MinHeight="336" Margin="10,10,10,73" Stroke="Black" VerticalAlignment="Stretch" MinWidth="772" RadiusY="22.682" RadiusX="22.682"/>
 
-        <Button Content="" x:Name="button" HorizontalAlignment="Left" Margin="10,371,0,0" VerticalAlignment="Top" Width="38" Height="38" Click="button_Click_1">
+        <Button Content="" x:Name="button" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="38" Height="38" Click="button_Click_1" RenderTransformOrigin="0.61,0.077">
             <Button.Background>
                 <ImageBrush ImageSource="/T-Bike;component/Image/bck.png"/>
             </Button.Background>
@@ -40,9 +35,9 @@
         <TextBox x:Name="TBColor" HorizontalAlignment="Left" Margin="109,224,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="14" Width="136" Background="White"/>
         <TextBlock x:Name="LBPrice" HorizontalAlignment="Left" Margin="46,189,0,0" TextWrapping="Wrap" Text="Price" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
         <TextBlock x:Name="LBColor" HorizontalAlignment="Left" Margin="46,232,0,0" TextWrapping="Wrap" Text="Color" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
-        <Button Name="BTNPro" Content="Update" HorizontalAlignment="Left" Margin="707,382,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Name="BTNPro" Content="Update" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="Button_Click"/>
         <TextBlock Name="LBTitle" HorizontalAlignment="Left" Margin="29,24,0,0" TextWrapping="Wrap" Text="UnknownData" VerticalAlignment="Top" FontSize="18" Foreground="White" TextDecorations="Underline"/>
-        <DataGrid Name="dataGrid1" HorizontalAlignment="Left" Height="268" Margin="364,40,0,0" VerticalAlignment="Top" Width="398" Background="#89232323" SelectionChanged="dataGrid1_SelectionChanged">
+        <DataGrid Name="dataGrid1" HorizontalAlignment="Stretch" MinHeight="268" Margin="356,38,38,113" VerticalAlignment="Stretch" MinWidth="398" Background="#89232323" SelectionChanged="dataGrid1_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="Column1"  />
                 <DataGridTextColumn x:Name="Column2"  />
@@ -65,7 +60,7 @@
             <ComboBoxItem Content="Maintainence"/>
         </ComboBox>
         <TextBlock Visibility="Hidden" x:Name="LBStatus" HorizontalAlignment="Left" Margin="46,273,0,0" TextWrapping="Wrap" Text="Status" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold" />
-        <ComboBox Visibility="Hidden"  x:Name="CBSnackStatus" HorizontalAlignment="Left" Margin="109,265,0,0" Text="" VerticalAlignment="Top" FontSize="14" Width="136" Background="White" Controls:TextBoxHelper.Watermark="Bicycle Status..." Controls:TextBoxHelper.AutoWatermark="True" Controls:TextBoxHelper.UseFloatingWatermark="True">
+        <ComboBox Visibility="Hidden"  x:Name="CBSnackStatus" HorizontalAlignment="Left" Margin="109,265,0,0" Text="" VerticalAlignment="Top" FontSize="14" Width="136" Background="White" Controls:TextBoxHelper.Watermark="Snack Status..." Controls:TextBoxHelper.AutoWatermark="True" Controls:TextBoxHelper.UseFloatingWatermark="True">
             <ComboBoxItem Content="Active"/>
             <ComboBoxItem Content="InActive"/>
             <ComboBoxItem Content="Out Of Stock"/>

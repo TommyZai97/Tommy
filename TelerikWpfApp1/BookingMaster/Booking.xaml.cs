@@ -66,7 +66,7 @@ namespace TBike
                
                 string BikeID = Convert.ToString(CBBike.SelectedValue);
                 TBikeDAL MyDAL = new TBikeDAL();
-                DateTime Start = Convert.ToDateTime(StartDate.Value);
+                DateTime Start = Convert.ToDateTime(StartDate.SelectedDate.Value);
 
                 TimeSpan CheckTime = new TimeSpan(08, 00, 00);
                 TimeSpan endTime = new TimeSpan(16, 00, 00);

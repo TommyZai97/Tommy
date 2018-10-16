@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace TBike
 {
@@ -29,41 +30,50 @@ namespace TBike
 
 
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public string stringBuilder(string Address)
         {
-            //button for creating new employee
-            int ZipCode = Convert.ToInt32(TBZipCode.Text);
-                
-            TBikeDAL MyDal = new TBikeDAL();
-            MyDal.AddNewEmployeeDetails(TBEmpName.Text, DOBText.SelectedDate.Value.Date, TBEmail.Text, TBPhoneNo.Text, TBAddress1.Text, TBAddress2.Text, TBAddress3.Text, TBCity.Text, ZipCode, "Tommy");
 
-            CreateNewUser emp = new CreateNewUser();
-            this.Close();
-            emp.PopulateDataFromLogin(username);
-            emp.Show();
-            MessageBox.Show("Create New User Success!!!");
-            
+            StringBuilder striBuild = new StringBuilder();
+            striBuild.AppendLine(TBAddress1.Text);
+            striBuild.AppendLine(TBAddress2.Text);
+            striBuild.AppendLine(TBAddress3.Text);
+            striBuild.Append(TBCity.Text);
+            striBuild.Append(" , " + TBZipCode.Text);
+
+            Address = striBuild.ToString().Trim();
+
+            return Address;
+        }
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //button for creating new employee
+               
+
+                TBikeDAL MyDal = new TBikeDAL();
+
+
+                string Address = "";
+                stringBuilder(Address); 
+
+
+                MyDal.AddNewEmployeeDetails(TBEmpName.Text, DOBText.SelectedDate.Value.Date, TBEmail.Text, TBPhoneNo.Text, Address, "Tommy");
+
+                CreateNewUser emp = new CreateNewUser();
+                this.Close();
+                emp.PopulateDataFromLogin(username);
+                emp.Show();
+                MessageBox.Show("Create New User Success!!!");
+            }
+            catch(Exception ex)
+            {
+                var res = await this.ShowMessageAsync("Error", ex.Message);
+            }
           
         }
 
-        void LoopVisualTree(DependencyObject obj)
-
-        {
-
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-
-            {
-
-                if (obj is TextBox)
-
-                    ((TextBox)obj).Text = null;
-
-                LoopVisualTree(VisualTreeHelper.GetChild(obj, i));
-
-            }
-
-        }
+     
 
         public void populateEmployeeID()
         {

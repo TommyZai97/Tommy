@@ -27,6 +27,7 @@ namespace TBike
         string username;
         int RankID;
         string Customer;
+       
 
         static string constring = System.Configuration.ConfigurationManager.ConnectionStrings["123"].ConnectionString;
 
@@ -85,7 +86,7 @@ namespace TBike
         public void BindCBExpired(ComboBox ListBicycle)
         {
             SqlConnection conn = new SqlConnection(constring);
-            SqlDataAdapter da = new SqlDataAdapter("SELECT BicycleID,BicycleName From BicycleMaster WHERE BicycleStatus = 'N' and CurrentRenter='"+ CBCustomer.SelectedValue.ToString().Trim()+"'", conn);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT BicycleID,BicycleName From BicycleMaster WHERE BicycleStatus = 'N' and CurrentRenter='" + LBName.Text + "'", conn);
             DataSet ds = new DataSet();
             da.Fill(ds, "BicycleMaster");
             ListBicycle.ItemsSource = ds.Tables[0].DefaultView;
@@ -100,16 +101,35 @@ namespace TBike
             TBikeDAL MyDAL = new TBikeDAL();
 
             DataTable ResultTable = MyDAL.ShowBookingTableByCustomer(Customer);
-
+            Customer = Convert.ToString(ResultTable.Rows[0]["Customer"]);
             if (ResultTable.Rows.Count != 0)
             {
+                if (Status == "R")
+                {
+                    LBCustomer.Text = Customer;
 
-                LBCustomer.Text = Customer;
+                    LBBookingDate.Text = Convert.ToString(ResultTable.Rows[0]["BookingDate"]);
+                    LBBicycle.Text = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
+                    LBRemarks.Text = Convert.ToString(ResultTable.Rows[0]["Remark"]);
+                }
+                else
+                {
+                    // if Status is not return
+                    StackHelo.Visibility = Visibility.Hidden;
+                    Rect1.Visibility = Visibility.Hidden;
+                    CBBike.Visibility = Visibility.Hidden;
+                    LBCustomer.Visibility = Visibility.Hidden;
+                    LBBookingDate.Visibility = Visibility.Hidden;
+                    LBBicycle.Visibility = Visibility.Hidden;
+                    LBRemarks.Visibility = Visibility.Hidden;
 
-                LBBookingDate.Text = Convert.ToString(ResultTable.Rows[0]["BookingDate"]);
-                LBBicycle.Text = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
-                LBRemarks.Text = Convert.ToString(ResultTable.Rows[0]["Remark"]);
-           
+                    BTNExpired.Foreground = Brushes.Red;
+                    ExpiredStack.Visibility = Visibility.Visible;
+                    LBName.Text = Convert.ToString(ResultTable.Rows[0]["Customer"]);
+                    LBDate.Text = Convert.ToString(ResultTable.Rows[0]["BookingDate"]);
+                
+                    BindCBExpired(ListBicycle);
+                }
             }
             else
             {
@@ -119,10 +139,10 @@ namespace TBike
 
         }
 
-        private void BTNReturn_Click(object sender, RoutedEventArgs e)
+        private async void BTNReturn_Click(object sender, RoutedEventArgs e)
         {
             string DamageStatus = "A";
-        if(CBStatus.IsChecked ?? true)
+            if ((CBStatus.IsChecked ?? true) || (CBStatus_Copy.IsChecked ?? true))
             {
                 DamageStatus = "I";
             }
@@ -133,13 +153,14 @@ namespace TBike
                 {
 
                     MyDAL.UpdateBookingStatus("S", CBBike.SelectedValue.ToString().Trim(), Customer, TLUsername.Text);
-                    MyDAL.UpdateBikeStatus(CBBike.SelectedValue.ToString().Trim(),"", DamageStatus, TBCondition.Text);
+                    MyDAL.UpdateBikeStatus(CBBike.SelectedValue.ToString().Trim(),"", DamageStatus, TBCondition.Text, null, Convert.ToDateTime(null), TLUsername.Text);
+                    var res = await this.ShowMessageAsync("Bicycle: ", CBBike.Text + " Returned");
+
                     Return ret = new Return();
                     this.Close();
                     ret.PopulateDataFromLogin(username);
                     ret.Show();
-                    MessageBox.Show("Bicycle: " + CBBike.SelectedValue.ToString().Trim() + " Returned");
-                }
+}
 
                 else
                 {
@@ -148,15 +169,16 @@ namespace TBike
             }
             else
             {
-                if (CBCustomer.SelectedValue != null)
+                if (LBCustomer.Text != null)
                 {
-                    MyDAL.UpdateBookingStatus("S", ListBicycle.SelectedValue.ToString().Trim(), CBCustomer.SelectedValue.ToString().Trim(), TLUsername.Text);
-                    MyDAL.UpdateBikeStatus(ListBicycle.SelectedValue.ToString().Trim(),"", DamageStatus,TBCondition.Text);
+                    MyDAL.UpdateBookingStatus("S", ListBicycle.SelectedValue.ToString().Trim(), LBCustomer.Text, TLUsername.Text);
+                    MyDAL.UpdateBikeStatus(ListBicycle.SelectedValue.ToString().Trim(),"", DamageStatus,TBCondition.Text,null, Convert.ToDateTime(null), TLUsername.Text);
+                    var res = await this.ShowMessageAsync("Late Returned Bicycle: ", ListBicycle.Text + " Returned");
                     Return ret = new Return();
                     this.Close();
                     ret.PopulateDataFromLogin(username);
                     ret.Show();
-                    MessageBox.Show("Late Returned Bicycle: " + ListBicycle.SelectedValue.ToString().Trim() + " Returned");
+                  
                 }
                 else
                 {
@@ -170,6 +192,7 @@ namespace TBike
 
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
+            //back button
             RentalProcessing rent = new RentalProcessing();
             rent.PopulateDataFromLogin(username);
             rent.Show();
@@ -190,9 +213,11 @@ namespace TBike
 
         private void BTNExpired_Click(object sender, RoutedEventArgs e)
         {
-            
+            //Expired Mode
             if (ExpiredStack.Visibility == Visibility.Visible)
             {
+                StackHelo.Visibility = Visibility.Visible;
+                Rect1.Visibility = Visibility.Visible;
                 CBBike.Visibility = Visibility.Visible;
                 LBCustomer.Visibility = Visibility.Visible;
                 LBBookingDate.Visibility = Visibility.Visible;
@@ -204,6 +229,8 @@ namespace TBike
             }
             else
             {
+                StackHelo.Visibility = Visibility.Hidden;
+                Rect1.Visibility = Visibility.Hidden;
                 LBBookingDate.Visibility = Visibility.Hidden;
                 LBBicycle.Visibility = Visibility.Hidden;
                 LBRemarks.Visibility = Visibility.Hidden;
@@ -225,6 +252,18 @@ namespace TBike
             BindCBExpired(ListBicycle);
 
 
+        }
+
+        private void CBStatus_Checked(object sender, RoutedEventArgs e)
+        {
+            if ((CBStatus.IsChecked ?? true) || (CBStatus_Copy.IsChecked ?? true))
+            {
+                TBCondition.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                TBCondition.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

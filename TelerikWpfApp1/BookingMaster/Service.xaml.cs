@@ -64,7 +64,7 @@ namespace TBike.BookingMaster
         public void BindComboBoxBicycle(ComboBox CBBicycle)
         {
             SqlConnection conn = new SqlConnection(constring);
-            SqlDataAdapter da = new SqlDataAdapter("SELECT BicycleID,BicycleName From BicycleMaster WHERE BicycleStatus = 'I'", conn);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT BicycleID,BicycleName From BicycleMaster WHERE BicycleStatus = 'I' OR BicycleStatus = 'M'", conn);
             DataSet ds = new DataSet();
             da.Fill(ds, "BicycleMaster");
             CBBicycle.ItemsSource = ds.Tables[0].DefaultView;
@@ -77,12 +77,24 @@ namespace TBike.BookingMaster
             TBikeDAL MyDAL = new TBikeDAL();
 
             DataTable ResultTable = MyDAL.SelectBicycleByID(CBBicycle.SelectedValue.ToString().Trim());
+            DataTable ResultTable2 = MyDAL.SelectServiceByBike(CBBicycle.SelectedValue.ToString().Trim());
             LBBicycleName.Text = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
-
             LBStatus.Text = Convert.ToString(ResultTable.Rows[0]["BicycleStatus"]);
+
+         
+
+
             if (LBStatus.Text == "I")
             {
                 LBStatus.Text = "Invalid";
+            }
+
+          
+            if (LBStatus.Text == "M")
+            {
+                LBStatus.Text = "Maintainance";
+                PickStart.SelectedDate = Convert.ToDateTime(ResultTable2.Rows[0]["ServiceStart"]);
+                PickEnd.SelectedDate = Convert.ToDateTime(ResultTable2.Rows[0]["ServiceEnd"]);
             }
             TBCondition.Text = Convert.ToString(ResultTable.Rows[0]["Condition"]);
           
@@ -90,29 +102,62 @@ namespace TBike.BookingMaster
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            //send to repair button
-            string repairCondition = ("Servicing, Reason: " + TBCondition.Text);
-            TBikeDAL MyDAL = new TBikeDAL();
-            var res = await this.ShowMessageAsync("Confirmation", "Are you sure to send this to Service? ", MessageDialogStyle.AffirmativeAndNegative);
-            if (res == MessageDialogResult.Affirmative)
+            try
             {
-                MyDAL.UpdateBikeStatus(CBBicycle.SelectedValue.ToString().Trim(), "", "M", repairCondition.Trim());
-                res = await this.ShowMessageAsync("Done", "Bicycle Send for Service");
+                if (LBStatus.Text == "Invalid")
+                {
+                    //send to repair button
+                    string repairCondition = ("Servicing, Reason: " + TBCondition.Text);
+                    TBikeDAL MyDAL = new TBikeDAL();
+                    var res = await this.ShowMessageAsync("Confirmation", "Are you sure to send this to Service? ", MessageDialogStyle.AffirmativeAndNegative);
+                    if (res == MessageDialogResult.Affirmative)
+                    {
+
+                        MyDAL.UpdateBikeStatus(CBBicycle.SelectedValue.ToString().Trim(), "", "M", repairCondition.Trim(), PickStart.SelectedDate, PickEnd.SelectedDate, TLUsername.Text);
+                        res = await this.ShowMessageAsync("Done", "Bicycle Send for Service");
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var res = await this.ShowMessageAsync("Error", ex.Message);
 
             }
-
         }
 
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
             //return from repair btn
-            string repairCondition = "";
-            TBikeDAL MyDAL = new TBikeDAL();
-            
-                MyDAL.UpdateBikeStatus(CBBicycle.SelectedValue.ToString().Trim(), "", "A", repairCondition.Trim());
-                var res = await this.ShowMessageAsync("Done", "Bicycle Has been Returned");
+            try
+            {
+                if (LBStatus.Text == "Maintainance")
+                {
+                    string repairCondition = "";
+                    TBikeDAL MyDAL = new TBikeDAL();
 
-            
+                    MyDAL.UpdateBikeStatus(CBBicycle.SelectedValue.ToString().Trim(), "", "A", repairCondition.Trim(), PickStart.SelectedDate, PickEnd.SelectedDate, TLUsername.Text);
+                    var res = await this.ShowMessageAsync("Done", "Bicycle Has been Returned");
+                }
+            }
+            catch (Exception ex)
+            {
+                var res = await this.ShowMessageAsync("Error", ex.Message);
+
+            }
+
+        }
+
+        private void PickStart_SelectedDateChanged(object sender, TimePickerBaseSelectionChangedEventArgs<DateTime?> e)
+        {
+            if (PickEnd.SelectedDate != null)
+            LBDuration.Text = Convert.ToString(PickEnd.SelectedDate.Value - PickStart.SelectedDate.Value) ;
+        }
+
+        private void PickEnd_SelectedDateChanged(object sender, TimePickerBaseSelectionChangedEventArgs<DateTime?> e)
+        {
+            if (PickStart.SelectedDate != null)
+                LBDuration.Text = Convert.ToString(PickEnd.SelectedDate.Value - PickStart.SelectedDate.Value) + "Days";
         }
     }
 }
