@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Intern001.it\Desktop\TommyGit\TelerikWpfApp1\obj\x86\Debug\
+C:\Users\Tommy\Desktop\TommyGit\TelerikWpfApp1\obj\x86\Debug\
 TBike
 none
 false
 DEBUG;TRACE
-C:\Users\Intern001.it\Desktop\TommyGit\TelerikWpfApp1\App.xaml
+C:\Users\Tommy\Desktop\TommyGit\TelerikWpfApp1\App.xaml
 16398011991
 
 22-1291384429
-40397660608
+40-145859900
 BookingMaster\Service.xaml;EmployeeMaster\FinalizeReports.xaml;InventoryMaster\InventoryModi.xaml;BookingMaster\Booking.xaml;EmployeeMaster\CreateNewUser.xaml;EmployeeMaster\EmployeeManagement.xaml;EmployeeMaster\EmployeeModify.xaml;EmployeeMaster\EmployeeRank.xaml;InventoryMaster\InventoryManage.xaml;InventoryMaster\Window1.xaml;LoginUser\LoginMenu.xaml;MainWindow.xaml;LoginUser\RegisterPassword.xaml;BookingMaster\rental.xaml;BookingMaster\RentalProcessing.xaml;BookingMaster\Return.xaml;
 
 False
