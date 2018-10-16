@@ -81,8 +81,7 @@ namespace TBike.BookingMaster
             LBBicycleName.Text = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
             LBStatus.Text = Convert.ToString(ResultTable.Rows[0]["BicycleStatus"]);
 
-            PickStart.SelectedDate = Convert.ToDateTime(ResultTable2.Rows[0]["ServiceStart"]);
-            PickEnd.SelectedDate = Convert.ToDateTime(ResultTable2.Rows[0]["ServiceEnd"]);
+         
 
 
             if (LBStatus.Text == "I")
@@ -94,6 +93,8 @@ namespace TBike.BookingMaster
             if (LBStatus.Text == "M")
             {
                 LBStatus.Text = "Maintainance";
+                PickStart.SelectedDate = Convert.ToDateTime(ResultTable2.Rows[0]["ServiceStart"]);
+                PickEnd.SelectedDate = Convert.ToDateTime(ResultTable2.Rows[0]["ServiceEnd"]);
             }
             TBCondition.Text = Convert.ToString(ResultTable.Rows[0]["Condition"]);
           
