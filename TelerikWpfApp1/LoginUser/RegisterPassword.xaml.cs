@@ -16,6 +16,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using TBike.AppData;
+using TBike.MessageBox;
 
 namespace TBike
 {
@@ -38,8 +40,8 @@ namespace TBike
             try {
                 if (TBEmail.Text == "" && TBPassword.Password.ToString().Trim() == "" && TBUsername.Text == "")
                 {
-                    MessageBox.Show("Please Fill in all text");
-
+                    PopWindow pop = new PopWindow(ImageType.Information, "Error", "Please Fill in all texts", "Let me fill in");
+                    pop.ShowDialog();
 
                 }
 
@@ -49,7 +51,8 @@ namespace TBike
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Failed to register Reason: " + ex);
+                PopWindow pop = new PopWindow(ImageType.Information, "Error", ex.Message, "I will Fix this");
+                pop.ShowDialog();
             }
 
 
@@ -83,7 +86,8 @@ namespace TBike
                 
                 if (TBUsername.Text == Convert.ToString(ResultTable.Rows[0]["Username"]).Trim())
                 {
-                    MessageBox.Show("This username has been used");
+                    PopWindow pop = new PopWindow(ImageType.Information, "Error", "Username has been used", "ok, i will check again");
+                    pop.ShowDialog();
                 }
 
                 
@@ -91,7 +95,7 @@ namespace TBike
                 else if (TBConfirmPassword != TBPassword)
                 {
                     var res = await this.ShowMessageAsync("Password Not Match","Password not match with confirm pasword");
-
+                   
                 }
 
                 //TLRankDesc.Text = Convert.ToString(ResultTable.Rows[0]["EmployeeRankDesc"]).Trim();

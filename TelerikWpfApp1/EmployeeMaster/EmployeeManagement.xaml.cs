@@ -15,6 +15,8 @@ using System.Data.SqlClient;
 using System.Data.Sql;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using TBike.MessageBox;
+using TBike.AppData;
 
 namespace TBike
 {
@@ -77,7 +79,7 @@ namespace TBike
             }
             else
             {
-                MessageBox.Show("You are not authorised to use this process");
+                PopWindow pop = new PopWindow(ImageType.Error, "Error", "You are not authorised to use this process","OK");
                 
             }
         }

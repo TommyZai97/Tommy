@@ -59,7 +59,7 @@ namespace TBike
                             }
                             else if (RecordStatus.Equals("M"))
                             {
-                                MyRow[ColumnName + "InFull"] = "Maintainance";
+                                MyRow[ColumnName + "InFull"] = "Maintenance";
                             }
                             else if (RecordStatus.Equals("N"))
                             {

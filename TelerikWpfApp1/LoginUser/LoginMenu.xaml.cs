@@ -16,6 +16,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 
 namespace TBike
@@ -35,7 +36,7 @@ namespace TBike
 
      
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             //Verify Login Data
             TBikeDAL MyDal = new TBikeDAL();
@@ -44,7 +45,7 @@ namespace TBike
             {
                 if (TBUsername.Text == "" && TBPassword.Password.ToString().Trim() == "")
                 {
-                    MessageBox.Show("Please Fill in all text");
+                    var res = await this.ShowMessageAsync("Error","Please Fill in all text");
                 }
                 else
                 {
@@ -61,13 +62,13 @@ namespace TBike
                     {
                         MainWindow main = new MainWindow();
                         main.PopulateDataFromLogin(TBUsername.Text);
-
                         main.Show();
                         this.Close();
                     }
                     else
                     {
-                        MessageBox.Show("Incorrect Username or password");
+                        
+                        await this.ShowMessageAsync("Error","Incorrect Username or password");
 
                     }
                 }
@@ -94,5 +95,37 @@ namespace TBike
             reg.ShowDialog();
            
         }
+
+        private void MetroWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.Key == Key.F11 && this.ShowTitleBar == true)
+            {
+
+                WindowState = WindowState.Maximized;
+                ResizeMode = ResizeMode.NoResize;
+                this.ShowTitleBar = false;
+                this.ShowMaxRestoreButton = false;
+                this.ShowCloseButton = false;
+                this.ShowMinButton = false;
+                this.ShowInTaskbar = false;
+                this.IgnoreTaskbarOnMaximize = true;
+            }
+            else if (e.Key == Key.F11 && this.ShowTitleBar == false)
+            {
+                WindowState = WindowState.Normal;
+                ResizeMode = ResizeMode.CanResize;
+                this.ShowTitleBar = true;
+                this.ShowMaxRestoreButton = true;
+                this.ShowCloseButton = true;
+                this.ShowMinButton = true;
+                this.ShowInTaskbar = true;
+                this.IgnoreTaskbarOnMaximize = false;
+            }
+
+
+        }
+
+
     }
 }

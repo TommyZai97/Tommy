@@ -7,14 +7,14 @@
     <framework targetVersion="4.6.1" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="T-Bike.exe.manifest" size="31227">
+    <dependentAssembly dependencyType="install" codebase="T-Bike.exe.manifest" size="38536">
       <assemblyIdentity name="T-Bike.exe" version="1.0.0.3" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>qYzrfcWHPutKu16f4kR2tnqIfIs0UWhi9nzhszxSaDY=</dsig:DigestValue>
+        <dsig:DigestValue>17M0S72nWQL7j1sdL+9br8aZ1SMQy+pq9hSCeO8LTec=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

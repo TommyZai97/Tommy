@@ -16,6 +16,8 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using System.Windows.Navigation;
 using MahApps.Metro.Controls.Dialogs;
+using TBike.AppData;
+using TBike.MessageBox;
 
 namespace TBike
 {
@@ -95,17 +97,21 @@ namespace TBike
 
         }
 
-        public async void PopulateID(string Customer, string Status)
+        public void PopulateID(string Customer, string Status)
         {
 
             TBikeDAL MyDAL = new TBikeDAL();
 
-            DataTable ResultTable = MyDAL.ShowBookingTableByCustomer(Customer);
+            DataTable ResultTable = MyDAL.ShowBookingTableByCustomer(Customer,Status);
             Customer = Convert.ToString(ResultTable.Rows[0]["Customer"]);
+            BindComboBoxCustomer(CBCustomer);
+            CBCustomer.SelectedIndex = CBCustomer.Items.Count - 1;
             if (ResultTable.Rows.Count != 0)
             {
                 if (Status == "R")
                 {
+                    BindComboBox(CBBike);
+                    CBBike.SelectedIndex = CBBike.Items.Count - 1;
                     LBCustomer.Text = Customer;
 
                     LBBookingDate.Text = Convert.ToString(ResultTable.Rows[0]["BookingDate"]);
@@ -125,79 +131,85 @@ namespace TBike
 
                     BTNExpired.Foreground = Brushes.Red;
                     ExpiredStack.Visibility = Visibility.Visible;
+                  
                     LBName.Text = Convert.ToString(ResultTable.Rows[0]["Customer"]);
                     LBDate.Text = Convert.ToString(ResultTable.Rows[0]["BookingDate"]);
                 
-                    BindCBExpired(ListBicycle);
+                 
                 }
             }
             else
             {
-                var res = await this.ShowMessageAsync("Error", "No data Found!!!");
+                PopWindow pop = new PopWindow(ImageType.Error,"Error", "No data Found!!!", "OK");
+                pop.ShowDialog();
             }
 
 
         }
 
-        private async void BTNReturn_Click(object sender, RoutedEventArgs e)
+        private void BTNReturn_Click(object sender, RoutedEventArgs e)
         {
-            string DamageStatus = "A";
-            if ((CBStatus.IsChecked ?? true) || (CBStatus_Copy.IsChecked ?? true))
+            try
             {
-                DamageStatus = "I";
-            }
-            TBikeDAL MyDAL = new TBikeDAL();
-            if (ExpiredStack.Visibility == Visibility.Hidden)
-            {
-                if (CBBike.SelectedValue != null)
+                string DamageStatus = "A";
+                if ((CBStatus.IsChecked ?? true) || (CBStatus_Copy.IsChecked ?? true))
                 {
-
-                    MyDAL.UpdateBookingStatus("S", CBBike.SelectedValue.ToString().Trim(), Customer, TLUsername.Text);
-                    MyDAL.UpdateBikeStatus(CBBike.SelectedValue.ToString().Trim(),"", DamageStatus, TBCondition.Text, null, Convert.ToDateTime(null), TLUsername.Text);
-                    var res = await this.ShowMessageAsync("Bicycle: ", CBBike.Text + " Returned");
-
-                    Return ret = new Return();
-                    this.Close();
-                    ret.PopulateDataFromLogin(username);
-                    ret.Show();
-}
-
-                else
-                {
-                    MessageBox.Show("No Bicycle Available for return");
+                    DamageStatus = "I";
                 }
-            }
-            else
-            {
-                if (LBCustomer.Text != null)
+                TBikeDAL MyDAL = new TBikeDAL();
+                if (ExpiredStack.Visibility == Visibility.Hidden)
                 {
-                    MyDAL.UpdateBookingStatus("S", ListBicycle.SelectedValue.ToString().Trim(), LBCustomer.Text, TLUsername.Text);
-                    MyDAL.UpdateBikeStatus(ListBicycle.SelectedValue.ToString().Trim(),"", DamageStatus,TBCondition.Text,null, Convert.ToDateTime(null), TLUsername.Text);
-                    var res = await this.ShowMessageAsync("Late Returned Bicycle: ", ListBicycle.Text + " Returned");
-                    Return ret = new Return();
-                    this.Close();
-                    ret.PopulateDataFromLogin(username);
-                    ret.Show();
-                  
+                    if (CBBike.SelectedValue != null)
+                    {
+
+                        MyDAL.UpdateBookingStatus("S", CBBike.SelectedValue.ToString().Trim(), Customer, TLUsername.Text);
+                        MyDAL.UpdateBikeStatus(CBBike.SelectedValue.ToString().Trim(), "", DamageStatus, TBCondition.Text, null, Convert.ToDateTime(null), TLUsername.Text);
+                        Xceed.Wpf.Toolkit.MessageBox.Show("Bicycle: "+ CBBike.Text + " Returned");
+
+                        MainWindow ret = new MainWindow();
+                        this.Close();
+                        ret.PopulateDataFromLogin(username);
+                        ret.Show();
+                    }
+
+                    else
+                    {
+                        PopWindow pop = new PopWindow(ImageType.Error ,"Error" ,"No Bicycle is currently being rented out", "OK");
+                        pop.ShowDialog();
+                    }
                 }
                 else
                 {
+                    if (LBCustomer.Text != null)
+                    {
+                        MyDAL.UpdateBookingStatus("S", ListBicycle.SelectedValue.ToString().Trim(), LBCustomer.Text, TLUsername.Text);
+                        MyDAL.UpdateBikeStatus(ListBicycle.SelectedValue.ToString().Trim(), "", DamageStatus, TBCondition.Text, null, Convert.ToDateTime(null), TLUsername.Text);
+                        PopWindow pop = new PopWindow(ImageType.Warning, "Late Return","Late Returned Bicycle: " + ListBicycle.Text + " Returned", "OK");
+                        pop.ShowDialog();
+                        MainWindow ret = new MainWindow();
+                        this.Close();
+                        ret.PopulateDataFromLogin(username);
+                        ret.Show();
 
-                    MessageBox.Show("No Bicycle Available for return");
+                    }
+                    else
+                    {
+
+                        PopWindow pop = new PopWindow(ImageType.Error ,"Error", "No Bicycle is currently being rented out", "Okay");
+                        pop.ShowDialog();
+                    }
                 }
             }
-            
+            catch(Exception ex)
+            {
+                PopWindow pop = new PopWindow(ImageType.Error ,"Error ", ex.Message, "Okay");
+                pop.ShowDialog();
+            }
+
 
         }
 
-        private void button_Click_1(object sender, RoutedEventArgs e)
-        {
-            //back button
-            RentalProcessing rent = new RentalProcessing();
-            rent.PopulateDataFromLogin(username);
-            rent.Show();
-            this.Close();
-        }
+     
 
         private void CBBike_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -213,7 +225,7 @@ namespace TBike
 
         private void BTNExpired_Click(object sender, RoutedEventArgs e)
         {
-            //Expired Mode
+           
             if (ExpiredStack.Visibility == Visibility.Visible)
             {
                 StackHelo.Visibility = Visibility.Visible;
@@ -229,6 +241,7 @@ namespace TBike
             }
             else
             {
+                //Expired Mode
                 StackHelo.Visibility = Visibility.Hidden;
                 Rect1.Visibility = Visibility.Hidden;
                 LBBookingDate.Visibility = Visibility.Hidden;
@@ -246,17 +259,27 @@ namespace TBike
         {
             TBikeDAL MyDAL = new TBikeDAL();
             
-            DataTable ResultTable = MyDAL.ShowBookingTableByCustomer(CBCustomer.SelectedValue.ToString().Trim());
+            DataTable ResultTable = MyDAL.ShowBookingTableByCustomer(CBCustomer.SelectedValue.ToString().Trim(),"N");
             LBName.Text = Convert.ToString(ResultTable.Rows[0]["Customer"]);
             LBDate.Text = Convert.ToString(ResultTable.Rows[0]["BookingDate"]);
             BindCBExpired(ListBicycle);
+            ListBicycle.SelectedIndex = ListBicycle.Items.Count - 1;
 
 
         }
 
         private void CBStatus_Checked(object sender, RoutedEventArgs e)
         {
-            if ((CBStatus.IsChecked ?? true) || (CBStatus_Copy.IsChecked ?? true))
+            if ((CBStatus.IsChecked ?? true) && ExpiredStack.Visibility == Visibility.Hidden)
+            {
+                TBConditionReal.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                TBConditionReal.Visibility = Visibility.Hidden;
+            }
+
+            if ( ExpiredStack.Visibility == Visibility.Visible && (CBStatus_Copy.IsChecked ?? true))
             {
                 TBCondition.Visibility = Visibility.Visible;
             }

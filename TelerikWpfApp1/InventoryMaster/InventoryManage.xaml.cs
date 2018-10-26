@@ -143,11 +143,16 @@ namespace TBike
         {
             DataRowView dataRow = (DataRowView)dataGrid1.SelectedItem;
             int index = dataGrid1.Items.IndexOf(dataGrid1.CurrentItem);
-        
 
+            if (index == -1)
+            {
+                index = 0;
+                Category = "";
+            }
             TBikeDAL MyDAL = new TBikeDAL();
             if (Category == "Bicycle")
             {
+            
                 DataTable ResultTable = MyDAL.ShowAllBikeTable();
                 string BicycleID = Convert.ToString(ResultTable.Rows[index]["BicycleID"]);
 

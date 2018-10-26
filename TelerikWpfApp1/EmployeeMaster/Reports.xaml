@@ -1,0 +1,33 @@
+﻿<Controls:MetroWindow
+        
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:materialMenu="clr-namespace:MaterialMenu;assembly=MaterialMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TBike.EmployeeMaster"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="TBike.EmployeeMaster.Reports"
+        
+        mc:Ignorable="d"
+        Title="Reports" Height="450" Width="800">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/T-Bike;component/Image/background.jpg"/>
+        </Grid.Background>
+        <Expander Header="Expander"  HorizontalAlignment="Left" Height="191" Margin="10,10,0,0" VerticalAlignment="Top" Width="222" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Foreground="White" Controls:ControlsHelper.HeaderFontWeight="ExtraBold" BorderBrush="White">
+
+            <Grid Background="#FFE5E5E5">
+                <StackPanel>
+                    <Button Name="BTNHELLO" Width="50" Height="50" Content="hello" />
+                    <Button Name="BTN3"  Width="50" Height="50" Content="hello" />
+                    <Button Name="BTN123" Width="50" Height="50" Content="hello" />
+                </StackPanel>
+            </Grid>
+
+        </Expander>
+        <Calendar HorizontalAlignment="Stretch" Margin="298,10,172,107" VerticalAlignment="Stretch" MinHeight="302" MinWidth="322"/>
+
+             </Grid>
+</Controls:MetroWindow>

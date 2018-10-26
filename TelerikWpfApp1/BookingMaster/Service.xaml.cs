@@ -15,6 +15,8 @@ using System.Data;
 using MahApps.Metro.Controls;
 using System.Data.SqlClient;
 using MahApps.Metro.Controls.Dialogs;
+using TBike.AppData;
+using TBike.MessageBox;
 
 namespace TBike.BookingMaster
 {
@@ -41,6 +43,35 @@ namespace TBike.BookingMaster
             rent.Show();
             this.Close();
         }
+
+        public void PopulateID(string BicycleID,string Status)
+        {
+            TBikeDAL MyDAL = new TBikeDAL();
+            DataTable ResultTable = MyDAL.SelectServiceByBike(BicycleID);
+            DataTable ResultBikeTable = MyDAL.SelectBicycleByID(BicycleID);
+            LBBicycleName.Text = Convert.ToString(ResultBikeTable.Rows[0]["BicycleName"]);
+            LBStatus.Text = Convert.ToString(ResultBikeTable.Rows[0]["BicycleStatus"]);
+
+            BindComboBoxBicycle(CBBicycle);
+            CBBicycle.SelectedIndex = CBBicycle.Items.Count - 1;
+            if (LBStatus.Text == "M")
+            {
+                LBStatus.Text = "Maintenance";
+                TBCondition.Text = Convert.ToString(ResultTable.Rows[0]["Remark"]);
+               PickStart.SelectedDate = Convert.ToDateTime(ResultTable.Rows[0]["ServiceStart"]);
+               PickEnd.SelectedDate = Convert.ToDateTime(ResultTable.Rows[0]["ServiceEnd"]);
+                LBDuration.Text = Convert.ToString(PickEnd.SelectedDate.Value - PickStart.SelectedDate.Value) + "Days";
+            }
+            else if (LBStatus.Text == "I")
+            {
+                LBStatus.Text = "InActive";
+                TBCondition.Text = Convert.ToString(ResultTable.Rows[0]["Remark"]);
+                
+
+            }
+
+        }
+
         public void PopulateDataFromLogin(string Values)
         {
             TBikeDAL MyDAL = new TBikeDAL();
@@ -92,7 +123,7 @@ namespace TBike.BookingMaster
           
             if (LBStatus.Text == "M")
             {
-                LBStatus.Text = "Maintainance";
+                LBStatus.Text = "Maintenance";
                 PickStart.SelectedDate = Convert.ToDateTime(ResultTable2.Rows[0]["ServiceStart"]);
                 PickEnd.SelectedDate = Convert.ToDateTime(ResultTable2.Rows[0]["ServiceEnd"]);
             }
@@ -100,7 +131,7 @@ namespace TBike.BookingMaster
           
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -109,40 +140,44 @@ namespace TBike.BookingMaster
                     //send to repair button
                     string repairCondition = ("Servicing, Reason: " + TBCondition.Text);
                     TBikeDAL MyDAL = new TBikeDAL();
-                    var res = await this.ShowMessageAsync("Confirmation", "Are you sure to send this to Service? ", MessageDialogStyle.AffirmativeAndNegative);
-                    if (res == MessageDialogResult.Affirmative)
+                    ConfirmWindow confirm = new ConfirmWindow(ImageType.Question ,"Confirmation", "Are you sure to send this to Service? ", "Yes","No");
+                    confirm.ShowDialog();
+                    if (confirm.Confirmed) 
                     {
 
                         MyDAL.UpdateBikeStatus(CBBicycle.SelectedValue.ToString().Trim(), "", "M", repairCondition.Trim(), PickStart.SelectedDate, PickEnd.SelectedDate, TLUsername.Text);
-                        res = await this.ShowMessageAsync("Done", "Bicycle Send for Service");
-
+                        PopWindow pop = new PopWindow(ImageType.Information , "Done", "Bicycle Send for Service", "OK");
+                        pop.ShowDialog();
                     }
                 }
             }
             catch (Exception ex)
             {
-                var res = await this.ShowMessageAsync("Error", ex.Message);
+                PopWindow pop = new PopWindow(ImageType.Error ,"Error", ex.Message,"OK");
+                pop.ShowDialog();
 
             }
         }
 
-        private async void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             //return from repair btn
             try
             {
-                if (LBStatus.Text == "Maintainance")
+                if (LBStatus.Text == "Maintenance")
                 {
                     string repairCondition = "";
                     TBikeDAL MyDAL = new TBikeDAL();
-
-                    MyDAL.UpdateBikeStatus(CBBicycle.SelectedValue.ToString().Trim(), "", "A", repairCondition.Trim(), PickStart.SelectedDate, PickEnd.SelectedDate, TLUsername.Text);
-                    var res = await this.ShowMessageAsync("Done", "Bicycle Has been Returned");
+                    string BicycleID = CBBicycle.SelectedValue.ToString().Trim();
+                    MyDAL.UpdateBikeStatus(BicycleID, "", "A", repairCondition.Trim(), PickStart.SelectedDate, PickEnd.SelectedDate, TLUsername.Text);
+                    PopWindow pop = new PopWindow(ImageType.Information ,"Done","Bicycle Has been Returned", "OK");
+                    pop.ShowDialog();
                 }
             }
             catch (Exception ex)
             {
-                var res = await this.ShowMessageAsync("Error", ex.Message);
+                PopWindow pop = new PopWindow(ImageType.Information ,"Error" , ex.Message, "OK");
+                pop.ShowDialog();
 
             }
 

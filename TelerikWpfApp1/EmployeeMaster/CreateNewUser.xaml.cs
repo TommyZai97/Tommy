@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using TBike.AppData;
+using TBike.MessageBox;
 
 namespace TBike
 {
@@ -44,7 +46,7 @@ namespace TBike
 
             return Address;
         }
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -64,11 +66,13 @@ namespace TBike
                 this.Close();
                 emp.PopulateDataFromLogin(username);
                 emp.Show();
-                MessageBox.Show("Create New User Success!!!");
+                PopWindow pop = new PopWindow(ImageType.Information,"Congratulations","Create New User Success!!!","OK");
             }
             catch(Exception ex)
             {
-                var res = await this.ShowMessageAsync("Error", ex.Message);
+                PopWindow pop = new PopWindow(ImageType.Error, "Error", ex.Message, "OK");
+                pop.ShowDialog(); 
+
             }
           
         }

@@ -17,6 +17,20 @@ namespace TBike
 
 
         #region BikeMaster
+
+        public ComboBox BindAllBikeComboBox(ComboBox CBBike)
+        {
+            SqlConnection conn = new SqlConnection(constring);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT BicycleID,BicycleName From BicycleMaster", conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "BicycleMaster");
+            CBBike.ItemsSource = ds.Tables[0].DefaultView;
+            CBBike.DisplayMemberPath = ds.Tables[0].Columns["BicycleName"].ToString();
+            CBBike.SelectedValuePath = ds.Tables[0].Columns["BicycleID"].ToString();
+
+            return CBBike;
+        }
+
         public DataTable SelectBicycleByID(string BicycleID)
         {
             SqlConnection MyCon = new SqlConnection(constring);
@@ -143,6 +157,36 @@ namespace TBike
             }
             return BicycleID;
         }
+
+        public DataTable ShowAllServiceDetails()
+        {
+
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelAllServiceDetail", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+     
+            try
+            {
+                MyCon.Open();
+
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At ShowAllServiceDetails : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+        }
+
         public DataTable SelectServiceByBike(string BicycleID)
         {
 
@@ -265,9 +309,123 @@ namespace TBike
             }
             return BicycleID;
         }
+        public DataTable SelectAllBookingByDynamic(string BookingID, string BookingName, string Bicycle, string BookingStatus, string Customer, string Remark, string BicycleType)
+        {
+
+
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelBookingByDynamic", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+            MyCmd.Parameters.AddWithValue("@BookingID", BookingID);
+            MyCmd.Parameters.AddWithValue("@BicycleName", Bicycle);
+            MyCmd.Parameters.AddWithValue("@BookingName", BookingName);
+            MyCmd.Parameters.AddWithValue("@BookingStatus", BookingStatus);
+            MyCmd.Parameters.AddWithValue("@Customer", Customer);
+            MyCmd.Parameters.AddWithValue("@Remark", Remark);
+
+            MyCmd.Parameters.AddWithValue("@BicycleType", BicycleType);
+            try
+            {
+                MyCon.Open();
+
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelectAllBookingByDynamic : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+
+        }
+
+        public DataTable SelectAllBicycleByDynamic(string BicycleID, string BicycleName, string CurrentRenter, string BicycleColor, string BicycleStatus, string BicycleType)
+        {
+
+
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelBicycleByDynamic", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+            MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
+            MyCmd.Parameters.AddWithValue("@BicycleName", BicycleName);
+            MyCmd.Parameters.AddWithValue("@CurrentRenter", CurrentRenter);
+            MyCmd.Parameters.AddWithValue("@BicycleColor", BicycleColor);
+            MyCmd.Parameters.AddWithValue("@BicycleStatus", BicycleStatus);
+            MyCmd.Parameters.AddWithValue("@BicycleType", BicycleType);
+            
+            try
+            {
+                MyCon.Open();
+
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelectAllBicycleByDynamic : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+
+        }
+
         #endregion
 
         #region EmployeeMaster
+        public DataTable SelectAllEmployeeByDynamic(string EmployeeID, string EmployeeName, string RankDesc, string Address, string CreatedBy)
+        {
+
+
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelEmployeeByDynamic", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+            MyCmd.Parameters.AddWithValue("@EmployeeID", EmployeeID);
+            MyCmd.Parameters.AddWithValue("@EmployeeName", EmployeeName);
+            MyCmd.Parameters.AddWithValue("@RankDesc", RankDesc);
+            MyCmd.Parameters.AddWithValue("@Address", Address);
+
+            MyCmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+            try
+            {
+                MyCon.Open();
+
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelectAllEmployeeByDynamic : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+
+        }
+
         public DataTable ShowAllEmployeeDetails()
         {
 
@@ -815,7 +973,7 @@ namespace TBike
             return date;
         }
 
-        public DataTable ShowBookingTableByCustomer(string Customer)
+        public DataTable ShowBookingTableByCustomer(string Customer, string Status)
         {
 
             SqlConnection MyCon = new SqlConnection(constring);
@@ -826,6 +984,7 @@ namespace TBike
             DataTable ResultDataTable = new DataTable("ResultDataTable");
 
             MyCmd.Parameters.AddWithValue("@Customer", Customer);
+            MyCmd.Parameters.AddWithValue("@Status", Status);
             try
             {
                 MyCon.Open();
@@ -848,6 +1007,40 @@ namespace TBike
         #endregion
 
         #region Snack
+        public DataTable SelectAllSnackByDynamic(string SnackID, string SnackName,string SnackStatus, string SnackType)
+        {
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelSnackByDynamic", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            MyCmd.Parameters.AddWithValue("@SnackID", SnackID);
+            MyCmd.Parameters.AddWithValue("@SnackName", SnackName);
+            MyCmd.Parameters.AddWithValue("@SnackType", SnackType);
+            MyCmd.Parameters.AddWithValue("@SnackStatus", SnackStatus);
+      
+            //we will use SQLAdaptor due to huge amount of column
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+            try
+            {
+                MyCon.Open();
+                //string SQLStatement = (string)MyCmd.ExecuteScalar();
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelectAllSnackByDynamic : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+        }
+
         public DataTable SelectSnackByID(string SnackID)
         {
             SqlConnection MyCon = new SqlConnection(constring);
@@ -980,5 +1173,43 @@ namespace TBike
             return SnackID;
         }
         #endregion
+
+        #region Service
+        public DataTable SelAllServiceByDynamic(string SnackID, string BicycleID, string Remark, string Status)
+        {
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelServiceByDynamic", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            MyCmd.Parameters.AddWithValue("@ServiceID", SnackID);
+            MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
+            MyCmd.Parameters.AddWithValue("@Remark", Remark);
+            MyCmd.Parameters.AddWithValue("@Status", Status);
+
+            //we will use SQLAdaptor due to huge amount of column
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+            try
+            {
+                MyCon.Open();
+                //string SQLStatement = (string)MyCmd.ExecuteScalar();
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelAllServiceByDynamic : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+        }
+        #endregion
     }
+
+
 }

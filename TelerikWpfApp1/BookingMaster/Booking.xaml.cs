@@ -20,7 +20,7 @@ namespace TBike
         int RankID;
         int A = 0;
         static string constring = System.Configuration.ConfigurationManager.ConnectionStrings["123"].ConnectionString;
-
+      
         public Booking()
         {
             InitializeComponent();
@@ -58,7 +58,7 @@ namespace TBike
         }
 
    
-        private async void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             //book button
             try
@@ -82,7 +82,8 @@ namespace TBike
                 if (ResultTable.Rows.Count == 0)
                 {
                     MyDAL.AddBookingTime(Start, CBBike.SelectedValue.ToString().Trim(), "A",TBCustomer.Text, null,TLUsername.Text,null,null,TBRemarks.Text);
-                    Xceed.Wpf.Toolkit.MessageBox.Show("Booking made at :" + Start);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("Booking made at :" + Start,"Success");
+
                 }
                 for (int i = 0; i < ResultTable.Rows.Count; i++)
                 {
@@ -90,18 +91,18 @@ namespace TBike
                     if (Start.Date > DateTime.Now && Convert.ToDateTime(ResultTable.Rows[A]["BookingDate"]).Date < Start.Date && Start.TimeOfDay > CheckTime && Start.TimeOfDay < endTime)
                     {
                         MyDAL.AddBookingTime(Start, CBBike.SelectedValue.ToString().Trim(), "A",TBCustomer.Text, null,TLUsername.Text,null,null, TBRemarks.Text);
-                        Xceed.Wpf.Toolkit.MessageBox.Show("Booking made at :" + Start);
+                        Xceed.Wpf.Toolkit.MessageBox.Show("Booking made at :" + Start, "Success");
                         A++;
                         break;
                     }
                     else if (Start.Date < DateTime.Now)
                     {
-                        var res = await this.ShowMessageAsync("Error","Date must be booked 1 day ahead from today");
+                        Xceed.Wpf.Toolkit.MessageBox.Show("Date must be booked 1 day ahead from today", "Error");
                         break;
                     }
                     else if (Start.TimeOfDay < CheckTime || Start.TimeOfDay > endTime)
                     {
-                        var res = await this.ShowMessageAsync("Error", "Booking must be booked at 8am-4pm");
+                        Xceed.Wpf.Toolkit.MessageBox.Show( "Booking must be booked at 8am-4pm", "Error");
                         break;
                     }
 
@@ -125,7 +126,7 @@ namespace TBike
                 }
                 if (count >= 1)
                 {
-                    Xceed.Wpf.Toolkit.MessageBox.Show("Time has been booked");
+                    Xceed.Wpf.Toolkit.MessageBox.Show("This bike has been booked", "Error");
                     count = 0;
                 }
               
@@ -133,7 +134,8 @@ namespace TBike
             }
             catch (Exception ex)
             {
-                Xceed.Wpf.Toolkit.MessageBox.Show("Error: " + ex);
+                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message);
+               
             }
 
         }

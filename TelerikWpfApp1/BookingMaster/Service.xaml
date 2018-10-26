@@ -15,7 +15,8 @@
 
 
         <Rectangle Visibility="Collapsed" Margin="56,49,47,71" Grid.RowSpan="2" Fill="#7F898989" RadiusY="18.919" RadiusX="18.919" />
-        <ComboBox Name="CBBicycle" HorizontalAlignment="Center" VerticalAlignment="Center" Width="222" Margin="275,21,436,411" Controls:TextBoxHelper.Watermark="Bicycle..." Controls:TextBoxHelper.UseFloatingWatermark="True" SelectionChanged="ComboBox_SelectionChanged" Height="45" RenderTransformOrigin="0.437,0.522"/>
+        <ComboBox Name="CBBicycle" HorizontalAlignment="Center" VerticalAlignment="Center" Width="222" Margin="275,21,436,411"
+                  Controls:TextBoxHelper.Watermark="Bicycle..." Controls:TextBoxHelper.UseFloatingWatermark="True" SelectionChanged="ComboBox_SelectionChanged" Height="45" RenderTransformOrigin="0.437,0.522"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="275,90,232,66" Width="426" Height="321">
             <StackPanel Orientation="Horizontal"  Grid.Row="1">
                 <TextBlock Text="Bicycle Name : " Foreground="White" Margin="0,0,8,0" FontWeight="Bold" FontSize="14"/>
@@ -43,13 +44,8 @@
 
             </StackPanel>
         </StackPanel>
-        <Button Content="" x:Name="button" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="38" Height="38" Click="button_Click_1" RenderTransformOrigin="0.786,-0.043" BorderBrush="{x:Null}" Grid.Row="1">
-            <Button.Background>
-                <ImageBrush ImageSource="/T-Bike;component/Image/bck.png"/>
-            </Button.Background>
-
-        </Button>
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="67,0,0,0" Width="302" Grid.Row="1">
+   
+        <StackPanel Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="67,0,0,0" Width="302" Grid.Row="1">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Welcome, " VerticalAlignment="Bottom" Foreground="White" Margin="0,0,0,17" FontWeight="Bold"/>
             <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="64,-33,19,18.667"/>
             <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="136,-42,0,20"/>

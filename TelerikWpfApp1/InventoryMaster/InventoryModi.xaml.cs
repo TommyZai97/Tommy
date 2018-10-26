@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using TBike.AppData;
+using TBike.MessageBox;
 
 namespace TBike
 {
@@ -26,6 +28,7 @@ namespace TBike
         int RankID;
         string MainStatus;
         string ItemStatus;
+        int ComboIndex;
         public InventoryModi()
         {
             InitializeComponent();
@@ -68,14 +71,18 @@ namespace TBike
                 if (CBSnackStatus.Text == "Active")
                 {
                     ItemStatus = "A";
+                    ComboIndex = 0;
                 }
-                else if (CBSnackStatus.Text == "Inactive")
+                else if (CBSnackStatus.Text == "InActive")
                 {
                     ItemStatus = "I";
+                    ComboIndex = 1;
                 }
                 else if (CBSnackStatus.Text == "Out Of Stock")
                 {
                     ItemStatus = "O";
+                    ComboIndex = 2;
+
                 }
             }
 
@@ -83,9 +90,9 @@ namespace TBike
         
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
-            InventoryManage inv = new InventoryManage();
-            inv.Show();
-            inv.PopulateDataFromLogin(username);
+            //InventoryManage inv = new InventoryManage();
+            //inv.Show();
+            //inv.PopulateDataFromLogin(username);
             this.Close();
         }
 
@@ -174,7 +181,7 @@ namespace TBike
 
 
 
-        public async void PopulateID(string ID,string Category,string Status)
+        public void PopulateID(string ID,string Category,string Status)
         {
             MainStatus = Status;
             TBikeDAL MyDAL = new TBikeDAL();
@@ -199,11 +206,13 @@ namespace TBike
                         TBPrice.Text = Convert.ToString(ResultTable.Rows[0]["Price"]).Trim();
                         TBColor.Text = Convert.ToString(ResultTable.Rows[0]["Color"]).Trim();
                         CBStatus.Text = Convert.ToString(ResultTable.Rows[0]["BicycleStatus"]).Trim();
+                        CBStatus.SelectedIndex = CBStatus.Items.Count - 1;
                         PopulateBikeDataTable();
                     }
                     else
                     {
-                        var res = await this.ShowMessageAsync("Error", "No data Found!!!");
+                        PopWindow pop = new PopWindow(ImageType.Information,"Error","No data Found!!!", "OK");
+                        pop.ShowDialog();
                     }
                 }
                 else if (Category == "Snacks")
@@ -223,11 +232,14 @@ namespace TBike
                     TBType.Text = Convert.ToString(ResultTable.Rows[0]["SnackType"]).Trim();
                     TBPrice.Text = Convert.ToString(ResultTable.Rows[0]["Price"]).Trim();
                     TBColor.Text = Convert.ToString(ResultTable.Rows[0]["Quantity"]).Trim();
+
+                    CBSnackStatus.SelectedIndex = ComboIndex;
                     PopulateSnackDataTable();
                 }
                 else
                 {
-                    var res = await this.ShowMessageAsync("Error", "Incorrect Category");
+                    PopWindow pop = new PopWindow(ImageType.Information, "Error","Incorrect Category", "OK");
+                    pop.ShowDialog();
                 }
             }
 
@@ -254,7 +266,6 @@ namespace TBike
             DetermineItemStatus();
             if (MainStatus == "Modification")
             {
-
                 UpdateAllItems();
             }
             else if (MainStatus == "Add") 
@@ -262,20 +273,20 @@ namespace TBike
                 AddNewItems();
             }
         }
-        public async void AddNewItems()
+        public void AddNewItems()
         {
+            DetermineItemStatus();
             try
             {
-
-
                 if (LBTitle.Text == "Bicycle")
                 {
                     PopulateBikeDataTable();
                     if (LBID.Text != null)
                     {
                         TBikeDAL MyDAL = new TBikeDAL();
-                        var res = await this.ShowMessageAsync("Confirmation", "Are you sure to add new data?", MessageDialogStyle.AffirmativeAndNegative);
-                        if (res == MessageDialogResult.Affirmative)
+                      ConfirmWindow con = new ConfirmWindow(ImageType.Question, "Are you sure to add new data?", "Confirmation","Yes","No");
+                        con.ShowDialog();
+                        if (con.Confirmed)
                         {
                             MyDAL.AddBicycleTable(TBName.Text, TBType.Text, Convert.ToDouble(TBPrice.Text), TBColor.Text, TLUsername.Text);
                             PopulateBikeDataTable();
@@ -286,40 +297,44 @@ namespace TBike
                 {
                     PopulateSnackDataTable();
                     TBikeDAL MyDAL = new TBikeDAL();
-                    var res = await this.ShowMessageAsync("Confirmation", "Are you sure to add new data?", MessageDialogStyle.AffirmativeAndNegative);
-                    if (res == MessageDialogResult.Affirmative)
+                    ConfirmWindow con = new ConfirmWindow(ImageType.Question,"Confirmation","Are you sure to add new data?", "Add Please", "No, don't add please");
+                    con.ShowDialog();
+                    if (con.Confirmed)
                     {
                         MyDAL.AddSnackTable( TBName.Text, TBType.Text, Convert.ToDouble(TBPrice.Text), Convert.ToInt32(TBColor.Text), TLUsername.Text);
                         PopulateSnackDataTable();
+                        con.Dispose();
                     }
                 }
             }
             catch (Exception ex)
             {
-                var res = await this.ShowMessageAsync("Error", ex.Message);
+                PopWindow pop = new PopWindow(ImageType.Information, "Error", ex.Message, "I will Fix this");
+                pop.ShowDialog();
+                pop.Dispose();
             }
+            
         }
     
 
-        public async void UpdateAllItems()
+        public void UpdateAllItems()
         {
             try
             {
-                if (CBStatus.Visibility == Visibility.Hidden || CBSnackStatus.Visibility == Visibility.Hidden)
-                {
-                    ItemStatus = CBStatus.Text;
-                }
+                DetermineItemStatus();
 
                 if (LBTitle.Text == "Bicycle")
                 {
                     if (LBID.Text != null)
                     {
                         TBikeDAL MyDAL = new TBikeDAL();
-                        var res = await this.ShowMessageAsync("Confirmation", "Are you sure to make these changes?", MessageDialogStyle.AffirmativeAndNegative);
-                        if (res == MessageDialogResult.Affirmative)
+                        ConfirmWindow con = new ConfirmWindow(ImageType.Question, "Confirmation" ,"Are you sure to make these changes?","Yes, Change This", "No, Don't Change");
+                        con.ShowDialog();
+                        if (con.Confirmed)
                         {
                             MyDAL.UpdateBicycleTable(LBID.Text, TBName.Text, TBType.Text, ItemStatus,Convert.ToDouble(TBPrice.Text), TBColor.Text, TLUsername.Text);
                             PopulateBikeDataTable();
+                          
                         }
                     }
                 }
@@ -327,17 +342,20 @@ namespace TBike
                 {
 
                     TBikeDAL MyDAL = new TBikeDAL();
-                    var res = await this.ShowMessageAsync("Confirmation", "Are you sure to make these changes?", MessageDialogStyle.AffirmativeAndNegative);
-                    if (res == MessageDialogResult.Affirmative)
+                    ConfirmWindow con = new ConfirmWindow(ImageType.Question, "Confirmation","Are you sure to make these changes?","Yes, Change This","No, Don't Change");
+                    con.ShowDialog();
+                    if (con.Confirmed)
                     {
                         MyDAL.UpdateSnackTable(LBID.Text, TBName.Text, TBType.Text, Convert.ToDouble(TBPrice.Text), Convert.ToInt32(TBColor.Text), ItemStatus, TLUsername.Text);
                         PopulateSnackDataTable();
+                     
                     }
                 }
             }
             catch (Exception ex)
             {
-                var res = await this.ShowMessageAsync("Error", ex.Message);
+                PopWindow pop = new PopWindow(ImageType.Error, "Error", ex.Message, "I will Fix this");
+                pop.ShowDialog();
             }
         }
 
@@ -370,7 +388,6 @@ namespace TBike
                     {
                         
                         PopulateID(SnackID, LBTitle.Text, "Modification");
-                       
                     }
                 }
             }

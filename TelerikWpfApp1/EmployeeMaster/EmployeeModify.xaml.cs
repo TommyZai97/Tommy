@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using TBike.AppData;
+using TBike.MessageBox;
 
 namespace TBike
 {
@@ -31,7 +33,7 @@ namespace TBike
             InitializeComponent();
         }
 
-        public async void populateEmployee(string EmployeeID)
+        public void populateEmployee(string EmployeeID)
         {
             TBikeDAL MyDAL = new TBikeDAL();
             DataTable ResultTable = MyDAL.SelectEmployeeByEmployeeID(EmployeeID);
@@ -49,7 +51,8 @@ namespace TBike
             }
             else
             {
-                var res = await this.ShowMessageAsync("Error", "No data Found!!!");
+                PopWindow pop = new PopWindow(ImageType.Error, "Error", "No data Found!!!","Ok");
+                pop.ShowDialog();
             }
         }
 
@@ -79,7 +82,7 @@ namespace TBike
 
         }
 
-        private async void BTNPromote_Click(object sender, RoutedEventArgs e)
+        private void BTNPromote_Click(object sender, RoutedEventArgs e)
         {
             TBikeDAL MyDAL = new TBikeDAL();
             DataTable ResultTable = MyDAL.SelectEmployeeByEmployeeID(LBEmployeeID.Text);
@@ -88,9 +91,10 @@ namespace TBike
             {
                 if (RankID > Rank)
                 {
-                    
-                    var res = await this.ShowMessageAsync("Confirm", "Are you sure to Promote " + LBEmployeeName.Text + " ?", MessageDialogStyle.AffirmativeAndNegative);
-                    if (res == MessageDialogResult.Affirmative)
+
+                    ConfirmWindow com = new ConfirmWindow(ImageType.Question, "Confirm?","Are you sure to Promote " + LBEmployeeName.Text + " ?", "Yes","No");
+                    com.ShowDialog();
+                    if (com.Confirmed)
                     {
                         MyDAL.UpdateEmployeePromotion(LBEmployeeID.Text, Rank + 1, TLUsername.Text);
                         ResultTable = MyDAL.SelectEmployeeByEmployeeID(LBEmployeeID.Text);
@@ -99,13 +103,15 @@ namespace TBike
                 }
                 else
                 {
-                    var res = await this.ShowMessageAsync("Error", "Cant Promote Rank Higher than self");
+                    ConfirmWindow com = new ConfirmWindow(ImageType.Error, "Error","Cant Promote Rank Higher than self","Ok","Cancel");
+                    com.ShowDialog();
                 }
 
             }
             catch (Exception ex)
             {
-                var res = await this.ShowMessageAsync("Error", Convert.ToString(ex).Trim());
+                PopWindow pop = new PopWindow(ImageType.Error, "Error", Convert.ToString(ex).Trim(),"OK");
+                pop.ShowDialog();
             }
         }
 
@@ -131,29 +137,32 @@ namespace TBike
                     }
                     else
                     {
-                        var res = await this.ShowMessageAsync("Error", "Rank Already is lowest");
+                        PopWindow pop = new PopWindow(ImageType.Warning, "Error", "Rank Already is lowest", "OK");
+                        pop.ShowDialog();
                     }
                 }
                 else
                 {
-                    var res = await this.ShowMessageAsync("Error", "Cant Demote Rank Lower than self");
+                    PopWindow pop = new PopWindow(ImageType.Error, "Error", "Cant Demote Rank Lower than self", "OK");
+                    pop.ShowDialog();
                 }
 
             }
             catch (Exception ex)
             {
-                var res = await this.ShowMessageAsync("Error", Convert.ToString(ex).Trim());
+                PopWindow pop = new PopWindow(ImageType.Error, "Error",ex.Message,"OK");
+                pop.ShowDialog();
             }
         }
 
-        private async void BTNUpdate_Click(object sender, RoutedEventArgs e)
+        private  void BTNUpdate_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 TBikeDAL MyDAL = new TBikeDAL();
                 username = LBUsername.Text;
-                var res = await this.ShowMessageAsync("Update", "Are you sure to modify these changes?", MessageDialogStyle.AffirmativeAndNegative);
-                if (res == MessageDialogResult.Affirmative)
+                ConfirmWindow com = new ConfirmWindow(ImageType.Error, "Update", "Are you sure to modify these changes?", "Yes","No");
+                if (com.Confirmed)
                 {
                     MyDAL.UpdateEmployee(LBEmployeeID.Text, LBEmployeeName.Text, Convert.ToDateTime(LBDob.Text), LBUsername.Text, LBEmployeeRankDesc.Text, LBEmail.Text, LBPhoneNo.Text, LBCity.Text, TLUsername.Text);
                     DataTable ResultTable = MyDAL.SelectEmployeeByEmployeeID(LBEmployeeID.Text);
@@ -174,7 +183,8 @@ namespace TBike
             }
             catch (Exception ex)
             {
-                var res = await this.ShowMessageAsync("Error", ex.Message);
+                PopWindow pop = new PopWindow(ImageType.Error, "Error", ex.Message, "OK");
+                pop.ShowDialog();
             }
         }
     }
