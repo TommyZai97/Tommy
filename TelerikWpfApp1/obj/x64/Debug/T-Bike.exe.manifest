@@ -198,14 +198,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="T-Bike.exe" size="1913312">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="T-Bike.exe" size="1914336">
       <assemblyIdentity name="T-Bike" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>IL8ree34y1FSif1pGgcfLyXen3Wj2m2QNkhoCw4YSsE=</dsig:DigestValue>
+        <dsig:DigestValue>/+9aXmeqwCXu4kGEwOJlzBtw4cjodwpwicPJ/lADBRE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -653,22 +653,22 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Scripts\Chart.js" size="109517">
+  <file name="Scripts\Chart.js" size="112990">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>HIAweLQCOuFjJxTs1g6SdnMEmfxxeeH5DuOanIb+S9E=</dsig:DigestValue>
+      <dsig:DigestValue>uPRnQeVVJoy+lgt0JKcKnaSBhlbz0HinFefbWe9R+P8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="T-Bike.exe.config" size="1687">
+  <file name="T-Bike.exe.config" size="1690">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>J6P7hMl7TRAklzWJmnajagPn+d4elk4LQgTYgoJhzZk=</dsig:DigestValue>
+      <dsig:DigestValue>snIr3IbmLYWdna5pyrdGRrgDRJCd6GG8J196A/xiyng=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

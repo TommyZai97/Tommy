@@ -7,14 +7,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TelerikWpfApp1"
         mc:Ignorable="d"
-        Title="Employee Modify And Promotion" MinHeight="597.564" MinWidth="800" WindowStartupLocation="CenterScreen" Width="1096.25" Height="549.891" Icon="/T-Bike;component/Image/logo.jpg">
+        Title="Employee Modify And Promotion" MinHeight="397.564" MinWidth="800" WindowStartupLocation="CenterScreen" Width="1271.439"  Icon="/T-Bike;component/Image/logo.jpg">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="/T-Bike;component/Image/background.jpg"/>
         </Grid.Background>
 
 
-        <Rectangle Visibility="Visible" Fill="#7F00000A" HorizontalAlignment="Stretch" MinHeight="436" Margin="10,28,10,63" Stroke="Black" VerticalAlignment="Center" MinWidth="650" RadiusY="20.775" RadiusX="20.775" Height="476"/>
+        <Rectangle Visibility="Visible" Fill="#7F00000A" HorizontalAlignment="Stretch" MinHeight="260" Margin="10,91,10,123" Stroke="Black" VerticalAlignment="Center" MinWidth="350" RadiusY="20.775" RadiusX="20.775" Grid.ColumnSpan="2" Height="290"/>
 
 
         <Button Content="" x:Name="button" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="38" Height="38" Click="button_Click_1" RenderTransformOrigin="0.736,4.204">
@@ -23,56 +27,67 @@
             </Button.Background>
         </Button>
 
-        <StackPanel HorizontalAlignment="Stretch" Margin="40,101,32,98" VerticalAlignment="Center" MinWidth="324" Height="368" >
-            <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        <StackPanel HorizontalAlignment="Stretch" Margin="40,40,32,71" VerticalAlignment="Center" MinWidth="224"  MinHeight="200" Grid.Column="0"  >
+            <StackPanel Orientation="Horizontal">
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Employee ID" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="0,0,0,20" />
                 <TextBlock x:Name ="LBEmployeeID" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="White" 
                            FontSize="18" FontFamily="Calibri" Margin="61,0,0,0" Width="234" />
 
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Date Of Birth" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="150,0,30,30"/>
-                <TextBox x:Name="LBDob" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="Black" FontSize="18" FontFamily="Calibri" Margin="0,0,0,0" MinWidth="186" MaxWidth="500"/>
-
-            </DockPanel>
-            <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
 
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Employee Name" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="0,0,31,30"/>
                 <TextBox x:Name="LBEmployeeName" HorizontalAlignment="Stretch" Text="" VerticalAlignment="Top" Foreground="Black" FontSize="18" FontFamily="Calibri" Margin="0,0,0,0" MinWidth="186" MaxWidth="500" Background="White" Width="353"/>
-                <TextBlock  TextWrapping="Wrap" Text="PhoneNo" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="35,0,60,30"/>
-                <TextBox x:Name="LBPhoneNo" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="Black" FontSize="18" FontFamily="Calibri" Margin="0,0,0,0" MinWidth="186" MaxWidth="500"/>
 
-            </DockPanel>
-            <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="0,0,76,30"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="0,0,76,20"/>
                 <TextBox x:Name="LBUsername" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="Black" FontSize="18" FontFamily="Calibri" Margin="0,-0,0,0" MinWidth="186" MaxWidth="500" Width="353"/>
-                <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="35,0,87,30"/>
-                <TextBox x:Name="LBEmail" HorizontalAlignment="Stretch"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="Black" FontSize="18" FontFamily="Calibri" Margin="0,-0,-1,0" MinWidth="186" MaxWidth="500"/>
 
-            </DockPanel>
-            <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Rank Desc" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="0,0,76,30"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Rank Desc" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="0,0,76,20"/>
                 <TextBox x:Name="LBEmployeeRankDesc" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="Black" FontSize="18" FontFamily="Calibri" Margin="0,0,1,0" MinWidth="186" MaxWidth="500" Width="352"/>
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Last Login" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="30,0,60,30"/>
-                <TextBlock x:Name="LBLastLogin" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="White" FontSize="18" FontFamily="Calibri" Margin="0,0,0,0" MinWidth="186" MaxWidth="500"/>
 
-            </DockPanel>
-            <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Address" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="0,0,95,30"/>
                 <TextBox x:Name="LBCity" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="Black" FontSize="18" FontFamily="Calibri" Margin="0,0,0,0" MinWidth="186" />
 
 
-            </DockPanel>
+            </StackPanel>
 
         </StackPanel>
-        <Button x:Name="BTNUpdate" Content="Update" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="BTNUpdate_Click"/>
-        <Button x:Name="BTNDemote" Content="Demote" HorizontalAlignment="Right" Margin="660,0,157,10" VerticalAlignment="Bottom" Width="75" Click="BTNDemote_Click"/>
-        <Button x:Name="BTNPromote" Content="Promote" HorizontalAlignment="Right" Margin="565,0,252,10" VerticalAlignment="Bottom" Width="75" Click="BTNPromote_Click"/>
+        <Button x:Name="BTNUpdate" Content="Update" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="BTNUpdate_Click" Grid.Column="1"/>
+        <Button x:Name="BTNDemote" Content="Demote" HorizontalAlignment="Right" Margin="0,0,157,10" VerticalAlignment="Bottom" Width="75" Click="BTNDemote_Click" Grid.Column="1"/>
+        <Button x:Name="BTNPromote" Content="Promote" HorizontalAlignment="Right" Margin="0,0,252,10" VerticalAlignment="Bottom" Width="75" Click="BTNPromote_Click" Grid.Column="1"/>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="84,0,0,-3" Width="302">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Welcome, " VerticalAlignment="Bottom" Foreground="White" Margin="0,0,0,17" FontWeight="Bold"/>
             <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="64,-33,19,18.667"/>
             <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="136,-42,0,20"/>
 
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Stretch" Margin="40,40,32,71" VerticalAlignment="Center" MinWidth="224"  MinHeight="200" Grid.Column="1"  >
+            <StackPanel Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Date Of Birth" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri"  Grid.ColumnSpan="2" Margin="0,0,15,20"/>
+                <TextBox x:Name="LBDob" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="Black" FontSize="18" FontFamily="Calibri" MinWidth="186" MaxWidth="500" Width="352" Grid.Column="1"/>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock  TextWrapping="Wrap" Text="PhoneNo" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="0,0,45,20"/>
+                <TextBox x:Name="LBPhoneNo" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="Black" FontSize="18" FontFamily="Calibri" Margin="0,0,10,10" MinWidth="186" MaxWidth="500" Width="352" Grid.Column="1"/>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="0,0,75,20"/>
+                <TextBox x:Name="LBEmail" HorizontalAlignment="Stretch"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="Black" FontSize="18" FontFamily="Calibri" Margin="0,0,10,10" MinWidth="186" MaxWidth="500" Width="352" Grid.Column="1"/>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Last Login" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="0,0,43,20"/>
+                <TextBlock x:Name="LBLastLogin" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="White" FontSize="18" FontFamily="Calibri" Margin="0,0,10,10" MinWidth="186" MaxWidth="500" Grid.Column="1"/>
+
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Controls:MetroWindow>

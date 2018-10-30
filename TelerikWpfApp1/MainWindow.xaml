@@ -4,7 +4,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                         
-        Title="MainWindow"  MinHeight="600" MinWidth="850" WindowStartupLocation="CenterScreen" Icon="Image/download.jpg" WindowState="Maximized" Height="588" Width="823" >
+        Title="MainWindow"  MinHeight="600" MinWidth="1050" WindowStartupLocation="CenterScreen" Icon="Image/download.jpg" WindowState="Maximized" Height="588" Width="823" >
 
     <Grid>
         <Grid.Background>
