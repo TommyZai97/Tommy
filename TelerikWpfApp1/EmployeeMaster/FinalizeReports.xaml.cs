@@ -344,26 +344,26 @@ namespace TBike.EmployeeMaster
                 if (Status == "M")
                 {
                     Service ret = new Service();
-                    ret.ShowDialog();
+                
                     ret.PopulateDataFromLogin(username);
                     ret.PopulateID(BicycleID, Status);
-
+                    ret.ShowDialog();
                 }
                 else if (Status == "I")
                 {
                     Service ret = new Service();
-                    ret.ShowDialog();
+            
                     ret.PopulateDataFromLogin(username);
                     ret.PopulateID(BicycleID, Status);
-
+                    ret.ShowDialog();
                 }
                 else
                 {
                     InventoryModi mod = new InventoryModi();
-                    mod.ShowDialog();
+                   
                     mod.PopulateDataFromLogin(username);
                     mod.PopulateID(BicycleID, "Bicycle", "Modification");
-
+                    mod.ShowDialog();
                 }
             }
         
@@ -390,18 +390,18 @@ namespace TBike.EmployeeMaster
                 if (Status == "M")
                 {
                     Service ret = new Service();
-                    ret.ShowDialog();
+                   
                     ret.PopulateDataFromLogin(username);
                     ret.PopulateID(BicycleID, Status);
-
+                    ret.ShowDialog();
                 }
                 else if (Status == "I")
                 {
                     Service ret = new Service();
-                    ret.ShowDialog();
+                 
                     ret.PopulateDataFromLogin(username);
                     ret.PopulateID(BicycleID, Status);
-
+                    ret.ShowDialog();
                 }
             }
         }
@@ -425,27 +425,27 @@ namespace TBike.EmployeeMaster
                     if (Status == "A")
                     {
                         rental rent = new rental();
-                        rent.ShowDialog();
+                  
                         rent.PopulateDataFromLogin(username);
                         rent.PopulateID(Customer, Status);
-                
+                        rent.ShowDialog();
                     }
                     else if (Status == "R")
                     {
                         Return ret = new Return();
-                        ret.ShowDialog();
+                    
                         ret.PopulateDataFromLogin(username);
                         ret.PopulateID(Customer, Status);
-                   
+                        ret.ShowDialog();
                     }
 
                     else if (Status == "N")
                     {
                         Return ret = new Return();
-                        ret.ShowDialog();
+                  
                         ret.PopulateDataFromLogin(username);
                         ret.PopulateID(Customer, Status);
-                       
+                        ret.ShowDialog();
                     }
 
 
@@ -474,10 +474,10 @@ namespace TBike.EmployeeMaster
                     {
 
                         EmployeeModify emp = new EmployeeModify();
-                        emp.ShowDialog();
+                  
                         emp.PopulateDataFromLogin(username);
                         emp.populateEmployee(id);
-                      
+                        emp.ShowDialog();
                     }
                     else
                     {

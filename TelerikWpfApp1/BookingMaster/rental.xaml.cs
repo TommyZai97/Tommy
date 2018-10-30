@@ -117,7 +117,7 @@ namespace TBike
 
                 }
                 // This is for adding new rent
-                if (TPStart.SelectedTime < DateTime.Now.TimeOfDay)
+                else if (TPStart.SelectedTime < DateTime.Now.TimeOfDay)
                 {
                     PopWindow pop = new PopWindow(ImageType.Warning,"Sorry", "Can't rent time that is before the current time","Okay");
                     pop.ShowDialog();

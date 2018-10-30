@@ -13,21 +13,102 @@
         Title="Reports" Height="450" Width="800">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="148*"/>
+            <ColumnDefinition Width="207*"/>
+            <ColumnDefinition Width="309*"/>
+            <ColumnDefinition Width="128*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
         <Grid.Background>
             <ImageBrush ImageSource="/T-Bike;component/Image/background.jpg"/>
         </Grid.Background>
-        <Expander Header="Expander"  HorizontalAlignment="Left" Height="191" Margin="10,10,0,0" VerticalAlignment="Top" Width="222" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Foreground="White" Controls:ControlsHelper.HeaderFontWeight="ExtraBold" BorderBrush="White">
 
-            <Grid Background="#FFE5E5E5">
-                <StackPanel>
-                    <Button Name="BTNHELLO" Width="50" Height="50" Content="hello" />
-                    <Button Name="BTN3"  Width="50" Height="50" Content="hello" />
-                    <Button Name="BTN123" Width="50" Height="50" Content="hello" />
-                </StackPanel>
-            </Grid>
+        <ListBox x:Name="ListBooking" SelectionChanged="ListBooking_SelectionChanged" Grid.RowSpan="2" Grid.ColumnSpan="1" Background="#A5FFFFFF"/>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left"  Margin="10,10,0,0" VerticalAlignment="Top" Height="139" Width="181"  >
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="White" Text="BookingID" FontSize="14" FontWeight="DemiBold" Margin="0,0,23,0"/>
+                <TextBlock x:Name="TBBookID" Foreground="White" Text="No ID Found" FontSize="14" Margin="0,0,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="White" Text="Bicycle" FontSize="14" FontWeight="DemiBold" Margin="0,5,48,0"/>
+                <TextBlock x:Name="TBBike" Foreground="White" Text="No ID Found" FontSize="14" Margin="0,5,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="White" Text="Status" FontSize="14" FontWeight="DemiBold" Margin="0,5,52,0"/>
+                <TextBlock x:Name="TBBookStatus" Foreground="White" Text="No ID Found" FontSize="14" Margin="0,5,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="White" Text="Booked Date" FontSize="14" FontWeight="DemiBold" Margin="0,5,10,0"/>
+                <TextBlock x:Name="TBBookDate" Foreground="White" Text="No ID Found" FontSize="14" Margin="0,5,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="White" Text="Start-Time" FontSize="14" FontWeight="DemiBold" Margin="0,5,25,0"/>
+                <TextBlock x:Name="TBStartTime" Foreground="White" Text="No ID Found" FontSize="14" Margin="0,5,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="White" Text="End-Time" FontSize="14" FontWeight="DemiBold" Margin="0,5,31,0"/>
+                <TextBlock x:Name="TBEndTime" Foreground="White" Text="No ID Found" FontSize="14" Margin="0,5,10,0"/>
+            </StackPanel>
+        </StackPanel>
 
-        </Expander>
-        <Calendar HorizontalAlignment="Stretch" Margin="298,10,172,107" VerticalAlignment="Stretch" MinHeight="302" MinWidth="322"/>
+        <StackPanel Grid.Column="2" HorizontalAlignment="Left"  Margin="10,10,0,0" VerticalAlignment="Top" Height="187" Width="202"   >
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="White" Text="Deposit" FontSize="14" FontWeight="DemiBold" Margin="0,0,60,0"/>
+                <TextBlock x:Name="TBDeposit" Foreground="White" Text="No ID Found" FontSize="14" Margin="0,0,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="White" Text="Customer" FontSize="14" FontWeight="DemiBold" Margin="0,5,49,0"/>
+                <TextBlock x:Name="TBCustomer" Foreground="White" Text="No ID Found" FontSize="14" Margin="0,5,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="White" Text="Total Price" FontSize="14" FontWeight="DemiBold" Margin="0,5,45,0"/>
+                <TextBlock x:Name="TBTotalPrice" Foreground="White" Text="No ID Found" FontSize="14" Margin="0,5,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="White" Text="Remarks" FontSize="14" FontWeight="DemiBold" Margin="0,5,57,0"/>
+                <TextBlock x:Name="TBRemark" Foreground="White" Text="No ID Found" FontSize="14" Margin="0,5,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="White" Text="Created By" FontSize="14" FontWeight="DemiBold" Margin="0,5,43,0"/>
+                <TextBlock x:Name="TBCreatedBy" Foreground="White" Text="No ID Found" FontSize="14" Margin="0,5,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="White" Text="Created At" FontSize="14" FontWeight="DemiBold" Margin="0,5,45,0"/>
+                <TextBlock x:Name="TBCreatedAt" Foreground="White" Text="No ID Found" FontSize="14" Margin="0,5,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="White" Text="Last Updated By" FontSize="14" FontWeight="DemiBold" Margin="0,5,10,0"/>
+                <TextBlock x:Name="TBLastUpdatedBy" Foreground="White" Text="No ID Found" FontSize="14" Margin="0,5,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="White" Text="Last Updated At" FontSize="14" FontWeight="DemiBold" Margin="0,5,10,0"/>
+                <TextBlock x:Name="TBLastUpdatedAt" Foreground="White" Text="No ID Found" FontSize="14" Margin="0,5,10,0"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="90" Width="160" >
+            <Button x:Name="BTNPayment" Grid.Column="1" Grid.Row="1" Content="Monthly Earnings" Width="150" Height="35" Margin="10,10,0,0" FontWeight="DemiBold" Click="BTNPayment_Click"/>
 
-             </Grid>
+            <Button x:Name="BTNTotalRent" Grid.Column="1" Grid.Row="1" Content="Total Rents This Month" Width="150" Height="35" Margin="10,10,0,0" FontWeight="DemiBold" Click="BTNTotalRent_Click"/>
+        </StackPanel>
+        <StackPanel Name="MonthStack" Visibility="Visible" Grid.Column="2"  Grid.Row="1" >
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="DemiBold" FontSize="14"  HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Monthly Earnings" VerticalAlignment="Top" Foreground="White" Height="19" Width="112"/>
+                <TextBlock Name="TBMonthly" FontSize="14"  HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Rm 0.00" VerticalAlignment="Top" Foreground="White" Height="19" Width="112"/>
+
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Name="RentStack" Visibility="Visible" Grid.Column="2"  Grid.Row="1" >
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="DemiBold" FontSize="14"  HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Monthly Rent" VerticalAlignment="Top" Foreground="White" Height="19" Width="112"/>
+                <TextBlock Name="TBMonthlyRents" FontSize="14"  HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="ERROR:!@#!@#" VerticalAlignment="Top" Foreground="White" Height="19" Width="112"/>
+
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
 </Controls:MetroWindow>

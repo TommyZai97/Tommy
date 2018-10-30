@@ -386,6 +386,50 @@ namespace TBike
 
         }
 
+        public ListBox bindListBox(ListBox ListBooking)
+        {
+            SqlConnection conn = new SqlConnection(constring);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT BookingID From BikeBookingMaster WHERE BookingStatus='S'", conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "BikeBookingMaster");
+            ListBooking.ItemsSource = ds.Tables[0].DefaultView;
+            ListBooking.DisplayMemberPath = ds.Tables[0].Columns["BookingID"].ToString();
+            ListBooking.SelectedValuePath = ds.Tables[0].Columns["BookingID"].ToString();
+
+            return ListBooking;
+        }
+
+        public DataTable SelectAllBookingDetailsByID(string BookingID)
+        {
+            SqlConnection conn = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelAllBookingDetailsByID", conn);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+            MyCmd.Parameters.AddWithValue("BookingID", BookingID);
+
+            try
+            {
+                conn.Open();
+
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("DB Operation Error At SelectAllBookingDetailsByID : " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+                MyCmd.Dispose();
+
+            }
+            return ResultDataTable;
+        }
+
         #endregion
 
         #region EmployeeMaster

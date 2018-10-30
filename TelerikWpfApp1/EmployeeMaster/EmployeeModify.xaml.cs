@@ -162,6 +162,7 @@ namespace TBike
                 TBikeDAL MyDAL = new TBikeDAL();
                 username = LBUsername.Text;
                 ConfirmWindow com = new ConfirmWindow(ImageType.Error, "Update", "Are you sure to modify these changes?", "Yes","No");
+                com.ShowDialog();
                 if (com.Confirmed)
                 {
                     MyDAL.UpdateEmployee(LBEmployeeID.Text, LBEmployeeName.Text, Convert.ToDateTime(LBDob.Text), LBUsername.Text, LBEmployeeRankDesc.Text, LBEmail.Text, LBPhoneNo.Text, LBCity.Text, TLUsername.Text);

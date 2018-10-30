@@ -198,14 +198,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="T-Bike.exe" size="1905120">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="T-Bike.exe" size="1913312">
       <assemblyIdentity name="T-Bike" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ENbblivSfNoZ0St7UHgSuu4P/MpOlNoax2Gnn3Pgb2k=</dsig:DigestValue>
+        <dsig:DigestValue>IL8ree34y1FSif1pGgcfLyXen3Wj2m2QNkhoCw4YSsE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

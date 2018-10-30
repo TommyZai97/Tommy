@@ -11,7 +11,7 @@
 
     <Grid Opacity="0.9" >
 
-        <DataGrid Name="dataGrid1" IsReadOnly="True" HorizontalAlignment="Stretch" MinHeight="244" Margin="10,215,10,61" VerticalAlignment="Stretch" MinWidth="772" SelectionChanged="dataGrid1_SelectionChanged" Background="#7F838383">
+        <DataGrid Name="dataGrid1" IsReadOnly="True" HorizontalAlignment="Stretch" MinHeight="244" Margin="10,215,10,61" VerticalAlignment="Stretch" MinWidth="772" SelectionChanged="dataGrid1_SelectionChanged" Background="#7F838383" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="Column1"  />
                 <DataGridTextColumn x:Name="Column2"  />
