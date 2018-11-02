@@ -164,12 +164,9 @@ namespace TBike
 
                         MyDAL.UpdateBookingStatus("S", CBBike.SelectedValue.ToString().Trim(), Customer, TLUsername.Text);
                         MyDAL.UpdateBikeStatus(CBBike.SelectedValue.ToString().Trim(), "", DamageStatus, TBCondition.Text, null, Convert.ToDateTime(null), TLUsername.Text);
-                        Xceed.Wpf.Toolkit.MessageBox.Show("Bicycle: "+ CBBike.Text + " Returned");
-
-                        MainWindow ret = new MainWindow();
-                        this.Close();
-                        ret.PopulateDataFromLogin(username);
-                        ret.Show();
+                        PopWindow pop = new PopWindow(ImageType.Information, "Success","Bicycle: "+ CBBike.Text + " Returned","Thank You");
+                        pop.ShowDialog();
+                        BindComboBox(CBBike);
                     }
 
                     else
@@ -180,17 +177,14 @@ namespace TBike
                 }
                 else
                 {
+                    //this is for late return part
                     if (LBCustomer.Text != null)
                     {
-                        MyDAL.UpdateBookingStatus("S", ListBicycle.SelectedValue.ToString().Trim(), LBCustomer.Text, TLUsername.Text);
+                        MyDAL.UpdateBookingStatus("S", ListBicycle.SelectedValue.ToString().Trim(), LBName.Text, TLUsername.Text);
                         MyDAL.UpdateBikeStatus(ListBicycle.SelectedValue.ToString().Trim(), "", DamageStatus, TBCondition.Text, null, Convert.ToDateTime(null), TLUsername.Text);
                         PopWindow pop = new PopWindow(ImageType.Warning, "Late Return","Late Returned Bicycle: " + ListBicycle.Text + " Returned", "OK");
                         pop.ShowDialog();
-                        MainWindow ret = new MainWindow();
-                        this.Close();
-                        ret.PopulateDataFromLogin(username);
-                        ret.Show();
-
+                        BindComboBoxCustomer(CBCustomer);
                     }
                     else
                     {

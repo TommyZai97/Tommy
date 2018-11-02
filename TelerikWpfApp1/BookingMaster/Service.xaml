@@ -7,17 +7,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TBike.BookingMaster"
         mc:Ignorable="d"
-        Title="Bicycle Service" Height="508.157" Width="941.102" Icon="/T-Bike;component/Image/logo.jpg" WindowStartupLocation="CenterScreen">
+        Title="Bicycle Service" MaxHeight="650" MaxWidth="950" Icon="/T-Bike;component/Image/logo.jpg" WindowStartupLocation="CenterScreen" MinHeight="350" MinWidth="550" Height="477"  >
     <Controls:MetroWindow.Background>
         <ImageBrush ImageSource="/T-Bike;component/Image/background.jpg"/>
     </Controls:MetroWindow.Background>
     <Grid>
-
-
-        <Rectangle Visibility="Collapsed" Margin="56,49,47,71" Grid.RowSpan="2" Fill="#7F898989" RadiusY="18.919" RadiusX="18.919" />
-        <ComboBox Name="CBBicycle" HorizontalAlignment="Center" VerticalAlignment="Center" Width="222" Margin="275,21,436,411"
-                  Controls:TextBoxHelper.Watermark="Bicycle..." Controls:TextBoxHelper.UseFloatingWatermark="True" SelectionChanged="ComboBox_SelectionChanged" Height="45" RenderTransformOrigin="0.437,0.522"/>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="275,90,232,66" Width="426" Height="321">
+        <Rectangle Visibility="Visible" Width="468" Height="388" Fill="#7F000000" HorizontalAlignment="Center" VerticalAlignment="Center" RadiusY="18.919" RadiusX="18.919" Margin="106,6,77,52" />
+        <ComboBox x:Name="CBBicycle" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="200" MaxWidth="215" 
+                  Controls:TextBoxHelper.Watermark="Bicycle..." Controls:TextBoxHelper.UseFloatingWatermark="True" SelectionChanged="ComboBox_SelectionChanged" Height="37" Margin="142,20,296,393" Width="213"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
             <StackPanel Orientation="Horizontal"  Grid.Row="1">
                 <TextBlock Text="Bicycle Name : " Foreground="White" Margin="0,0,8,0" FontWeight="Bold" FontSize="14"/>
                 <TextBlock x:Name="LBBicycleName" Text="" Foreground="White" FontSize="14"/>
@@ -40,18 +38,18 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0" Grid.Row="1" Height="69">
                 <TextBlock Text="Service Duration : " Foreground="White" Margin="0,0,35,0" FontWeight="Bold" FontSize="14"/>
-                <TextBlock Name="LBDuration" Foreground="White" Margin="0,0,35,0" FontWeight="Bold" FontSize="14"/>
+                <TextBlock x:Name="LBDuration" Foreground="White" Margin="0,0,35,0" FontWeight="Bold" FontSize="14"/>
 
             </StackPanel>
         </StackPanel>
-   
+
         <StackPanel Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="67,0,0,0" Width="302" Grid.Row="1">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Welcome, " VerticalAlignment="Bottom" Foreground="White" Margin="0,0,0,17" FontWeight="Bold"/>
             <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="64,-33,19,18.667"/>
             <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="136,-42,0,20"/>
         </StackPanel>
-        <Button Content="Send to Repair" HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="1" VerticalAlignment="Bottom" Width="117" RenderTransformOrigin="1.105,0.104" Click="Button_Click"/>
-        <Button Content="Return Service" HorizontalAlignment="Right" Margin="0,0,157,10" Grid.Row="1" VerticalAlignment="Bottom" Width="109" RenderTransformOrigin="1.105,0.104" Click="Button_Click_2"/>
+        <Button Content="Send to Repair" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="117" RenderTransformOrigin="1.105,0.104" Click="Button_Click"/>
+        <Button Content="Return Service" HorizontalAlignment="Right" Margin="0,0,145,10" VerticalAlignment="Bottom" Width="109" RenderTransformOrigin="1.105,0.104" Click="Button_Click_2"/>
 
 
     </Grid>

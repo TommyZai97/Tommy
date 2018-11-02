@@ -11,7 +11,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TBike.MessageBox"
         mc:Ignorable="d"
-        Title="Confirm" Height="200" Width="500" Background="#E5FFFFFF" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
+        Title="Confirm" Height="200" Width="388" Background="#E5FFFFFF" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="70"/>

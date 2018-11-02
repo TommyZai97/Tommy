@@ -19,8 +19,8 @@
 
         <StackPanel Visibility="Hidden" x:Name="ExpiredStack" HorizontalAlignment="Right" MinHeight="321" Margin="0,15,10,83" VerticalAlignment="Stretch" Width="324" Background="#7FB6B6B6" Grid.RowSpan="2">
             <ComboBox x:Name="CBCustomer" Margin="15,16,31,0" Height="25" Controls:TextBoxHelper.Watermark="Customer..." Background="White" SelectionChanged="CBCustomer_SelectionChanged"/>
-            <TextBlock x:Name="LBName" TextWrapping="Wrap" Text="TextBlock" Margin="16,20,228,0" FontSize="14" Foreground="White" FontWeight="Bold" Background="#4C000000"/>
-            <TextBlock x:Name="LBDate" TextWrapping="Wrap" Text="TextBlock" Margin="16,20,74,0" FontSize="14" Foreground="White" FontWeight="Bold" Background="#4C000000"/>
+            <TextBlock x:Name="LBName" TextWrapping="Wrap" Margin="16,20,228,0" FontSize="14" Foreground="White" FontWeight="Bold" Background="#4C000000"/>
+            <TextBlock x:Name="LBDate" TextWrapping="Wrap" Margin="16,20,74,0" FontSize="14" Foreground="White" FontWeight="Bold" Background="#4C000000"/>
             <ComboBox x:Name="ListBicycle" HorizontalAlignment="Left" Margin="17,17,0,30" VerticalAlignment="Top" Width="149" Controls:TextBoxHelper.Watermark="Bicycle..." />
             <StackPanel Orientation="Horizontal">
                 <TextBlock Visibility="Visible" HorizontalAlignment="Left" Foreground="White" TextWrapping="Wrap" Text="Damaged ?" VerticalAlignment="Top" FontWeight="Bold" Margin="20,0,0,0"/>

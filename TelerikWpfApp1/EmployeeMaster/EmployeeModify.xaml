@@ -7,7 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TelerikWpfApp1"
         mc:Ignorable="d"
-        Title="Employee Modify And Promotion" MinHeight="397.564" MinWidth="800" WindowStartupLocation="CenterScreen" Width="1271.439"  Icon="/T-Bike;component/Image/logo.jpg">
+        Title="Employee Modify And Promotion" MinHeight="397.564" WindowStartupLocation="CenterScreen" Width="884"  Icon="/T-Bike;component/Image/logo.jpg" Height="223.827">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -18,14 +18,9 @@
         </Grid.Background>
 
 
-        <Rectangle Visibility="Visible" Fill="#7F00000A" HorizontalAlignment="Stretch" MinHeight="260" Margin="10,91,10,123" Stroke="Black" VerticalAlignment="Center" MinWidth="350" RadiusY="20.775" RadiusX="20.775" Grid.ColumnSpan="2" Height="290"/>
+        <Rectangle Visibility="Visible" Fill="#7F00000A" HorizontalAlignment="Stretch" Height="323" Margin="10,10,10,34" Stroke="Black" VerticalAlignment="Center" MinWidth="350" RadiusY="20.775" RadiusX="20.775" Grid.ColumnSpan="2"/>
 
 
-        <Button Content="" x:Name="button" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="38" Height="38" Click="button_Click_1" RenderTransformOrigin="0.736,4.204">
-            <Button.Background>
-                <ImageBrush ImageSource="/T-Bike;component/Image/bck.png"/>
-            </Button.Background>
-        </Button>
 
         <StackPanel HorizontalAlignment="Stretch" Margin="40,40,32,71" VerticalAlignment="Center" MinWidth="224"  MinHeight="200" Grid.Column="0"  >
             <StackPanel Orientation="Horizontal">
@@ -52,7 +47,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Address" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" Margin="0,0,95,30"/>
-                <TextBox x:Name="LBCity" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="Black" FontSize="18" FontFamily="Calibri" Margin="0,0,0,0" MinWidth="186" />
+                <TextBox x:Name="LBCity" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="Black" FontSize="18" FontFamily="Calibri" Margin="0,0,0,0" MinWidth="186" MaxWidth="500" Width="352"/>
 
 
             </StackPanel>
@@ -61,7 +56,7 @@
         <Button x:Name="BTNUpdate" Content="Update" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="BTNUpdate_Click" Grid.Column="1"/>
         <Button x:Name="BTNDemote" Content="Demote" HorizontalAlignment="Right" Margin="0,0,157,10" VerticalAlignment="Bottom" Width="75" Click="BTNDemote_Click" Grid.Column="1"/>
         <Button x:Name="BTNPromote" Content="Promote" HorizontalAlignment="Right" Margin="0,0,252,10" VerticalAlignment="Bottom" Width="75" Click="BTNPromote_Click" Grid.Column="1"/>
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="84,0,0,-3" Width="302">
+        <StackPanel Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="84,0,0,-3" Width="302">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Welcome, " VerticalAlignment="Bottom" Foreground="White" Margin="0,0,0,17" FontWeight="Bold"/>
             <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="64,-33,19,18.667"/>
             <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="136,-42,0,20"/>

@@ -7,7 +7,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:TelerikWpfApp1"
         mc:Ignorable="d"  
-        Title="rental" Height="450" Width="852.436" WindowStartupLocation="CenterScreen" Icon="/T-Bike;component/Image/logo.jpg">
+        Title="rental" MinHeight="450" MinWidth="800" WindowStartupLocation="CenterScreen" Icon="/T-Bike;component/Image/logo.jpg" Width="774" Height="282">
 
     <Grid>
         <Grid.Background>
@@ -16,8 +16,10 @@
         <Rectangle x:Name="rect" HorizontalAlignment="Right"  VerticalAlignment="Stretch" MinWidth="317" MaxWidth="600" Fill="#7F000000" Visibility="Hidden" Width="369"/>
 
         <ComboBox x:Name="CBBike" HorizontalAlignment="Left" Margin="29,41,0,0" VerticalAlignment="Top" Width="206" Height="23" SelectionChanged="ComboBox_SelectionChanged" Controls:TextBoxHelper.Watermark="Reserved Customers..."/>
-        <Controls:TimePicker x:Name="TPStart" Height="34" Width="206" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,77,0,308" Controls:TextBoxHelper.Watermark="Select starting time" />
-        <Controls:TimePicker x:Name="TPEnd" Height="34" Width="214" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="256,77,0,308" Controls:TextBoxHelper.Watermark="Select ending time"/>
+        <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,80,10,10">
+        <Controls:TimePicker x:Name="TPStart" Height="34" Width="150" HorizontalAlignment="Left"  VerticalAlignment="Top" Controls:TextBoxHelper.Watermark="Select starting time" />
+            <Controls:TimePicker x:Name="TPEnd" Height="34" Width="150" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Top"  Controls:TextBoxHelper.Watermark="Select ending time"/>
+        </DockPanel>
         <TextBox x:Name="TBCustomer" HorizontalAlignment="Left" Height="23" Margin="29,185,0,208" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="158" Controls:TextBoxHelper.Watermark="New Customer..."/>
         <ComboBox x:Name="CBBicycle" HorizontalAlignment="Left" Margin="29,224,0,169" VerticalAlignment="Top" Width="158" Height="23"  Controls:TextBoxHelper.Watermark="Bicycle" RenderTransformOrigin="0.539,-0.561"/>
         <Button x:Name="BTNNext" Content="Next" HorizontalAlignment="Left" Margin="29,310,0,78" VerticalAlignment="Bottom" Width="110" FontSize="14" FontWeight="Bold" FontFamily="Calibri" Click="Button_Click"/>

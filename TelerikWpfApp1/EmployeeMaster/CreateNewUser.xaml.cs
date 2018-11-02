@@ -26,39 +26,35 @@ namespace TBike
     {
         string username;
         int RankID;
+   
         public CreateNewUser()
         {
             InitializeComponent();
 
 
         }
-        public string stringBuilder(string Address)
-        {
 
-            StringBuilder striBuild = new StringBuilder();
-            striBuild.AppendLine(TBAddress1.Text);
-            striBuild.AppendLine(TBAddress2.Text);
-            striBuild.AppendLine(TBAddress3.Text);
-            striBuild.Append(TBCity.Text);
-            striBuild.Append(" , " + TBZipCode.Text);
-
-            Address = striBuild.ToString().Trim();
-
-            return Address;
-        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 //button for creating new employee
-               
 
+                string Address;
                 TBikeDAL MyDal = new TBikeDAL();
 
+                //String Builder
 
-                string Address = "";
-                stringBuilder(Address); 
+                StringBuilder striBuild = new StringBuilder();
+                striBuild.AppendLine(TBAddress1.Text);
+                striBuild.AppendLine(TBAddress2.Text);
+                striBuild.AppendLine(TBAddress3.Text);
+                striBuild.Append(TBCity.Text);
+                striBuild.Append(" , " + TBZipCode.Text);
 
+                Address = striBuild.ToString().Trim();
+
+                
 
                 MyDal.AddNewEmployeeDetails(TBEmpName.Text, DOBText.SelectedDate.Value.Date, TBEmail.Text, TBPhoneNo.Text, Address, "Tommy");
 

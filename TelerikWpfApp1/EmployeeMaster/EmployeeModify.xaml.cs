@@ -56,13 +56,7 @@ namespace TBike
             }
         }
 
-        private void button_Click_1(object sender, RoutedEventArgs e)
-        {
-            EmployeeManagement emp = new EmployeeManagement();
-            emp.PopulateDataFromLogin(username);
-            emp.Show();
-            this.Close();
-        }
+     
 
         public void PopulateDataFromLogin(string Values)
         {

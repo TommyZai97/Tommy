@@ -43,6 +43,9 @@
                         <StackPanel Background="#19000000" Grid.ColumnSpan="2" >
                             <DockPanel  Margin="10,10">
                                 <Button Width="40" Height="40" Click="Book_Click">
+                                    <Button.Effect>
+                                        <DropShadowEffect/>
+                                    </Button.Effect>
                                     <Button.Background>
                                         <ImageBrush ImageSource="Image/booking.png"/>
                                     </Button.Background>
@@ -51,6 +54,9 @@
                             </DockPanel>
                             <DockPanel Margin="10,10">
                                 <Button Width="40" Height="40" Margin="0" Click="Rent_Click">
+                                    <Button.Effect>
+                                        <DropShadowEffect/>
+                                    </Button.Effect>
                                     <Button.Background>
                                         <ImageBrush ImageSource="Image/rent.jpg"/>
                                     </Button.Background>
@@ -59,6 +65,9 @@
                             </DockPanel>
                             <DockPanel Margin="10,10">
                                 <Button Width="40" Height="40" Click="Return_Click">
+                                    <Button.Effect>
+                                        <DropShadowEffect/>
+                                    </Button.Effect>
                                     <Button.Background>
                                         <ImageBrush ImageSource="Image/return.png"/>
                                     </Button.Background>
@@ -67,6 +76,9 @@
                             </DockPanel>
                             <DockPanel Margin="10,10">
                                 <Button Width="40" Height="40" Click="Service_Click">
+                                    <Button.Effect>
+                                        <DropShadowEffect/>
+                                    </Button.Effect>
                                     <Button.Background>
                                         <ImageBrush ImageSource="Image/Service.png"/>
                                     </Button.Background>
@@ -175,6 +187,9 @@
                     <StackPanel>
                         <DockPanel Margin="10,10">
                             <Button Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40" Height="40" Click="Button_Click_3">
+                                <Button.Effect>
+                                    <DropShadowEffect/>
+                                </Button.Effect>
                                 <Button.Background>
                                     <ImageBrush ImageSource="Image/stat.jpg"/>
                                 </Button.Background>
@@ -183,6 +198,9 @@
                         </DockPanel>
                         <DockPanel Margin="10,10">
                             <Button Content="" HorizontalAlignment="Left" Margin="0,15,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="Button_Click_4">
+                                <Button.Effect>
+                                    <DropShadowEffect/>
+                                </Button.Effect>
                                 <Button.Background>
                                     <ImageBrush ImageSource="Image/stat.jpg"/>
                                 </Button.Background>
