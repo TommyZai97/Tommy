@@ -11,7 +11,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TBike.MessageBox"
         mc:Ignorable="d"
-        Title="Confirm" Height="200" Width="388" Background="#E5FFFFFF" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
+        Title="Confirm" Height="200" Width="488" Background="#E5FFFFFF" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="70"/>
@@ -27,7 +27,7 @@
 
         </Image>
         <TextBlock x:Name="tbMessage" Foreground="#FF4A4B57" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="15,31,15,15" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-        <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="53,0,20,10" Grid.Row="1" Grid.ColumnSpan="3">
+        <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,10" Grid.Row="1" Grid.ColumnSpan="3">
             <Button Name="BTNYes" Grid.ColumnSpan="2" Content="Yes" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="1" MinWidth="60" 
                     FontWeight="Regular" FontSize="12" FontStyle="Normal" Typography.Capitals="Normal" Click="BTNYes_Click"/>
             <Button Name="BTNNo" Grid.ColumnSpan="2" Content="No" HorizontalAlignment="Stretch" Grid.Row="1" Margin="10,0" VerticalAlignment="Bottom" MinWidth="60" 

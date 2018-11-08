@@ -41,7 +41,8 @@ namespace TBike.EmployeeMaster
             DataTable ResultTable = MyDAL.SelectAllBookingDetailsByID(TBBookID.Text);
             TBBike.Text = Convert.ToString(ResultTable.Rows[0]["BicycleName"]).Trim();
             TBBookStatus.Text = "Successful";
-            TBBookDate.Text = Convert.ToString(ResultTable.Rows[0]["BookingDate"]).Trim();
+            DateTime date = Convert.ToDateTime(ResultTable.Rows[0]["BookingDate"]);
+            TBBookDate.Text = date.ToShortDateString().ToString().Trim();
             TBStartTime.Text = Convert.ToString(ResultTable.Rows[0]["StartTime"]).Trim();
             TBEndTime.Text = Convert.ToString(ResultTable.Rows[0]["EndTime"]).Trim();
             TBDeposit.Text = Convert.ToString(ResultTable.Rows[0]["BookingDeposit"]).Trim();
@@ -49,10 +50,12 @@ namespace TBike.EmployeeMaster
             TBTotalPrice.Text = Convert.ToString(ResultTable.Rows[0]["TotalPrice"]).Trim();
             TBRemark.Text = Convert.ToString(ResultTable.Rows[0]["Remark"]).Trim();
             TBCreatedBy.Text = Convert.ToString(ResultTable.Rows[0]["CreatedBy"]).Trim();
-            TBCreatedAt.Text = Convert.ToString(ResultTable.Rows[0]["CreatedAt"]).Trim();
+            date = Convert.ToDateTime(ResultTable.Rows[0]["CreatedAt"]);
+            TBCreatedAt.Text = date.ToShortDateString().ToString().Trim();
             TBLastUpdatedBy.Text = Convert.ToString(ResultTable.Rows[0]["LastUpdatedBy"]).Trim();
-            TBLastUpdatedAt.Text = Convert.ToString(ResultTable.Rows[0]["LastUpdatedAt"]).Trim();
-
+            date = Convert.ToDateTime(ResultTable.Rows[0]["LastUpdatedAt"]);
+            TBLastUpdatedAt.Text = date.ToShortDateString().ToString().Trim();
+            TBShowTitle.Text = "Seleted ID: " + ListBooking.SelectedValue.ToString().Trim();
         }
 
         private void BTNPayment_Click(object sender, RoutedEventArgs e)
@@ -107,6 +110,12 @@ namespace TBike.EmployeeMaster
                     i++;
 
 
+                }
+                i++;
+
+                if (ResultTable.Rows.Count >= i)
+                {
+                    break;
                 }
             }
             TBMonthlyRents.Text = Convert.ToString(i);

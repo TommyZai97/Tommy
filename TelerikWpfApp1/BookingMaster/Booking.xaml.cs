@@ -43,8 +43,8 @@ namespace TBike
             }
             else
             {
-                Xceed.Wpf.Toolkit.MessageBox.Show("Please Choose a Bicycle");
-              
+                MessageBox.PopWindow pop = new MessageBox.PopWindow(AppData.ImageType.Warning, "Sorry", "Please Choose a Bike", "Sure");
+                pop.ShowDialog();
             }
 
         }
@@ -60,11 +60,13 @@ namespace TBike
    
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            int insertCounter = 0;
+            int count = 0;
             //book button
             try
             {
                
-                string BikeID = Convert.ToString(CBBike.SelectedValue);
+                string BikeID = Convert.ToString(CBBike.SelectedValue).Trim();
                 TBikeDAL MyDAL = new TBikeDAL();
                 DateTime Start = Convert.ToDateTime(StartDate.SelectedDate.Value);
 
@@ -72,70 +74,107 @@ namespace TBike
                 TimeSpan endTime = new TimeSpan(16, 00, 00);
 
 
-                DataTable ResultAllTable = new DataTable();
+                
                 DataTable ResultTable = new DataTable();
-                ResultAllTable = MyDAL.ShowAllBookingTable();
 
+               
                 ResultTable = MyDAL.ShowBookingTableByBike(CBBike.SelectedValue.ToString().Trim(),"");
-                int count = 0;
+                
+                
                 var dates = new List<DateTime>();
                 if (ResultTable.Rows.Count == 0)
                 {
                     MyDAL.AddBookingTime(Start, CBBike.SelectedValue.ToString().Trim(), "A",TBCustomer.Text, null,TLUsername.Text,null,null,TBRemarks.Text);
-                    Xceed.Wpf.Toolkit.MessageBox.Show("Booking made at :" + Start,"Success");
-
+                    MessageBox.PopWindow pop = new MessageBox.PopWindow(AppData.ImageType.Information, "Success", "Booking made at :" + Start, "OK");
+                    pop.ShowDialog();
                 }
                 for (int i = 0; i < ResultTable.Rows.Count; i++)
                 {
-                              
-                    if (Start.Date > DateTime.Now && Convert.ToDateTime(ResultTable.Rows[A]["BookingDate"]).Date < Start.Date && Start.TimeOfDay > CheckTime && Start.TimeOfDay < endTime)
+                    if (Convert.ToString(ResultTable.Rows[A]["BookingStatus"]).Trim() != "S")
                     {
-                        MyDAL.AddBookingTime(Start, CBBike.SelectedValue.ToString().Trim(), "A",TBCustomer.Text, null,TLUsername.Text,null,null, TBRemarks.Text);
-                        Xceed.Wpf.Toolkit.MessageBox.Show("Booking made at :" + Start, "Success");
-                        A++;
-                        break;
-                    }
-                    else if (Start.Date < DateTime.Now)
-                    {
-                        Xceed.Wpf.Toolkit.MessageBox.Show("Date must be booked 1 day ahead from today", "Error");
-                        break;
-                    }
-                    else if (Start.TimeOfDay < CheckTime || Start.TimeOfDay > endTime)
-                    {
-                        Xceed.Wpf.Toolkit.MessageBox.Show( "Booking must be booked at 8am-4pm", "Error");
-                        break;
-                    }
 
+
+                        DateTime GetDate = Convert.ToDateTime(ResultTable.Rows[A]["BookingDate"]);
+                        if (Start.Date == GetDate && CBBike.SelectedValue.ToString().Trim() == Convert.ToString(ResultTable.Rows[A]["BicycleID"]).ToString().Trim())
+                        {
+                            count++;
+                            break;
+                        }
+
+                        else if (Start.Date > DateTime.Now && Convert.ToDateTime(ResultTable.Rows[A]["BookingDate"]).Date < Start.Date && Start.TimeOfDay > CheckTime && Start.TimeOfDay < endTime)
+                        {
+                            insertCounter++;
+                            A++;
+
+                        }
+                        else if (Start.Date < DateTime.Now)
+                        {
+                            MessageBox.PopWindow pop = new MessageBox.PopWindow(AppData.ImageType.Warning, "Sorry", "Date must be booked 1 day ahead from today", "OK");
+                            pop.ShowDialog();
+                            insertCounter = 0;
+                            break;
+
+                        }
+                        else if (Start.TimeOfDay < CheckTime || Start.TimeOfDay > endTime)
+                        {
+                            MessageBox.PopWindow pop = new MessageBox.PopWindow(AppData.ImageType.Warning, "Sorry", "Booking must be booked at 8am-4pm", "OK");
+                            pop.ShowDialog();
+                            insertCounter = 0;
+                            break;
+                           
+                        }
+
+                        else
+                        {
+
+                            count = count + 1;
+                            A++;
+                        }
+
+                        if (ResultTable.Rows.Count <= A)
+                        {
+                            A = 0;
+                            insertCounter++;
+                            break;
+                        }
+
+                    }
                     else
                     {
-                       
-                        count = count + 1;
-                    
+                        A++;
+                        insertCounter++;
                     }
-                    A++;
-                    if (ResultTable.Rows.Count <= A)
-                    {
-                        A = 0;
-                        break;
-                    }
-
-
-
-
                     
                 }
+               
                 if (count >= 1)
                 {
-                    Xceed.Wpf.Toolkit.MessageBox.Show("This bike has been booked", "Error");
+                    MessageBox.PopWindow pop = new MessageBox.PopWindow(AppData.ImageType.Warning, "Sorry","Sorry Booking not made, This bike has been booked on "+ Start.ToLongDateString(),"OK");
                     count = 0;
+                    pop.ShowDialog();
                 }
-              
+                else if (insertCounter >= 1)
+                {
+                    MyDAL.AddBookingTime(Start, CBBike.SelectedValue.ToString().Trim(), "A", TBCustomer.Text, null, TLUsername.Text, null, null, TBRemarks.Text);
+                    MessageBox.PopWindow pop = new MessageBox.PopWindow(AppData.ImageType.Information, "Success", "Bicycle: " + Convert.ToString(ResultTable.Rows[0]["BicycleName"]).Trim() + ", Booking made at :" + Start.ToLongDateString(), "OK");
+                    insertCounter = 0;
+                    pop.ShowDialog();
+                }
+             
+
 
             }
             catch (Exception ex)
             {
-                Xceed.Wpf.Toolkit.MessageBox.Show(ex.Message);
-               
+                MessageBox.PopWindow pop = new MessageBox.PopWindow(AppData.ImageType.Error, "Error", ex.Message, "Sad :(");
+                pop.ShowDialog();
+            }
+            finally
+            {
+                //dispose all counters
+                A = 0;
+                count = 0;
+                insertCounter = 0;
             }
 
         }

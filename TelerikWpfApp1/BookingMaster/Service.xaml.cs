@@ -1,20 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Data;
 using MahApps.Metro.Controls;
 using System.Data.SqlClient;
-using MahApps.Metro.Controls.Dialogs;
 using TBike.AppData;
 using TBike.MessageBox;
 
@@ -28,8 +17,7 @@ namespace TBike.BookingMaster
         string username;
         int RankID;
         static string constring = System.Configuration.ConfigurationManager.ConnectionStrings["123"].ConnectionString;
-
-
+        
         public Service()
         {
             InitializeComponent();
@@ -58,16 +46,14 @@ namespace TBike.BookingMaster
             {
                 LBStatus.Text = "Maintenance";
                 TBCondition.Text = Convert.ToString(ResultTable.Rows[0]["Remark"]);
-               PickStart.SelectedDate = Convert.ToDateTime(ResultTable.Rows[0]["ServiceStart"]);
-               PickEnd.SelectedDate = Convert.ToDateTime(ResultTable.Rows[0]["ServiceEnd"]);
+                PickStart.SelectedDate = Convert.ToDateTime(ResultTable.Rows[0]["ServiceStart"]);
+                PickEnd.SelectedDate = Convert.ToDateTime(ResultTable.Rows[0]["ServiceEnd"]);
                 LBDuration.Text = Convert.ToString(PickEnd.SelectedDate.Value - PickStart.SelectedDate.Value) + "Days";
             }
             else if (LBStatus.Text == "I")
             {
                 LBStatus.Text = "InActive";
                 TBCondition.Text = Convert.ToString(ResultTable.Rows[0]["Remark"]);
-                
-
             }
 
         }
@@ -91,7 +77,6 @@ namespace TBike.BookingMaster
             }
 
         }
-
         public void BindComboBoxBicycle(ComboBox CBBicycle)
         {
             SqlConnection conn = new SqlConnection(constring);
@@ -102,7 +87,6 @@ namespace TBike.BookingMaster
             CBBicycle.DisplayMemberPath = ds.Tables[0].Columns["BicycleName"].ToString();
             CBBicycle.SelectedValuePath = ds.Tables[0].Columns["BicycleID"].ToString();
         }
-
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TBikeDAL MyDAL = new TBikeDAL();
@@ -111,16 +95,10 @@ namespace TBike.BookingMaster
             DataTable ResultTable2 = MyDAL.SelectServiceByBike(CBBicycle.SelectedValue.ToString().Trim());
             LBBicycleName.Text = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
             LBStatus.Text = Convert.ToString(ResultTable.Rows[0]["BicycleStatus"]);
-
-         
-
-
             if (LBStatus.Text == "I")
             {
                 LBStatus.Text = "Invalid";
             }
-
-          
             if (LBStatus.Text == "M")
             {
                 LBStatus.Text = "Maintenance";
@@ -128,7 +106,6 @@ namespace TBike.BookingMaster
                 PickEnd.SelectedDate = Convert.ToDateTime(ResultTable2.Rows[0]["ServiceEnd"]);
             }
             TBCondition.Text = Convert.ToString(ResultTable.Rows[0]["Condition"]);
-          
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -144,7 +121,6 @@ namespace TBike.BookingMaster
                     confirm.ShowDialog();
                     if (confirm.Confirmed) 
                     {
-
                         MyDAL.UpdateBikeStatus(CBBicycle.SelectedValue.ToString().Trim(), "", "M", repairCondition.Trim(), PickStart.SelectedDate, PickEnd.SelectedDate, TLUsername.Text);
                         PopWindow pop = new PopWindow(ImageType.Information , "Done", "Bicycle Send for Service", "OK");
                         pop.ShowDialog();
@@ -155,7 +131,6 @@ namespace TBike.BookingMaster
             {
                 PopWindow pop = new PopWindow(ImageType.Error ,"Error", ex.Message,"OK");
                 pop.ShowDialog();
-
             }
         }
 
@@ -178,7 +153,6 @@ namespace TBike.BookingMaster
             {
                 PopWindow pop = new PopWindow(ImageType.Information ,"Error" , ex.Message, "OK");
                 pop.ShowDialog();
-
             }
 
         }

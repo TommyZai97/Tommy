@@ -31,7 +31,8 @@ namespace TBike
         public LoginMenu()
         {
             InitializeComponent();
-            
+            TBUsername.Focusable = true;
+            TBUsername.Focus();
         }
 
      

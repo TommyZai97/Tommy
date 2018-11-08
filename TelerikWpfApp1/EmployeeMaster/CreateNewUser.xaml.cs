@@ -30,8 +30,6 @@ namespace TBike
         public CreateNewUser()
         {
             InitializeComponent();
-
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -39,25 +37,19 @@ namespace TBike
             try
             {
                 //button for creating new employee
-
                 string Address;
                 TBikeDAL MyDal = new TBikeDAL();
 
                 //String Builder
-
                 StringBuilder striBuild = new StringBuilder();
                 striBuild.AppendLine(TBAddress1.Text);
                 striBuild.AppendLine(TBAddress2.Text);
                 striBuild.AppendLine(TBAddress3.Text);
                 striBuild.Append(TBCity.Text);
                 striBuild.Append(" , " + TBZipCode.Text);
-
                 Address = striBuild.ToString().Trim();
-
                 
-
                 MyDal.AddNewEmployeeDetails(TBEmpName.Text, DOBText.SelectedDate.Value.Date, TBEmail.Text, TBPhoneNo.Text, Address, "Tommy");
-
                 CreateNewUser emp = new CreateNewUser();
                 this.Close();
                 emp.PopulateDataFromLogin(username);
@@ -68,13 +60,10 @@ namespace TBike
             {
                 PopWindow pop = new PopWindow(ImageType.Error, "Error", ex.Message, "OK");
                 pop.ShowDialog(); 
-
             }
           
         }
-
-     
-
+        
         public void populateEmployeeID()
         {
             
@@ -88,14 +77,11 @@ namespace TBike
 
             if (ResultTable.Rows.Count > 0)
             {
-
                 TLUsername.Text = Convert.ToString(ResultTable.Rows[0]["EmployeeName"]).Trim();
                 TLRankDesc.Text = Convert.ToString(ResultTable.Rows[0]["EmployeeRankDesc"]).Trim();
                 username = Convert.ToString(ResultTable.Rows[0]["Username"]).Trim();
                 RankID = Convert.ToInt32(ResultTable.Rows[0]["EmployeeRank"]);
-
-
-                    }
+            }
         }
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
