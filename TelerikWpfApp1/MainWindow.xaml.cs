@@ -18,7 +18,8 @@ using MahApps.Metro.Controls.Dialogs;
 using System.Threading.Tasks;
 using TBike.EmployeeMaster;
 using TBike.BookingMaster;
-
+using TBike;
+using System.Windows.Threading;
 
 namespace TBike
 {
@@ -28,29 +29,37 @@ namespace TBike
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        public static int Max { get; set; }
+
+
         int RankID;
         string username;
         string id;
         string self;
-
+        DispatcherTimer timer;
+        int ctr = 0;
         public int MyValue { get; set; }
         public MainWindow()
         {
-       
+
 
             InitializeComponent();
-       
             PopulateDataFromLogin("");
             CalculateDoneRentedTime();
             PopulateDataGrid();
-            
+            TBikeDAL MyDAL = new TBikeDAL();
+            MyDAL.bindListBoxCustomer(LBRent);
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 2);
+            timer.Tick += new EventHandler(timer_Tick);
+
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.F11 && this.ShowTitleBar == true)
             {
-              
+
                 WindowState = WindowState.Maximized;
                 ResizeMode = ResizeMode.NoResize;
                 this.ShowTitleBar = false;
@@ -73,7 +82,7 @@ namespace TBike
             }
         }
 
-       
+
         public void CalculateDoneRentedTime()
         {
             TBikeDAL MyDAL = new TBikeDAL();
@@ -82,24 +91,24 @@ namespace TBike
             int i = 0;
             foreach (DataRow row in ResultTable.Rows)
             {
-            
+
                 DateTime D = Convert.ToDateTime(ResultTable.Rows[i]["BookingDate"]);
                 string ID = Convert.ToString(ResultTable.Rows[i]["BookingID"]);
                 string Status = Convert.ToString(ResultTable.Rows[i]["BookingStatus"]);
                 string Bike = Convert.ToString(ResultTable.Rows[i]["BicycleID"]);
                 string Customer = Convert.ToString(ResultTable.Rows[i]["Customer"]);
-                
+
                 if (date.Date > D.Date && Status == "A")
                 {
                     MyDAL.UpdateBookingDate(D, "E", ID);
-                    MyDAL.UpdateBikeStatus(Bike, "","A","", null, null, TLUsername.Text);
+                    MyDAL.UpdateBikeStatus(Bike, "", "A", "", null, null, TLUsername.Text);
                 }
                 else if (date.Date > D && Status == "R")
                 {
-                    MyDAL.UpdateBookingDate(D, "N",ID);
-                    MyDAL.UpdateBikeStatus(Bike, Customer,"N","", null, null, TLUsername.Text);
+                    MyDAL.UpdateBookingDate(D, "N", ID);
+                    MyDAL.UpdateBikeStatus(Bike, Customer, "N", "", null, null, TLUsername.Text);
                 }
-                 i = i + 1;
+                i = i + 1;
             }
         }
         private void Store_Click(object sender, RoutedEventArgs e)
@@ -110,19 +119,18 @@ namespace TBike
             InventoryManage newWin = new InventoryManage();
             newWin.PopulateDataFromLogin(username);
             Framework.Content = newWin.Content;
-           
-            //newWin.Show();
-            //this.Close();
+
+
 
         }
 
-      
+
 
         private async void create_Click(object sender, RoutedEventArgs e)
         {
             if (RankID == 1)
             {
-               var res = await this.ShowMessageAsync("Error","You have no access to this current Service");
+                var res = await this.ShowMessageAsync("Error", "You have no access to this current Service");
 
             }
             else
@@ -140,11 +148,11 @@ namespace TBike
         {
             TBikeDAL MyDAL = new TBikeDAL();
             DataTable ResultTable = MyDAL.SelectEmployeeID("", Values);
-          
+
 
             if (ResultTable.Rows.Count > 0)
             {
-              
+
                 TLUsername.Text = Convert.ToString(ResultTable.Rows[0]["EmployeeName"]).Trim();
                 TLRankDesc.Text = Convert.ToString(ResultTable.Rows[0]["EmployeeRankDesc"]).Trim();
                 username = Convert.ToString(ResultTable.Rows[0]["Username"]).Trim();
@@ -225,7 +233,7 @@ namespace TBike
             FinalizeReports search = new FinalizeReports();
             Framework.Content = search.Content;
             search.PopulateDataFromLogin(username);
-           
+
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
@@ -238,6 +246,8 @@ namespace TBike
 
         private void Book_Click(object sender, RoutedEventArgs e)
         {
+            
+            PopUpGrid.Visibility = Visibility.Hidden;
             Framework.Visibility = Visibility.Visible;
             Booking book = new Booking();
             book.PopulateDataFromLogin(username);
@@ -298,7 +308,7 @@ namespace TBike
         {
             TBikeDAL MyDAL = new TBikeDAL();
             DataRowView dataRow = (DataRowView)dataGrid1.SelectedItem;
-            
+
             int index = dataGrid1.Items.IndexOf(dataGrid1.CurrentItem);
             if (index == -1)
             {
@@ -317,7 +327,7 @@ namespace TBike
                 {
                     Framework.Visibility = Visibility.Visible;
                     dataGrid1.Visibility = Visibility.Collapsed;
-                    
+
                     EmployeeModify mod = new EmployeeModify();
                     mod.populateEmployee(id);
                     mod.PopulateDataFromLogin(username);
@@ -328,14 +338,14 @@ namespace TBike
             }
             else
             {
-                var res = await this.ShowMessageAsync("Error","Please Select Employee");
+                var res = await this.ShowMessageAsync("Error", "Please Select Employee");
 
             }
         }
 
         private void Framework_LoadCompleted(object sender, NavigationEventArgs e)
         {
-           
+
         }
 
         private async void ExpanderEmployee_Expanded(object sender, RoutedEventArgs e)
@@ -343,10 +353,160 @@ namespace TBike
             if (RankID < 2)
             {
 
-       
-                var res = await this.ShowMessageAsync("Error","Rank not high enough to access");
+
+                var res = await this.ShowMessageAsync("Error", "Rank not high enough to access");
                 ExpanderEmployee.IsExpanded = false;
             }
         }
+
+        private async void BtnRank_Click(object sender, RoutedEventArgs e)
+        {
+
+
+
+            if (RankID >= 4)
+            {
+                Framework.Visibility = Visibility.Visible;
+                EmployeeRank mod = new EmployeeRank();
+                mod.PopulateDataFromLogin(username);
+                mod.ShowDialog();
+
+            }
+
+
+            else
+            {
+                var res = await this.ShowMessageAsync("Error", "Rank not high enough");
+
+            }
+
+
+        }
+
+        private void BtnHome_Click(object sender, RoutedEventArgs e)
+        {
+            TBikeDAL MyDAL = new TBikeDAL();
+
+        }
+
+        private void LBRent_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (LBRent.SelectedIndex != -1)
+            {
+                string customer = LBRent.SelectedValue.ToString().Trim();
+
+
+                if (customer != "")
+                {
+                    rental rent = new rental();
+                    rent.PopulateDataFromLogin(username);
+                    rent.PopulateID(customer, "A");
+                    rent.ShowDialog();
+                }
+            }
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            //popup button to refresh the listbox
+            TBikeDAL MyDAL = new TBikeDAL();
+            MyDAL.bindListBoxCustomer(LBRent);
+        }
+
+        //===============================================================================================
+        //===============================================================================================
+        //===============================================================================================
+        //===============================================================================================
+        //===============================================================================================
+        //===============================================================================================
+        //===============================================================================================
+
+        #region homepage
+        void timer_Tick(object sender, EventArgs e)
+        {
+
+
+            TBikeDAL MyDAl = new TBikeDAL();
+            DataTable ResultTable = MyDAl.ShowAllBikeTable();
+
+            ctr++;
+            if (ctr > ResultTable.Rows.Count)
+            {
+                ctr = 1;
+            }
+            PlaySlideShow(ctr);
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ctr = 1;
+            PlaySlideShow(ctr);
+        }
+        private void PlaySlideShow(int ctr)
+        {
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            string filename = ((ctr < 10) ? "Image/plane0" + ctr + ".jpg" : "Image/plane" + ctr + ".jpg");
+            image.UriSource = new Uri(filename, UriKind.Relative);
+            image.EndInit();
+            myImage.Source = image;
+            myImage.Stretch = Stretch.Uniform;
+            progressBar1.Value = ctr;
+        }
+        private void btnFirst_Click(object sender, RoutedEventArgs e)
+        {
+            ctr = 1;
+            PlaySlideShow(ctr);
+        }
+
+        private void btnPrevious_Click(object sender, RoutedEventArgs e)
+        {
+            TBikeDAL MyDAl = new TBikeDAL();
+            DataTable ResultTable = MyDAl.ShowAllBikeTable();
+
+            ctr--;
+            if (ctr < 1)
+            {
+                ctr = ResultTable.Rows.Count;
+            }
+            PlaySlideShow(ctr);
+        }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+            TBikeDAL MyDAl = new TBikeDAL();
+            DataTable ResultTable = MyDAl.ShowAllBikeTable();
+
+            Max = ResultTable.Rows.Count;
+
+            ctr++;
+            if (ctr > ResultTable.Rows.Count)
+            {
+                ctr = 1;
+            }
+            PlaySlideShow(ctr);
+        }
+
+        private void btnLast_Click(object sender, RoutedEventArgs e)
+        {
+            TBikeDAL MyDAl = new TBikeDAL();
+            DataTable ResultTable = MyDAl.ShowAllBikeTable();
+
+            
+            ctr = ResultTable.Rows.Count;
+            PlaySlideShow(ctr);
+        }
+        private void chkAutoPlay_Click(object sender, RoutedEventArgs e)
+        {
+            timer.IsEnabled = chkAutoPlay.IsChecked.Value;
+            btnFirst.Visibility = (btnFirst.IsVisible == true) ? Visibility.Hidden : Visibility.Visible;
+            btnPrevious.Visibility = (btnPrevious.IsVisible == true) ? Visibility.Hidden : Visibility.Visible;
+            btnNext.Visibility = (btnNext.IsVisible == true) ? Visibility.Hidden : Visibility.Visible;
+            btnLast.Visibility = (btnLast.IsVisible == true) ? Visibility.Hidden : Visibility.Visible;
+        } 
+
+        
     }
 }
+#endregion

@@ -45,25 +45,13 @@
                  MinWidth="200" Controls:TextBoxHelper.IsSpellCheckContextMenuEnabled="True" Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:TextBoxHelper.Watermark="Remarks..." Controls:TextBoxHelper.WatermarkAlignment="Center" Controls:TextBoxHelper.WatermarkTrimming="CharacterEllipsis" Width="506"/>
         <Button Content="Book" HorizontalAlignment="Right" Margin="0,198,79,285" VerticalAlignment="Top" Width="123" Height="25" Click="Button_Click_2" FontSize="10"/>
 
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="68,0,0,0" Width="302">
+        <StackPanel  Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="68,0,0,0" Width="302">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Welcome, " VerticalAlignment="Bottom" Foreground="White" Margin="0,0,0,17" FontWeight="Bold"/>
             <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="80,-33,19,18.667"/>
             <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="178,-35,0,20"/>
         </StackPanel>
 
-        <Button Content="" x:Name="button" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="38" Height="38" Click="button_Click_1" RenderTransformOrigin="0.786,-0.043" BorderBrush="{x:Null}">
-            <Button.Background>
-                <ImageBrush ImageSource="/T-Bike;component/Image/bck.png"/>
-            </Button.Background>
-            <Button.ToolTip>
-                <ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold">Back to Renting Menu</TextBlock>
-
-                    </StackPanel>
-                </ToolTip>
-            </Button.ToolTip>
-        </Button>
+       
 
         <Button Content="Search" HorizontalAlignment="Right" Margin="0,0,79,41" VerticalAlignment="Bottom" Width="82" Height="24" Click="Button_Click"/>
 

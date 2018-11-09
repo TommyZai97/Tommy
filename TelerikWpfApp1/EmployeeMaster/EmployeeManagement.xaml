@@ -31,17 +31,13 @@
                 <DataGridTextColumn Header="Last Updated At" Binding="{Binding LastUpdatedAt}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="" x:Name="button" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="38" Height="38" Click="button_Click_1">
-            <Button.Background>
-                <ImageBrush ImageSource="/T-Bike;component/Image/bck.png"/>
-            </Button.Background>
-        </Button>
+    
         <Button Content="View" FontSize="12px" HorizontalAlignment="Left" Margin="22,29,0,0" VerticalAlignment="Top" Width="109" Height="34" Click="Button_Click" FontFamily="Calibri" FontWeight="Normal"/>
         <Button Name="BTNnew" FontSize="12px" Content="New Users" HorizontalAlignment="Left" Margin="22,108,0,0" VerticalAlignment="Top" Width="109" Height="34" Click="Add_Click" FontFamily="Calibri" FontWeight="Normal"/>
 
         <Button x:Name="BTNSetRank" FontSize="12px" Content="User Ranks" HorizontalAlignment="Left" Margin="22,186,0,0" VerticalAlignment="Top" Width="109" Height="34" Click="BTNSetRank_Click" FontFamily="Calibri" FontWeight="Normal"/>
         <Button Name="BTNPromote" Visibility="Hidden" Content="Modify/Promotion" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="143" RenderTransformOrigin="1.009,0.562" Click="BTNPromote_Click"/>
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="94,0,0,0" Width="302">
+        <StackPanel  Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="94,0,0,0" Width="302">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Welcome, " VerticalAlignment="Bottom" Foreground="White" Margin="0,0,0,17" FontWeight="Bold"/>
             <TextBlock  Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="80,-33,19,18.667"/>
             <TextBlock  Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="178,-35,0,20"/>

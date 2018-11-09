@@ -22,21 +22,16 @@
         </DockPanel>
         <TextBox x:Name="TBCustomer" HorizontalAlignment="Left" Height="23" Margin="29,185,0,208" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="158" Controls:TextBoxHelper.Watermark="New Customer..."/>
         <ComboBox x:Name="CBBicycle" HorizontalAlignment="Left" Margin="29,224,0,169" VerticalAlignment="Top" Width="158" Height="23"  Controls:TextBoxHelper.Watermark="Bicycle" RenderTransformOrigin="0.539,-0.561"/>
-        <Button x:Name="BTNNext" Content="Next" HorizontalAlignment="Left" Margin="29,310,0,78" VerticalAlignment="Bottom" Width="110" FontSize="14" FontWeight="Bold" FontFamily="Calibri" Click="Button_Click"/>
+        <Button x:Name="BTNNext" Content="Next" HorizontalAlignment="Left" Margin="30,0,0,26" VerticalAlignment="Bottom" Width="110" FontSize="14" FontWeight="Bold" FontFamily="Calibri" Click="Button_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="29,20,0,0" TextWrapping="Wrap" Text="Select Customer if there is any booking" VerticalAlignment="Top" Foreground="White" FontStyle="Italic" TextDecorations="Underline"/>
         <TextBlock x:Name="LBNewTitle" HorizontalAlignment="Left" Margin="29,149,0,246" TextWrapping="Wrap" Text="New Customer" VerticalAlignment="Top" Foreground="White" TextDecorations="Underline" FontWeight="Bold" FontSize="18"/>
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="94,0,0,0" Width="302">
+        <StackPanel  Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="94,0,0,0" Width="302">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Welcome, " VerticalAlignment="Bottom" Foreground="White" Margin="0,0,0,17" FontWeight="Bold"/>
             <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="80,-33,19,18.667"/>
             <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="178,-35,0,20"/>
         </StackPanel>
 
-        <Button Content="" x:Name="button" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="38" Height="38" Click="button_Click_1" RenderTransformOrigin="0.786,-0.043" BorderBrush="{x:Null}">
-            <Button.Background>
-                <ImageBrush ImageSource="/T-Bike;component/Image/bck.png"/>
-            </Button.Background>
-
-        </Button>
+       
         <Button x:Name="BTNRent" Content="Rent" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Width="89" Margin="0,0,29.333,24.667" Height="33" FontSize="12" Click="BTNRent_Click"/>
 
         <StackPanel Name="stack1" Visibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="369">

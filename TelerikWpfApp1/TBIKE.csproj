@@ -217,9 +217,6 @@
     <Compile Include="BookingMaster\rental.xaml.cs">
       <DependentUpon>rental.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BookingMaster\RentalProcessing.xaml.cs">
-      <DependentUpon>RentalProcessing.xaml</DependentUpon>
-    </Compile>
     <Compile Include="BookingMaster\Return.xaml.cs">
       <DependentUpon>Return.xaml</DependentUpon>
     </Compile>
@@ -288,10 +285,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BookingMaster\rental.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="BookingMaster\RentalProcessing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -410,6 +403,13 @@
     <Resource Include="Image\info.png" />
     <Resource Include="Image\warning.png" />
     <Resource Include="Image\error.png" />
+    <Resource Include="Image\rank128.png" />
+    <Resource Include="Image\plane01.jpg" />
+    <Resource Include="Image\plane02.jpg" />
+    <Resource Include="Image\plane03.jpg" />
+    <Resource Include="Image\plane04.jpg" />
+    <Resource Include="Image\plane05.jpg" />
+    <Resource Include="Image\plane06.jpg" />
     <Content Include="Scripts\Chart.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
