@@ -49,13 +49,7 @@ namespace TBike
 
         }
 
-        private void button_Click_1(object sender, RoutedEventArgs e)
-        {
-            RentalProcessing rent = new RentalProcessing();
-            rent.PopulateDataFromLogin(username);
-            rent.Show();
-            this.Close();
-        }
+     
 
    
         private void Button_Click_2(object sender, RoutedEventArgs e)

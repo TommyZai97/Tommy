@@ -344,7 +344,6 @@ C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\LoginUser\Login
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\MainWindow.g.cs
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\LoginUser\RegisterPassword.g.cs
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\rental.g.cs
-C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\RentalProcessing.g.cs
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\Return.g.cs
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\MessageBox\ConfirmWindow.g.cs
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\MessageBox\PopWindow.g.cs
@@ -366,7 +365,6 @@ C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\InventoryMaster
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\LoginUser\LoginMenu.baml
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\LoginUser\RegisterPassword.baml
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\rental.baml
-C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\RentalProcessing.baml
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\Return.baml
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\MessageBox\ConfirmWindow.baml
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\MessageBox\PopWindow.baml

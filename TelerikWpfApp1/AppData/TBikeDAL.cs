@@ -385,6 +385,19 @@ namespace TBike
             return ResultDataTable;
 
         }
+        
+        public ListBox bindListBoxCustomer(ListBox ListCustomers)
+        {
+            SqlConnection conn = new SqlConnection(constring);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT Customer From BikeBookingMaster WHERE BookingStatus='A'", conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "BikeBookingMaster");
+            ListCustomers.ItemsSource = ds.Tables[0].DefaultView;
+            ListCustomers.DisplayMemberPath = ds.Tables[0].Columns["Customer"].ToString();
+            ListCustomers.SelectedValuePath = ds.Tables[0].Columns["Customer"].ToString();
+
+            return ListCustomers;
+        }
 
         public ListBox bindListBox(ListBox ListBooking)
         {
