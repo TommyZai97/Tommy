@@ -205,7 +205,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>F+mzLpcfQXXiPfEeCq/k9iB3ZkqS2ywjxRMSNEIS2b4=</dsig:DigestValue>
+        <dsig:DigestValue>UA1T8WY1N00uPLLm5ZVECATEmtTxhBRdICZjyCnuTKo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -662,13 +662,13 @@
       <dsig:DigestValue>uPRnQeVVJoy+lgt0JKcKnaSBhlbz0HinFefbWe9R+P8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="T-Bike.exe.config" size="1687">
+  <file name="T-Bike.exe.config" size="1697">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>J6P7hMl7TRAklzWJmnajagPn+d4elk4LQgTYgoJhzZk=</dsig:DigestValue>
+      <dsig:DigestValue>h8zAL1Yl0W5n0ArG32G4DX5T5RZBicEy7JK0kxOBcdw=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
