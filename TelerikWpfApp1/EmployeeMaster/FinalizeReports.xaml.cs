@@ -39,8 +39,16 @@ namespace TBike.EmployeeMaster
 
         private void BTNsearch_Click(object sender, RoutedEventArgs e)
         {
-            initializeWorker();
-           
+            
+            if (CBBike.SelectedIndex == -1)
+            {
+                PopWindow pop = new PopWindow(ImageType.Error, "Error", "Please Choose a mode", "OK");
+                pop.ShowDialog();
+
+            }
+            else{
+                initializeWorker();
+            }
         }
 
         public void SearchModule()
@@ -96,7 +104,7 @@ namespace TBike.EmployeeMaster
             Column7.Header = "";
             Column8.Header = "";
             Column9.Header = "";
-   
+            Column10.Header = "";
 
             TBIkeUtility.TranslateRecordStatusDescription(new List<string> { "Status" }, ref ResultTable);
             dataGrid1.ItemsSource = ResultTable.DefaultView;
@@ -123,6 +131,7 @@ namespace TBike.EmployeeMaster
             Column7.Header = "";
             Column8.Header = "";
             Column9.Header = "";
+            Column10.Header = "";
             TBIkeUtility.TranslateRecordStatusDescription(new List<string> { "SnackStatus" }, ref ResultTable);
             dataGrid1.ItemsSource = ResultTable.DefaultView;
             dataGrid1.IsReadOnly = true;
@@ -149,6 +158,7 @@ namespace TBike.EmployeeMaster
             Column7.Header = "";
             Column8.Header = "";
             Column9.Header = "";
+            Column10.Header = "";
             TBIkeUtility.TranslateRecordStatusDescription(new List<string> { "BicycleStatus" }, ref ResultTable);
 
 
@@ -169,20 +179,22 @@ namespace TBike.EmployeeMaster
             Column1.Binding = new Binding("BookingID");
             Column2.Header = "Bicycle";
             Column2.Binding = new Binding("BicycleName");
-            Column3.Header = "Booking Date";
-            Column3.Binding = new Binding("BookingDate");
-            Column4.Header = "Booking Status";
-            Column4.Binding = new Binding("BookingStatusInFull");
-            Column5.Header = "Booking Start-Time";
-            Column5.Binding = new Binding("StartTime");
-            Column6.Header = "Booking End-Time";
-            Column6.Binding = new Binding("EndTime");
-            Column7.Header = "Deposit";
-            Column7.Binding = new Binding("BookingDeposit");
-            Column8.Header = "Customer Name";
-            Column8.Binding = new Binding("Customer");
-            Column9.Header = "Total Price";
-            Column9.Binding = new Binding("TotalPrice");
+            Column3.Header = "Bicycle Type";
+            Column3.Binding = new Binding("BicycleType");
+            Column4.Header = "Booking Date";
+            Column4.Binding = new Binding("BookingDate");
+            Column5.Header = "Booking Status";
+            Column5.Binding = new Binding("BookingStatusInFull");
+            Column6.Header = "Booking Start-Time";
+            Column6.Binding = new Binding("StartTime");
+            Column7.Header = "Booking End-Time";
+            Column7.Binding = new Binding("EndTime");
+            Column8.Header = "Deposit";
+            Column8.Binding = new Binding("BookingDeposit");
+            Column9.Header = "Customer Name";
+            Column9.Binding = new Binding("Customer");
+            Column10.Header = "Total Price";
+            Column10.Binding = new Binding("TotalPrice");
             TBIkeUtility.TranslateRecordStatusDescription(new List<string> { "BookingStatus" }, ref ResultTable);
 
 
@@ -219,6 +231,7 @@ namespace TBike.EmployeeMaster
             Column8.Header = "Last Login-Time";
             Column8.Binding = new Binding("LastLoginTime");  
             Column9.Header = "";
+            Column10.Header = "";
             dataGrid1.ItemsSource = ResultTable.DefaultView;
             dataGrid1.AutoGenerateColumns = false;
         }

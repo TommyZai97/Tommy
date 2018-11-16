@@ -402,11 +402,11 @@ namespace TBike
         public ListBox bindListBox(ListBox ListBooking)
         {
             SqlConnection conn = new SqlConnection(constring);
-            SqlDataAdapter da = new SqlDataAdapter("SELECT BookingID From BikeBookingMaster WHERE BookingStatus='S'", conn);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT BookingID,BicycleType From BikeBookingMaster WHERE BookingStatus='S'", conn);
             DataSet ds = new DataSet();
             da.Fill(ds, "BikeBookingMaster");
             ListBooking.ItemsSource = ds.Tables[0].DefaultView;
-            ListBooking.DisplayMemberPath = ds.Tables[0].Columns["BookingID"].ToString();
+            ListBooking.DisplayMemberPath = ds.Tables[0].Columns["BicycleType"].ToString();
             ListBooking.SelectedValuePath = ds.Tables[0].Columns["BookingID"].ToString();
 
             return ListBooking;
@@ -422,6 +422,7 @@ namespace TBike
             DataTable ResultDataTable = new DataTable("ResultDataTable");
 
             MyCmd.Parameters.AddWithValue("BookingID", BookingID);
+            
 
             try
             {
@@ -439,6 +440,68 @@ namespace TBike
                 conn.Dispose();
                 MyCmd.Dispose();
 
+            }
+            return ResultDataTable;
+        }
+
+        public DataTable SelectBookingByMonthBicycle(string BicycleID)
+        {
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelBookingByMonthBicycle", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+           
+            MyCmd.Parameters.AddWithValue("@month", DateTime.Now.Month);
+            MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
+            try
+            {
+                MyCon.Open();
+
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelectBookingByMonthBicycle : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+        }
+
+        public DataTable SelectBookingByMonthType(string BicycleType)
+        {
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelBookingByMonthType", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+
+            MyCmd.Parameters.AddWithValue("@month", DateTime.Now.Month);
+            MyCmd.Parameters.AddWithValue("@BicycleType", BicycleType);
+            try
+            {
+                MyCon.Open();
+
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelectBookingByMonthType : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
             }
             return ResultDataTable;
         }
@@ -1098,6 +1161,19 @@ namespace TBike
             return ResultDataTable;
         }
 
+        public ComboBox BindSnackCombo(ComboBox ComboBox)
+        {
+            SqlConnection conn = new SqlConnection(constring);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT SnackID,SnackName From SnackTableMaster Where SnackStatus = 'A'", conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "SnackTableMaster");
+            ComboBox.ItemsSource = ds.Tables[0].DefaultView;
+            ComboBox.DisplayMemberPath = ds.Tables[0].Columns["SnackName"].ToString();
+            ComboBox.SelectedValuePath = ds.Tables[0].Columns["SnackID"].ToString();
+
+            return ComboBox;
+        }
+
         public DataTable SelectSnackByID(string SnackID)
         {
             SqlConnection MyCon = new SqlConnection(constring);
@@ -1228,6 +1304,96 @@ namespace TBike
                 MyCmd.Dispose();
             }
             return SnackID;
+        }
+
+        public string AddSnackSales(string SnackID, int Quantity, string Customer, string CreatedBy,string BookingID)
+        {
+
+
+            SqlConnection conn = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("AddSnackSalesMaster", conn);
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+            try
+            {
+                if (BookingID == "")
+                {
+                    MyCmd.Parameters.AddWithValue("@SnackID", SnackID);
+
+                    MyCmd.Parameters.AddWithValue("@Quantity", Quantity);
+                    MyCmd.Parameters.AddWithValue("@Customer", Customer);
+                    MyCmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                    MyCmd.ExecuteNonQuery();
+                    MyCmd.Parameters.Clear();
+
+                    MyCmd.CommandText = "UpdSnackQuantity";
+                    MyCmd.Parameters.AddWithValue("@Quantity", Quantity);
+                    MyCmd.Parameters.AddWithValue("@SnackID", SnackID);
+                    MyCmd.ExecuteNonQuery();
+                    MyCmd.Parameters.Clear();
+                }
+                else
+                {
+                    MyCmd.CommandText = "AddExistBookSnackSalesMaster";
+                    MyCmd.Parameters.AddWithValue("@SnackID", SnackID);
+                    MyCmd.Parameters.AddWithValue("@BookingID", BookingID);
+                    MyCmd.Parameters.AddWithValue("@Quantity", Quantity);
+                    MyCmd.Parameters.AddWithValue("@Customer", Customer);
+                    MyCmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                    MyCmd.ExecuteNonQuery();
+                    MyCmd.Parameters.Clear();
+
+                    MyCmd.CommandText = "UpdSnackQuantity";
+                    MyCmd.Parameters.AddWithValue("@Quantity", Quantity);
+                    MyCmd.Parameters.AddWithValue("@SnackID", SnackID);
+                    MyCmd.ExecuteNonQuery();
+                    MyCmd.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("DB Operation Error At UpdateSnackTable : " + e.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+                MyCmd.Dispose();
+            }
+            return SnackID;
+        }
+
+        public DataTable SelectSnackSalesByBookIDCustomer(string BookingID, string Customer) {
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelSnackSalesByBookIDCustomer ", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            MyCmd.Parameters.AddWithValue("@BookingID", BookingID);
+            MyCmd.Parameters.AddWithValue("@Customer", Customer);
+          
+
+            //we will use SQLAdaptor due to huge amount of column
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+            try
+            {
+                MyCon.Open();
+                //string SQLStatement = (string)MyCmd.ExecuteScalar();
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelectSnackSalesByBookIDCustomer : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
         }
         #endregion
 

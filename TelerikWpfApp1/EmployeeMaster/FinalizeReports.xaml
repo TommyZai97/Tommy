@@ -22,6 +22,7 @@
                 <DataGridTextColumn x:Name="Column7"  />
                 <DataGridTextColumn x:Name="Column8"  />
                 <DataGridTextColumn x:Name="Column9"  />
+                <DataGridTextColumn x:Name="Column10" />
             </DataGrid.Columns>
         </DataGrid>
 

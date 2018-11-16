@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,6 +35,8 @@ namespace TBike
             InitializeComponent();
             BindComboBoxBicycle(CBBicycle);
             BindComboBox(CBBike);
+            TBikeDAL MyDAL = new TBikeDAL();
+            MyDAL.BindSnackCombo(CBSnack);
         }
 
         private void BTNRent_Click(object sender, RoutedEventArgs e)
@@ -41,6 +44,8 @@ namespace TBike
             TBikeDAL MyDAL = new TBikeDAL();
             try
             {
+               
+               
                 TimeSpan duration = TPEnd.SelectedTime.Value - TPStart.SelectedTime.Value;
                 if (CBBike.SelectedIndex != -1)
                 {
@@ -49,6 +54,7 @@ namespace TBike
                     string BikeName = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
                     string customer = Convert.ToString(ResultTable.Rows[0]["CurrentRenter"]);
                     DateTime bookTime = Convert.ToDateTime(ResultTable.Rows[0]["BookingDate"]);
+                    string BookingID = Convert.ToString(ResultTable.Rows[0]["BookingID"]).Trim();
                     //double Deposit = Convert.ToDouble(ResultTable.Rows[0]["BookingDeposit"]);
                     double Price = Convert.ToDouble(ResultTable.Rows[0]["Price"]);
 
@@ -94,6 +100,11 @@ namespace TBike
                                     //MessageBox.Show("Rented For " + LBCustomer.Text + " Duration is " + Convert.ToString(duration.Hours).Trim() + " Hours","Question",MessageBoxButton.YesNo,MessageBoxImage.Information);
                                     if (confirm.Confirmed)
                                     {
+                                        if (SnackPanel.Visibility == Visibility.Visible)
+                                        {
+                                            MyDAL.AddSnackSales(CBSnack.SelectedValue.ToString().Trim(), Convert.ToInt32(TBQuantity.Text), LBCustomer.Text.Trim(),TLUsername.Text.Trim(),BookingID);
+
+                                        }
 
                                         MyDAL.UpdateBikeStatus(Bike, LBCustomer.Text.Trim(), "R", "", null, null, TLUsername.Text);
                                         MyDAL.UpdateBookingDate(Convert.ToDateTime(LBBookingDate.Text), Bike, LBCustomer.Text.Trim(), TotalPrice, "R", TLUsername.Text.Trim(), TPStart.SelectedTime, TPEnd.SelectedTime, TBRemarks.Text);
@@ -126,7 +137,7 @@ namespace TBike
                 {
                     TimeSpan CheckTime = new TimeSpan(08, 00, 00);
                     TimeSpan endTime = new TimeSpan(20, 00, 00);
-
+                    
 
                     if (TPEnd.SelectedTime < CheckTime || TPEnd.SelectedTime > endTime)
                     {
@@ -166,8 +177,13 @@ namespace TBike
                                 //MessageBox.Show("Rented For " + LBCustomer.Text + " Duration is " + Convert.ToString(duration.Hours).Trim() + " Hours","Question",MessageBoxButton.YesNo,MessageBoxImage.Information);
                                 if (con.Confirmed)
                                 {
+                                   
 
                                     MyDAL.AddBookingTime(DateTime.Now.Date, Bike, "R", LBCustomer.Text.Trim(), TotalPrice, TLUsername.Text.Trim(), TPStart.SelectedTime, TPEnd.SelectedTime, TBRemarks.Text);
+                                    if (SnackPanel.Visibility == Visibility.Visible)
+                                    {
+                                        MyDAL.AddSnackSales(CBSnack.SelectedValue.ToString().Trim(), Convert.ToInt32(TBQuantity.Text), LBCustomer.Text.Trim(), TLUsername.Text.Trim(),"");
+                                    }
                                     PopWindow pop = new PopWindow(ImageType.Information,"Complete", "Rented Out by " + TLUsername.Text,"Okay");
                                     pop.ShowDialog();
                                     TBCustomer.Text = "";
@@ -332,6 +348,22 @@ namespace TBike
             }
         }
 
+        private void TBQuantity_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
 
+        private void CheckSnacks_Checked(object sender, RoutedEventArgs e)
+        {
+            if (CheckSnacks.IsChecked ?? true)
+            {
+                SnackPanel.Visibility = Visibility.Visible;
+            }
+            else 
+            {
+                SnackPanel.Visibility = Visibility.Hidden;
+            }
+        }
     }
 }
