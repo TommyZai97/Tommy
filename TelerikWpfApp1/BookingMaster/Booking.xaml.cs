@@ -155,9 +155,9 @@ namespace TBike
                     insertCounter = 0;
                     pop.ShowDialog();
                 }
-             
 
 
+              
             }
             catch (Exception ex)
             {
@@ -170,6 +170,8 @@ namespace TBike
                 A = 0;
                 count = 0;
                 insertCounter = 0;
+                MainWindow main = new MainWindow();
+                main.Notification();
             }
 
         }

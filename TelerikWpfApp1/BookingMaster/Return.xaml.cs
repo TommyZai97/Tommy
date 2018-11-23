@@ -207,14 +207,26 @@ namespace TBike
 
         private void CBBike_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TBikeDAL MyDAL = new TBikeDAL();
-            DataTable ResultTable = MyDAL.ShowBookingTableByBike(CBBike.SelectedValue.ToString().Trim(),"R");
-            TBIkeUtility.TranslateRecordStatusDescription(new List<string> { "BookingStatus" }, ref ResultTable);
-            LBCustomer.Text = Convert.ToString(ResultTable.Rows[0]["Customer"]);
-            Customer = LBCustomer.Text;
-            LBBookingDate.Text = Convert.ToString(ResultTable.Rows[0]["BookingDate"]);
-            LBBicycle.Text = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
-            LBRemarks.Text = Convert.ToString(ResultTable.Rows[0]["Remark"]);
+            if (CBBike.Items.Count == 0)
+            {
+                MainWindow main = new MainWindow();
+                main.Framework.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                if (CBBike.SelectedIndex == -1)
+                {
+                    CBBike.SelectedIndex = 0;
+                }
+                TBikeDAL MyDAL = new TBikeDAL();
+                DataTable ResultTable = MyDAL.ShowBookingTableByBike(CBBike.SelectedValue.ToString().Trim(), "R");
+                TBIkeUtility.TranslateRecordStatusDescription(new List<string> { "BookingStatus" }, ref ResultTable);
+                LBCustomer.Text = Convert.ToString(ResultTable.Rows[0]["Customer"]);
+                Customer = LBCustomer.Text;
+                LBBookingDate.Text = Convert.ToString(ResultTable.Rows[0]["BookingDate"]);
+                LBBicycle.Text = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
+                LBRemarks.Text = Convert.ToString(ResultTable.Rows[0]["Remark"]);
+            }
         }
 
         private void BTNExpired_Click(object sender, RoutedEventArgs e)

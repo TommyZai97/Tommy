@@ -280,7 +280,6 @@ C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\bin\x64\Debug\Xceed.Wpf.Avalo
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\bin\x64\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\bin\x64\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\bin\x64\Debug\Xceed.Wpf.DataGrid.dll
-C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\bin\x64\Debug\Xceed.Wpf.Samples.SampleData.dll
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\bin\x64\Debug\Xceed.Wpf.Toolkit.dll
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\bin\x64\Debug\Telerik.Windows.Documents.dll
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\bin\x64\Debug\Telerik.Windows.Zip.dll
@@ -330,8 +329,6 @@ C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\TBIKE.csprojAss
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\MainWindow.baml
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\App.baml
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\Service.g.cs
-C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\EmployeeMaster\FinalizeReports.g.cs
-C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\EmployeeMaster\Reports.g.cs
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\InventoryMaster\InventoryModi.g.cs
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\Booking.g.cs
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\EmployeeMaster\CreateNewUser.g.cs
@@ -352,8 +349,6 @@ C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\T-Bike_Content.
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\T-Bike_MarkupCompile.cache
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\T-Bike_MarkupCompile.lref
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\Service.baml
-C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\EmployeeMaster\FinalizeReports.baml
-C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\EmployeeMaster\Reports.baml
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\InventoryMaster\InventoryModi.baml
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\Booking.baml
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\EmployeeMaster\CreateNewUser.baml
@@ -378,3 +373,11 @@ C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\T-Bike.applicat
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\TBIKE.csproj.CopyComplete
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\T-Bike.exe
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\T-Bike.pdb
+C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\Report\ReportCharts.g.cs
+C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\Report\ReportCharts.baml
+C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\MessageBox\TypeWindow.g.cs
+C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\MessageBox\TypeWindow.baml
+C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\Report\FinalizeReports.g.cs
+C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\Report\Reports.g.cs
+C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\Report\FinalizeReports.baml
+C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\Report\Reports.baml

@@ -18,9 +18,9 @@ using MahApps.Metro.Controls.Dialogs;
 using System.Threading.Tasks;
 using TBike.EmployeeMaster;
 using TBike.BookingMaster;
-using TBike;
+using TBike.Report;
 using System.Windows.Threading;
-
+using TBike.MessageBox;
 namespace TBike
 {
 
@@ -45,11 +45,14 @@ namespace TBike
             PopulateDataFromLogin("");
             CalculateDoneRentedTime();
             PopulateDataGrid();
+            Notification();
+        }
+
+        public void Notification()
+        {
             TBikeDAL MyDAL = new TBikeDAL();
             MyDAL.bindListBoxCustomer(LBRent);
-
-            button.Content = "Current Bookings" + " (" +LBRent.Items.Count.ToString() + ")";
-
+            button.Content = "Current Bookings" + " (" + LBRent.Items.Count.ToString() + ")";
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -110,6 +113,7 @@ namespace TBike
         }
         private void Store_Click(object sender, RoutedEventArgs e)
         {
+            Notification();
             dataGrid1.Visibility = Visibility.Collapsed;
             Framework.Visibility = Visibility.Visible;
             //button for store
@@ -125,6 +129,7 @@ namespace TBike
 
         private async void create_Click(object sender, RoutedEventArgs e)
         {
+            Notification();
             if (RankID == 1)
             {
                 var res = await this.ShowMessageAsync("Error", "You have no access to this current Service");
@@ -225,6 +230,7 @@ namespace TBike
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            Notification();
             //Search button
             dataGrid1.Visibility = Visibility.Collapsed;
             Framework.Visibility = Visibility.Visible;
@@ -236,17 +242,30 @@ namespace TBike
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
+            Notification();
             dataGrid1.Visibility = Visibility.Collapsed;
             Framework.Visibility = Visibility.Visible;
             //Report button
-            Reports ala = new Reports();
-            Framework.Content = ala.Content;
+            ConfirmWindow pop = new ConfirmWindow(AppData.ImageType.Question,"Choose", "Please select report type","Booking","Snacks");
+            pop.ShowDialog();  
+            if (pop.Confirmed)
+            {
+                ReportCharts ala = new ReportCharts();
+                ala.SortCategory("Bicycle");
+                Framework.Content = ala.Content;
+            }
+            else
+            {
+                ReportCharts ala = new ReportCharts();
+                ala.SortCategory("Snack");
+                Framework.Content = ala.Content;
+            }
         }
 
         private void Book_Click(object sender, RoutedEventArgs e)
         {
+            Notification();
             dataGrid1.Visibility = Visibility.Collapsed;
-           
             Framework.Visibility = Visibility.Visible;
             Booking book = new Booking();
             book.PopulateDataFromLogin(username);
@@ -255,6 +274,7 @@ namespace TBike
 
         private void Rent_Click(object sender, RoutedEventArgs e)
         {
+            Notification();
             dataGrid1.Visibility = Visibility.Collapsed;
             Framework.Visibility = Visibility.Visible;
             rental rent = new rental();
@@ -264,6 +284,7 @@ namespace TBike
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
+            Notification();
             dataGrid1.Visibility = Visibility.Collapsed;
             Framework.Visibility = Visibility.Visible;
             Return retun = new Return();
@@ -272,6 +293,7 @@ namespace TBike
         }
         private void Service_Click(object sender, RoutedEventArgs e)
         {
+            Notification();
             dataGrid1.Visibility = Visibility.Collapsed;
             Framework.Visibility = Visibility.Visible;
             Service service = new Service();
@@ -281,6 +303,7 @@ namespace TBike
 
         private void EmpModify_Click(object sender, RoutedEventArgs e)
         {
+            Notification();
             dataGrid1.Visibility = Visibility.Collapsed;
             //employee modification
             Framework.Visibility = Visibility.Hidden;
@@ -364,7 +387,7 @@ namespace TBike
 
         private async void BtnRank_Click(object sender, RoutedEventArgs e)
         {
-
+            Notification();
             dataGrid1.Visibility = Visibility.Collapsed;
 
             if (RankID >= 4)
@@ -388,6 +411,7 @@ namespace TBike
 
         private void BtnHome_Click(object sender, RoutedEventArgs e)
         {
+            Notification();
             TBikeDAL MyDAL = new TBikeDAL();
             dataGrid1.Visibility = Visibility.Collapsed;
             Framework.Visibility = Visibility.Hidden;

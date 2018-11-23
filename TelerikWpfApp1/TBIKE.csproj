@@ -177,10 +177,10 @@
     <Compile Include="BookingMaster\Service.xaml.cs">
       <DependentUpon>Service.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EmployeeMaster\FinalizeReports.xaml.cs">
+    <Compile Include="Report\FinalizeReports.xaml.cs">
       <DependentUpon>FinalizeReports.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EmployeeMaster\Reports.xaml.cs">
+    <Compile Include="Report\Reports.xaml.cs">
       <DependentUpon>Reports.xaml</DependentUpon>
     </Compile>
     <Compile Include="InventoryMaster\InventoryModi.xaml.cs">
@@ -221,15 +221,21 @@
       <DependentUpon>Return.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppData\TBIkeUtility.cs" />
+    <Compile Include="MessageBox\TypeWindow.xaml.cs">
+      <DependentUpon>TypeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Report\ReportCharts.xaml.cs">
+      <DependentUpon>ReportCharts.xaml</DependentUpon>
+    </Compile>
     <Page Include="BookingMaster\Service.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EmployeeMaster\FinalizeReports.xaml">
+    <Page Include="Report\FinalizeReports.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EmployeeMaster\Reports.xaml">
+    <Page Include="Report\Reports.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -292,11 +298,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MessageBox\TypeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MessageBox\ConfirmWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MessageBox\PopWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Report\ReportCharts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

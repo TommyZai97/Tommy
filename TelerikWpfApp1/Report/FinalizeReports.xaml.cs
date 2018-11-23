@@ -28,27 +28,157 @@ namespace TBike.EmployeeMaster
     {
         string username;
         int RankID;
+        string ItemStatus;
+        int ComboIndex;
         BackgroundWorker MyStartupBackgroundWorker;
         public FinalizeReports()
         {
             InitializeComponent();
             TBikeDAL MyDAL = new TBikeDAL();
-            MyDAL.BindAllBikeComboBox(CBBike);
+            MyDAL.BindAllBikeComboBox(TBBicycle);
+            MyDAL.BindAllBikeComboBox(TBBikeName);
+            MyDAL.BindAllBikeComboBox(TBBikeName2);
+         
 
         }
+        public void DetermineItemStatus()
+        {
+            #region Service
+            if (TBServiceStatus.Text == "Active")
+            {
+                ItemStatus = "A";
+            }
+            else if (TBServiceStatus.Text == "Expired")
+            {
+                ItemStatus = "E";
+            }
+            else if (TBServiceStatus.Text == "Not Returned")
+            {
+                ItemStatus = "N";
+            }
+            else if (TBServiceStatus.Text == "Succesful")
+            {
+                ItemStatus = "S";
+            }
+            else if (TBServiceStatus.Text == "Renting")
+            {
+                ItemStatus = "R";
+            }
+            else if (TBServiceStatus.Text == "Inactive")
+            {
+                ItemStatus = "I";
+            }
+            else if (TBServiceStatus.Text == "Maintenance")
+            {
+                ItemStatus = "M";
+            } 
 
+            #endregion
+
+            #region Snack
+
+            if (TBSnackStatus.Text == "Active")
+            {
+                ItemStatus = "A";
+                ComboIndex = 0;
+            }
+            else if (TBSnackStatus.Text == "InActive")
+            {
+                ItemStatus = "I";
+                ComboIndex = 1;
+            }
+            else if (TBSnackStatus.Text == "Out Of Stock")
+            {
+                ItemStatus = "O";
+                ComboIndex = 2;
+
+            }
+            #endregion
+
+            #region Booking
+            if (TBBookingStatus.Text == "Active")
+            {
+                ItemStatus = "A";
+            }
+            else if (TBBookingStatus.Text == "Expired")
+            {
+                ItemStatus = "E";
+            }
+            else if (TBBookingStatus.Text == "Not Returned")
+            {
+                ItemStatus = "N";
+            }
+            else if (TBBookingStatus.Text == "Succesful")
+            {
+                ItemStatus = "S";
+            }
+            else if (TBBookingStatus.Text == "Renting")
+            {
+                ItemStatus = "R";
+            }
+            else if (TBBookingStatus.Text == "Inactive")
+            {
+                ItemStatus = "I";
+            }
+            else if (TBBookingStatus.Text == "Maintenance")
+            {
+                ItemStatus = "M";
+            }
+            #endregion
+
+            #region Bicycle
+            if (TBBikeStatus.Text == "Active")
+            {
+                ItemStatus = "A";
+            }
+            else if (TBBikeStatus.Text == "Expired")
+            {
+                ItemStatus = "E";
+            }
+            else if (TBBikeStatus.Text == "Not Returned")
+            {
+                ItemStatus = "N";
+            }
+            else if (TBBikeStatus.Text == "Succesful")
+            {
+                ItemStatus = "S";
+            }
+            else if (TBBikeStatus.Text == "Renting")
+            {
+                ItemStatus = "R";
+            }
+            else if (TBBikeStatus.Text == "Inactive")
+            {
+                ItemStatus = "I";
+            }
+            else if (TBBikeStatus.Text == "Maintenance")
+            {
+                ItemStatus = "M";
+            }
+            #endregion
+
+
+        }
         private void BTNsearch_Click(object sender, RoutedEventArgs e)
         {
-            
-            if (CBBike.SelectedIndex == -1)
+            if (CBMode.SelectedValue.ToString().Trim() == "Employee")
             {
-                PopWindow pop = new PopWindow(ImageType.Error, "Error", "Please Choose a mode", "OK");
-                pop.ShowDialog();
-
+                if (RankID >= 3)
+                {
+                    initializeWorker();
+                }
+                else
+                {
+                    PopWindow pop = new PopWindow(ImageType.Error, "Rank too low", "Sorry You do not have access to this feature", "Ok");
+                    pop.ShowDialog();
+                }
             }
-            else{
+            else
+            {
                 initializeWorker();
             }
+                
+           
         }
 
         public void SearchModule()
@@ -87,7 +217,7 @@ namespace TBike.EmployeeMaster
         public void ServiceMode()
         {
             TBikeDAL MyDAL = new TBikeDAL();
-
+            DetermineItemStatus();
             DataTable ResultTable = MyDAL.SelAllServiceByDynamic(TBServiceId.Text, TBServiceStatus.Text, TBServiceRemark.Text, TBServiceStatus.Text);
             Column1.Header = "Service ID";
             Column1.Binding = new Binding("ServiceID");
@@ -114,7 +244,7 @@ namespace TBike.EmployeeMaster
         public void SnackMode()
         {
             TBikeDAL MyDAL = new TBikeDAL();
-
+            DetermineItemStatus();
             DataTable ResultTable = MyDAL.SelectAllSnackByDynamic(TBSnackID.Text, TBSnackName.Text, TBSnackStatus.Text, TBSnackType.Text);
             Column1.Header = "Snack ID";
             Column1.Binding = new Binding("SnackID");
@@ -141,7 +271,7 @@ namespace TBike.EmployeeMaster
         public void BicycleMode()
         {
             TBikeDAL MyDAL = new TBikeDAL();
-
+            DetermineItemStatus();
             DataTable ResultTable = MyDAL.SelectAllBicycleByDynamic(TBBicycleID.Text, TBBikeName2.Text, TBCurrentRenter.Text, TBBikeColor.Text,TBBikeStatus.Text, TBBikeType2.Text);
             Column1.Header = "Bicycle ID";
             Column1.Binding = new Binding("BicycleID");
@@ -171,8 +301,8 @@ namespace TBike.EmployeeMaster
         {
 
             TBikeDAL MyDAL = new TBikeDAL();
-
-            DataTable ResultTable = MyDAL.SelectAllBookingByDynamic(TBBookID.Text, TBBookName.Text, TBBikeName.Text, TBBookingStatus.Text, TBCustomer.Text, TBRemarks.Text, TBBikeType.Text);
+            DetermineItemStatus();
+            DataTable ResultTable = MyDAL.SelectAllBookingByDynamic(TBBookID.Text,TBBikeName.Text, TBBookingStatus.Text, TBCustomer.Text, TBRemarks.Text, TBBikeType.Text);
 
 
             Column1.Header = "Booking ID";
@@ -212,7 +342,7 @@ namespace TBike.EmployeeMaster
         {
       
             TBikeDAL MyDAL = new TBikeDAL();
-
+            DetermineItemStatus();
             DataTable ResultTable = MyDAL.SelectAllEmployeeByDynamic(TBID.Text, TBName.Text, TBRankDesc.Text, TBAddress.Text, TBCreatedBy.Text);
             Column1.Header = "Employee ID";
             Column1.Binding = new Binding("EmployeeID");
@@ -240,59 +370,7 @@ namespace TBike.EmployeeMaster
 
         }
 
-        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-            initializeWorker();
-            //mode selector
-            //if (CBMode.SelectedValue.ToString().Trim() == "Employee")
-            //{
-               
-            //    StackService.Visibility = Visibility.Hidden;
-            //    StackSnack.Visibility = Visibility.Hidden;
-            //    StackBike.Visibility = Visibility.Hidden;
-            //    StackBook.Visibility = Visibility.Hidden;
-            //    StackEmp.Visibility = Visibility.Visible;
-            //    EmployeeMode();
-
-            //}
-            //else if (CBMode.SelectedValue.ToString().Trim() == "Booking")
-            //{
-            //    StackService.Visibility = Visibility.Hidden;
-            //    StackSnack.Visibility = Visibility.Hidden;
-            //    StackBike.Visibility = Visibility.Hidden;
-            //    StackEmp.Visibility = Visibility.Hidden;
-            //    StackBook.Visibility = Visibility.Visible;
-            //    BookingMode();
-            //}
-            //else if (CBMode.SelectedValue.ToString().Trim() == "Service")
-            //{
-            //    StackSnack.Visibility = Visibility.Hidden;
-            //    StackBike.Visibility = Visibility.Hidden;
-            //    StackEmp.Visibility = Visibility.Hidden;
-            //    StackBook.Visibility = Visibility.Hidden;
-            //    StackService.Visibility = Visibility.Visible;
-            //    ServiceMode();
-            //}
-            //else if (CBMode.SelectedValue.ToString().Trim() == "Bicycle")
-            //{
-            //    StackService.Visibility = Visibility.Hidden;
-            //    StackSnack.Visibility = Visibility.Hidden;
-            //    StackEmp.Visibility = Visibility.Hidden;
-            //    StackBook.Visibility = Visibility.Hidden;
-            //    StackBike.Visibility = Visibility.Visible;
-            //    BicycleMode();
-            //}
-            //else if (CBMode.SelectedValue.ToString().Trim() == "Snacks")
-            //{
-            //    StackService.Visibility = Visibility.Hidden;
-            //    StackBook.Visibility = Visibility.Hidden;
-            //    StackEmp.Visibility = Visibility.Hidden;
-            //    StackBike.Visibility = Visibility.Hidden;
-            //    StackSnack.Visibility = Visibility.Visible;
-            //    SnackMode();
-            //}
-        }
-
+      
         private void dataGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (CBMode.SelectedValue.ToString().Trim() == "Booking")

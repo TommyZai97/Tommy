@@ -63,7 +63,7 @@ namespace TBike
                 {
                     ItemStatus = "I";
                 }
-                else if (CBStatus.Text == "Maintainence")
+                else if (CBStatus.Text == "Maintenance")
                 {
                     ItemStatus = "M";
                 }

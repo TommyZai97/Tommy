@@ -12,7 +12,7 @@
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="TBike.Booking"
         mc:Ignorable="d"
         
-        Title="Booking" MinHeight="500" MinWidth="800"  WindowStartupLocation="CenterScreen" Icon="/T-Bike;component/Image/logo.jpg" Width="765.726">
+        Title="Create Booking Date" MinHeight="500" MinWidth="800"  WindowStartupLocation="CenterScreen" Icon="/T-Bike;component/Image/logo.jpg" Width="765.726">
 
 
     <Grid Margin="0,0,-8,0">

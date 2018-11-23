@@ -83,23 +83,35 @@ namespace TBike.BookingMaster
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TBikeDAL MyDAL = new TBikeDAL();
+            if (CBBicycle.Items.Count == 0)
+            {
+                MainWindow main = new MainWindow();
+                main.Framework.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                if (CBBicycle.SelectedIndex == -1)
+                {
+                    CBBicycle.SelectedIndex = 0;
+                }
+                TBikeDAL MyDAL = new TBikeDAL();
 
-            DataTable ResultTable = MyDAL.SelectBicycleByID(CBBicycle.SelectedValue.ToString().Trim());
-            DataTable ResultTable2 = MyDAL.SelectServiceByBike(CBBicycle.SelectedValue.ToString().Trim());
-            LBBicycleName.Text = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
-            LBStatus.Text = Convert.ToString(ResultTable.Rows[0]["BicycleStatus"]);
-            if (LBStatus.Text == "I")
-            {
-                LBStatus.Text = "Invalid";
+                DataTable ResultTable = MyDAL.SelectBicycleByID(CBBicycle.SelectedValue.ToString().Trim());
+                DataTable ResultTable2 = MyDAL.SelectServiceByBike(CBBicycle.SelectedValue.ToString().Trim());
+                LBBicycleName.Text = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
+                LBStatus.Text = Convert.ToString(ResultTable.Rows[0]["BicycleStatus"]);
+                if (LBStatus.Text == "I")
+                {
+                    LBStatus.Text = "Invalid";
+                }
+                if (LBStatus.Text == "M")
+                {
+                    LBStatus.Text = "Maintenance";
+                    PickStart.SelectedDate = Convert.ToDateTime(ResultTable2.Rows[0]["ServiceStart"]);
+                    PickEnd.SelectedDate = Convert.ToDateTime(ResultTable2.Rows[0]["ServiceEnd"]);
+                }
+                TBCondition.Text = Convert.ToString(ResultTable.Rows[0]["Condition"]);
             }
-            if (LBStatus.Text == "M")
-            {
-                LBStatus.Text = "Maintenance";
-                PickStart.SelectedDate = Convert.ToDateTime(ResultTable2.Rows[0]["ServiceStart"]);
-                PickEnd.SelectedDate = Convert.ToDateTime(ResultTable2.Rows[0]["ServiceEnd"]);
-            }
-            TBCondition.Text = Convert.ToString(ResultTable.Rows[0]["Condition"]);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -119,6 +131,7 @@ namespace TBike.BookingMaster
                         PopWindow pop = new PopWindow(ImageType.Information , "Done", "Bicycle Send for Service", "OK");
                         pop.ShowDialog();
                     }
+                    BindComboBoxBicycle(CBBicycle);
                 }
             }
             catch (Exception ex)
@@ -141,6 +154,7 @@ namespace TBike.BookingMaster
                     MyDAL.UpdateBikeStatus(BicycleID, "", "A", repairCondition.Trim(), PickStart.SelectedDate, PickEnd.SelectedDate, TLUsername.Text);
                     PopWindow pop = new PopWindow(ImageType.Information ,"Done","Bicycle Has been Returned", "OK");
                     pop.ShowDialog();
+                    BindComboBoxBicycle(CBBicycle);
                 }
             }
             catch (Exception ex)
