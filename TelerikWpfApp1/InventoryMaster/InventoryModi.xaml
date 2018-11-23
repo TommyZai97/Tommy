@@ -51,13 +51,13 @@
             </DataGrid.Columns>
         </DataGrid>
         <ComboBox Visibility="Hidden"  x:Name="CBStatus" HorizontalAlignment="Left" Margin="109,265,0,0" Text="" VerticalAlignment="Top" FontSize="14" Width="136" Background="White" Controls:TextBoxHelper.Watermark="Bicycle Status..." Controls:TextBoxHelper.AutoWatermark="True" Controls:TextBoxHelper.UseFloatingWatermark="True">
-            <ComboBoxItem Content="Active"/>
+            <ComboBoxItem Content="Active" />
             <ComboBoxItem Content="Expired"/>
             <ComboBoxItem Content="Not Returned"/>
             <ComboBoxItem Content="Succesful"/>
             <ComboBoxItem Content="Renting"/>
             <ComboBoxItem Content="Inactive"/>
-            <ComboBoxItem Content="Maintainence"/>
+            <ComboBoxItem Content="Maintenance"/>
         </ComboBox>
         <TextBlock Visibility="Hidden" x:Name="LBStatus" HorizontalAlignment="Left" Margin="46,273,0,0" TextWrapping="Wrap" Text="Status" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold" />
         <ComboBox Visibility="Hidden"  x:Name="CBSnackStatus" HorizontalAlignment="Left" Margin="109,265,0,0" Text="" VerticalAlignment="Top" FontSize="14" Width="136" Background="White" Controls:TextBoxHelper.Watermark="Snack Status..." Controls:TextBoxHelper.AutoWatermark="True" Controls:TextBoxHelper.UseFloatingWatermark="True">

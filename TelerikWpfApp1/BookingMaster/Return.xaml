@@ -7,7 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TelerikWpfApp1"
         mc:Ignorable="d"
-        Title="Return" Height="450" Width="800" WindowStartupLocation="CenterScreen" Icon="/T-Bike;component/Image/logo.jpg">
+        Title="Return Bike" Height="450" Width="800" WindowStartupLocation="CenterScreen" Icon="/T-Bike;component/Image/logo.jpg">
     <Grid>
 
 
@@ -15,7 +15,7 @@
             <ImageBrush ImageSource="/T-Bike;component/Image/background.jpg"/>
         </Grid.Background>
         <Rectangle Name="Rect1" Fill="#7FB6B6B6" HorizontalAlignment="Left" MinHeight="321" Margin="10,15,0,32" VerticalAlignment="Stretch" Width="311"/>
-        <ComboBox x:Name="CBBike" HorizontalAlignment="Left" Margin="51,42,0,0" VerticalAlignment="Top" Width="193" Controls:TextBoxHelper.Watermark="Bicycle..." SelectionChanged="CBBike_SelectionChanged" Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True"/>
+        <ComboBox x:Name="CBBike"  IsEditable="True" IsTextSearchEnabled="True" HorizontalAlignment="Left" Margin="51,42,0,0" VerticalAlignment="Top" Width="193" Controls:TextBoxHelper.Watermark="Bicycle..." SelectionChanged="CBBike_SelectionChanged" Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True"/>
 
         <StackPanel Visibility="Hidden" x:Name="ExpiredStack" HorizontalAlignment="Right" MinHeight="321" Margin="0,15,10,83" VerticalAlignment="Stretch" Width="324" Background="#7FB6B6B6" Grid.RowSpan="2">
             <ComboBox x:Name="CBCustomer" Margin="15,16,31,0" Height="25" Controls:TextBoxHelper.Watermark="Customer..." Background="White" SelectionChanged="CBCustomer_SelectionChanged"/>

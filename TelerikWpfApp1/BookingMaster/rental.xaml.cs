@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,6 +35,8 @@ namespace TBike
             InitializeComponent();
             BindComboBoxBicycle(CBBicycle);
             BindComboBox(CBBike);
+            TBikeDAL MyDAL = new TBikeDAL();
+            MyDAL.BindSnackCombo(CBSnack);
         }
 
         private void BTNRent_Click(object sender, RoutedEventArgs e)
@@ -41,6 +44,8 @@ namespace TBike
             TBikeDAL MyDAL = new TBikeDAL();
             try
             {
+               
+               
                 TimeSpan duration = TPEnd.SelectedTime.Value - TPStart.SelectedTime.Value;
                 if (CBBike.SelectedIndex != -1)
                 {
@@ -49,6 +54,7 @@ namespace TBike
                     string BikeName = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
                     string customer = Convert.ToString(ResultTable.Rows[0]["CurrentRenter"]);
                     DateTime bookTime = Convert.ToDateTime(ResultTable.Rows[0]["BookingDate"]);
+                    string BookingID = Convert.ToString(ResultTable.Rows[0]["BookingID"]).Trim();
                     //double Deposit = Convert.ToDouble(ResultTable.Rows[0]["BookingDeposit"]);
                     double Price = Convert.ToDouble(ResultTable.Rows[0]["Price"]);
 
@@ -88,13 +94,37 @@ namespace TBike
                                 {
                                     double TotalPrice = (((double)duration.TotalHours) * Price);
                                     TotalPrice = System.Math.Round(TotalPrice, 2);
+                                
 
                                     ConfirmWindow confirm = new ConfirmWindow(ImageType.Question, "Confirm?", "Bicycle " + BikeName + ", for Renter " + LBCustomer.Text + ", Duration is " + duration + " Hours, " + " Total Price: RM" + TotalPrice, "Yes, Rent Out", "No, Don't Rent");
                                     confirm.ShowDialog();
+                                    if (SnackPanel.Visibility == Visibility.Visible)
+                                    {
+                                        DataTable ResultTableSnack = MyDAL.SelectSnackBySnackID(CBSnack.SelectedValue.ToString().Trim());
+                                        int Sorter = Convert.ToInt32(ResultTableSnack.Rows[0]["Quantity"]);
+                                        double price = Convert.ToDouble(ResultTableSnack.Rows[0]["Price"]) * Convert.ToInt32(TBQuantity.Text);
+                                        string Snack = Convert.ToString(ResultTableSnack.Rows[0]["SnackName"]).Trim();
+                                        confirm = new ConfirmWindow(ImageType.Question, "Confirm?", "Snack: "+ Snack +" , Total Price: "+ price, "Confirm", "No, Don't Confirm");
+                                        confirm.ShowDialog();
+                                        if (Sorter >= Convert.ToInt32(TBQuantity.Text) && confirm.Confirmed)
+                                        {
+                                            MyDAL.AddSnackSales(CBSnack.SelectedValue.ToString().Trim(), Convert.ToInt32(TBQuantity.Text), LBCustomer.Text.Trim(), price, TLUsername.Text.Trim(), BookingID);
+                                        }
+                                        else if (confirm.Confirmed == false)
+                                        {
+                                            confirm.Confirmed = false;
+                                        }
+                                        else
+                                        {
+                                            PopWindow poper = new PopWindow(ImageType.Warning, "Can't Sale!!", "Item lack of stock, please Restock", "OK");
+                                            poper.ShowDialog();
+                                            confirm.Confirmed = false;
+                                        }
+                                    }
                                     //MessageBox.Show("Rented For " + LBCustomer.Text + " Duration is " + Convert.ToString(duration.Hours).Trim() + " Hours","Question",MessageBoxButton.YesNo,MessageBoxImage.Information);
                                     if (confirm.Confirmed)
                                     {
-
+                                     
                                         MyDAL.UpdateBikeStatus(Bike, LBCustomer.Text.Trim(), "R", "", null, null, TLUsername.Text);
                                         MyDAL.UpdateBookingDate(Convert.ToDateTime(LBBookingDate.Text), Bike, LBCustomer.Text.Trim(), TotalPrice, "R", TLUsername.Text.Trim(), TPStart.SelectedTime, TPEnd.SelectedTime, TBRemarks.Text);
                                         PopWindow pop = new PopWindow(ImageType.Information, "Success rent","Bicycle " + BikeName + ", for Renter " + LBCustomer.Text + ", Duration is " + duration + " Hours, " + " Total Price: RM" + TotalPrice +" ,has been Rented","OK");
@@ -111,10 +141,7 @@ namespace TBike
                                 }
                             }
                         }
-
                     }
-
-
                 }
                 // This is for adding new rent
                 else if (TPStart.SelectedTime < DateTime.Now.TimeOfDay)
@@ -126,7 +153,7 @@ namespace TBike
                 {
                     TimeSpan CheckTime = new TimeSpan(08, 00, 00);
                     TimeSpan endTime = new TimeSpan(20, 00, 00);
-
+                    
 
                     if (TPEnd.SelectedTime < CheckTime || TPEnd.SelectedTime > endTime)
                     {
@@ -154,20 +181,48 @@ namespace TBike
                             {
                                 PopWindow pop = new PopWindow(ImageType.Warning, "Sorry", "This Bike has been rented By, " + customer.Trim(),"Okay");
                                 pop.ShowDialog();
+                               
                             }
                             //if able to rent start process add
                             else
                             {
                                 double TotalPrice = (((double)duration.TotalHours) * Price);
                                 TotalPrice = System.Math.Round(TotalPrice, 2);
-
-                              ConfirmWindow con = new ConfirmWindow(ImageType.Question, "Confirm", "Bicycle " + BikeName + ", for Renter " + LBCustomer.Text + ", Duration is " + duration + " Hours, " + " Total Price: RM" + TotalPrice,"Yes, Rent","No, Don't");
+                            
+                                ConfirmWindow con = new ConfirmWindow(ImageType.Question, "Confirm", "Bicycle " + BikeName + ", for Renter " + LBCustomer.Text + ", Duration is " + duration + " Hours, " + " Total Price: RM" + TotalPrice,"Yes, Rent","No, Don't");
                                 con.ShowDialog();
+                                if (SnackPanel.Visibility == Visibility.Visible)
+                                {
+
+                                    DataTable ResultTableSnack = MyDAL.SelectSnackBySnackID(CBSnack.SelectedValue.ToString().Trim());
+                                    int Sorter = Convert.ToInt32(ResultTableSnack.Rows[0]["Quantity"]);
+                                    double price = Convert.ToDouble(ResultTableSnack.Rows[0]["Price"]) * Convert.ToInt32(TBQuantity.Text);
+                                    string Snack = Convert.ToString(ResultTableSnack.Rows[0]["SnackName"]).Trim();
+                                    con = new ConfirmWindow(ImageType.Question, "Confirm?", "Snack: " + Snack + " , Total Price: " + price, "Confirm", "No, Don't Confirm");
+                                    con.ShowDialog();
+                                    if (Sorter >= Convert.ToInt32(TBQuantity.Text) && con.Confirmed)
+                                    {
+                                        MyDAL.AddSnackSales(CBSnack.SelectedValue.ToString().Trim(), Convert.ToInt32(TBQuantity.Text), LBCustomer.Text.Trim(), price, TLUsername.Text.Trim(), "");
+                                    }
+                                    else if (con.Confirmed == false)
+                                    {
+                                       
+                                        con.Confirmed = false;
+                                    }
+                                    else
+                                    {
+                                        PopWindow poper = new PopWindow(ImageType.Warning, "Can't Sale!!", "Item lack of stock, please Restock", "OK");
+                                        poper.ShowDialog();
+                                        con.Confirmed = false;
+                                    }
+                                }
                                 //MessageBox.Show("Rented For " + LBCustomer.Text + " Duration is " + Convert.ToString(duration.Hours).Trim() + " Hours","Question",MessageBoxButton.YesNo,MessageBoxImage.Information);
                                 if (con.Confirmed)
                                 {
+                                   
 
                                     MyDAL.AddBookingTime(DateTime.Now.Date, Bike, "R", LBCustomer.Text.Trim(), TotalPrice, TLUsername.Text.Trim(), TPStart.SelectedTime, TPEnd.SelectedTime, TBRemarks.Text);
+                                    
                                     PopWindow pop = new PopWindow(ImageType.Information,"Complete", "Rented Out by " + TLUsername.Text,"Okay");
                                     pop.ShowDialog();
                                     TBCustomer.Text = "";
@@ -185,7 +240,7 @@ namespace TBike
                         }
                     }
                 }
-                
+                BindComboBox(CBBike);
             }
             catch (Exception ex)
             {
@@ -261,26 +316,39 @@ namespace TBike
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TBikeDAL MyDAL = new TBikeDAL();
-            LBCustomer.Text = CBBike.SelectedValue.ToString().Trim();
-            DataTable ResultTable = MyDAL.ShowBookingTableByCustomer(CBBike.SelectedValue.ToString().Trim(),"A");
-            LBBookingDate.Text = Convert.ToString(ResultTable.Rows[0]["BookingDate"]);
-            LBBike.Text = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
-            TBRemarks.Text = Convert.ToString(ResultTable.Rows[0]["Remark"]);
-            LBCustomer.Visibility = Visibility.Visible;
-            LBBike.Visibility = Visibility.Visible;
-            LBBookingDate.Visibility = Visibility.Visible;
-            rect.Visibility = Visibility.Visible;
-            TBRemarks.Visibility = Visibility.Visible;
-            LB1.Visibility = Visibility.Visible;
-            LB2.Visibility = Visibility.Visible;
-            LB3.Visibility = Visibility.Visible;
-            stack1.Visibility = Visibility.Visible;
-            
-            //New Rentals
-            TBCustomer.Visibility = Visibility.Hidden;
-            CBBicycle.Visibility = Visibility.Hidden;
-            BTNNext.Visibility = Visibility.Hidden;
-            LBNewTitle.Visibility = Visibility.Hidden;
+
+            if (CBBike.Items.Count == 0)
+            {
+                MainWindow main = new MainWindow();
+                main.Framework.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                if (CBBike.SelectedIndex == -1)
+                {
+                    CBBike.SelectedIndex = 0;
+                }
+                LBCustomer.Text = CBBike.SelectedValue.ToString().Trim();
+                DataTable ResultTable = MyDAL.ShowBookingTableByCustomer(CBBike.SelectedValue.ToString().Trim(), "A");
+                LBBookingDate.Text = Convert.ToString(ResultTable.Rows[0]["BookingDate"]);
+                LBBike.Text = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
+                TBRemarks.Text = Convert.ToString(ResultTable.Rows[0]["Remark"]);
+                LBCustomer.Visibility = Visibility.Visible;
+                LBBike.Visibility = Visibility.Visible;
+                LBBookingDate.Visibility = Visibility.Visible;
+                rect.Visibility = Visibility.Visible;
+                TBRemarks.Visibility = Visibility.Visible;
+                LB1.Visibility = Visibility.Visible;
+                LB2.Visibility = Visibility.Visible;
+                LB3.Visibility = Visibility.Visible;
+                stack1.Visibility = Visibility.Visible;
+
+                //New Rentals
+                TBCustomer.Visibility = Visibility.Hidden;
+                CBBicycle.Visibility = Visibility.Hidden;
+                BTNNext.Visibility = Visibility.Hidden;
+                LBNewTitle.Visibility = Visibility.Hidden;
+            }
         }
 
         public void BindComboBox(ComboBox CBBike)
@@ -332,6 +400,22 @@ namespace TBike
             }
         }
 
+        private void TBQuantity_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
 
+        private void CheckSnacks_Checked(object sender, RoutedEventArgs e)
+        {
+            if (CheckSnacks.IsChecked ?? true)
+            {
+                SnackPanel.Visibility = Visibility.Visible;
+            }
+            else 
+            {
+                SnackPanel.Visibility = Visibility.Hidden;
+            }
+        }
     }
 }

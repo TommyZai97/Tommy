@@ -1,0 +1,94 @@
+﻿<Controls:MetroWindow x:Class="TBike.Report.ReportCharts"
+        
+         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TBike.Report"
+        mc:Ignorable="d"
+        Title="Overall Report" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="210*"/>
+            <RowDefinition Height="211*"/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="BookPanel" Grid.Row="0" >
+            <DataGrid x:Name="BookGrd"  HorizontalAlignment="Stretch" VerticalAlignment="Top" IsReadOnly="True" SelectionChanged="detailGrd_Selected" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="dColumn1"  />
+                    <DataGridTextColumn x:Name="dColumn2"  />
+                    <DataGridTextColumn x:Name="dColumn3"  />
+                    <DataGridTextColumn x:Name="dColumn4"  />
+                    <DataGridTextColumn x:Name="dColumn5"  />
+                    <DataGridTextColumn x:Name="dColumn6"  />
+                    <DataGridTextColumn x:Name="dColumn7"  />
+                    <DataGridTextColumn x:Name="dColumn8"  />
+                    <DataGridTextColumn x:Name="dColumn9"  />
+                    <DataGridTextColumn x:Name="dColumn10" />
+                    <DataGridTextColumn x:Name="dColumn11" />
+                    <DataGridTextColumn x:Name="dColumn12" />
+                    <DataGridTextColumn x:Name="dColumn13" />
+                    <DataGridTextColumn x:Name="dColumn14" />
+                    <DataGridTextColumn x:Name="dColumn15" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button x:Name="BTNBookDetail" Content="Booking Details" Background="White" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10,0,0" Grid.Row="0" Click="BTNBookDetail_Click"/>
+        </StackPanel>
+        <StackPanel x:Name="BookDetailPanel" Grid.Row="1">
+            <TextBlock x:Name="TBBicycleID" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontStyle="Italic" Text="Total booking date of Bicycle"/>
+            <DataGrid x:Name="detailGrd" HorizontalAlignment="Stretch" VerticalAlignment="Top" IsReadOnly="True" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="Column1"  />
+                    <DataGridTextColumn x:Name="Column2"  />
+                    <DataGridTextColumn x:Name="Column3"  />
+                    <DataGridTextColumn x:Name="Column4"  />
+                    <DataGridTextColumn x:Name="Column5"  />
+                    <DataGridTextColumn x:Name="Column6"  />
+                    <DataGridTextColumn x:Name="Column7"  />
+                    <DataGridTextColumn x:Name="Column8"  />
+                    <DataGridTextColumn x:Name="Column9"  />
+                    <DataGridTextColumn x:Name="Column10" />
+                    <DataGridTextColumn x:Name="Column11" />
+                    <DataGridTextColumn x:Name="Column12" />
+                    <DataGridTextColumn x:Name="Column13" />
+                    <DataGridTextColumn x:Name="Column14" />
+                    <DataGridTextColumn x:Name="Column15" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel x:Name="SnackPanel" Grid.Row="0" Visibility="Hidden">
+            <DataGrid x:Name="SnackGrd"  HorizontalAlignment="Stretch" VerticalAlignment="Top" IsReadOnly="True" SelectionChanged="SnackGrd_SelectionChanged" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="SdColumn1"  />
+                    <DataGridTextColumn x:Name="SdColumn2"  />
+                    <DataGridTextColumn x:Name="SdColumn3"  />
+                    <DataGridTextColumn x:Name="SdColumn4"  />
+                    <DataGridTextColumn x:Name="SdColumn5"  />
+                    <DataGridTextColumn x:Name="SdColumn6"  />
+                    <DataGridTextColumn x:Name="SdColumn7"  />
+                    <DataGridTextColumn x:Name="SdColumn8"  />
+                    <DataGridTextColumn x:Name="SdColumn9"  />
+                    <DataGridTextColumn x:Name="SdColumn10"  />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel x:Name="SnackDetailPanel" Grid.Row="1" Visibility="Hidden">
+            <TextBlock x:Name="TBSnackID" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontStyle="Italic" Text="Total booking date of Bicycle"/>
+            <DataGrid x:Name="detailSnackGrd" HorizontalAlignment="Stretch" VerticalAlignment="Top" IsReadOnly="True" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="SColumn1"  />
+                    <DataGridTextColumn x:Name="SColumn2"  />
+                    <DataGridTextColumn x:Name="SColumn3"  />
+                    <DataGridTextColumn x:Name="SColumn4"  />
+                    <DataGridTextColumn x:Name="SColumn5"  />
+                    <DataGridTextColumn x:Name="SColumn6"  />
+                    <DataGridTextColumn x:Name="SColumn7"  />
+                    <DataGridTextColumn x:Name="SColumn8"  />
+                   
+                   
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Controls:MetroWindow>

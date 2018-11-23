@@ -7,7 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TBike.EmployeeMaster"
         mc:Ignorable="d"
-        Title="FinalizeReports" MinHeight="500" MinWidth="900" Icon="/T-Bike;component/Image/logo.jpg" d:DesignHeight="533.958" Width="822.864">
+        Title="Search Function" MinHeight="500" MinWidth="900" Icon="/T-Bike;component/Image/logo.jpg" d:DesignHeight="533.958" Width="822.864">
 
     <Grid Opacity="0.9" >
 
@@ -22,11 +22,12 @@
                 <DataGridTextColumn x:Name="Column7"  />
                 <DataGridTextColumn x:Name="Column8"  />
                 <DataGridTextColumn x:Name="Column9"  />
+                <DataGridTextColumn x:Name="Column10" />
             </DataGrid.Columns>
         </DataGrid>
 
         <Button Name="BTNsearch" IsDefault="True" Content="Search" HorizontalAlignment="Right" VerticalAlignment="Top" Width="100" Click="BTNsearch_Click" Margin="0,177,10,0" Height="33" FontFamily="Calibri" FontSize="14"/>
-        <ComboBox x:Name="CBMode"  SelectedValuePath="Content" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="10,10,0,0" Controls:TextBoxHelper.Watermark="Mode" SelectionChanged="ComboBox_SelectionChanged_1">
+        <ComboBox x:Name="CBMode"  SelectedValuePath="Content" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="10,10,0,0" Controls:TextBoxHelper.Watermark="Mode">
             <ComboBoxItem Content="Employee"/>
             <ComboBoxItem Content="Service"/>
             <ComboBoxItem Content="Bicycle"/>
@@ -42,7 +43,7 @@
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID" VerticalAlignment="Top" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold"/>
                 <TextBox x:Name="TBBicycleID" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="195" Margin="88,0,0,0" Controls:TextBoxHelper.Watermark="ID"/>
                 <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="Bicycle Name" VerticalAlignment="Center" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold" Margin="15,0,0,0"/>
-                <TextBox x:Name="TBBikeName2" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="195" Margin="10,0,0,0" Controls:TextBoxHelper.Watermark="Booking Name"/>
+                <ComboBox x:Name="TBBikeName2" HorizontalAlignment="Left" Height="23"   Text="" VerticalAlignment="Top" Width="195" Margin="10,0,0,0" Controls:TextBoxHelper.Watermark="Booking Name"/>
 
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,11,0,0">
@@ -54,7 +55,15 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,11,0,0">
                 <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Bicycle Status" VerticalAlignment="Top" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold"/>
-                <TextBox x:Name="TBBikeStatus" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="194" Controls:TextBoxHelper.Watermark="Bicycle Status" Margin="24,0,0,0"/>
+                <ComboBox x:Name="TBBikeStatus" HorizontalAlignment="Left" Height="23"  Text="" VerticalAlignment="Top" Width="194" Controls:TextBoxHelper.Watermark="Bicycle Status" Margin="24,0,0,0">
+                    <ComboBoxItem Content="Active"/>
+                    <ComboBoxItem Content="Expired"/>
+                    <ComboBoxItem Content="Not Returned"/>
+                    <ComboBoxItem Content="Succesful"/>
+                    <ComboBoxItem Content="Renting"/>
+                    <ComboBoxItem Content="Inactive"/>
+                    <ComboBoxItem Content="Maintainence"/>
+                </ComboBox>
               
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,11,0,0">
@@ -95,22 +104,28 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID" VerticalAlignment="Top" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold"/>
                     <TextBox x:Name="TBBookID" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="195" Margin="88,0,0,0" Controls:TextBoxHelper.Watermark="ID"/>
-                    <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="Booking Name" VerticalAlignment="Center" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold" Margin="15,0,0,0"/>
-                    <TextBox x:Name="TBBookName" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="195" Margin="10,0,0,0" Controls:TextBoxHelper.Watermark="Booking Name"/>
+                <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Customer" VerticalAlignment="Top" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold" Margin="10,0,0,0"/>
+                <TextBox x:Name="TBCustomer" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="194" Controls:TextBoxHelper.Watermark="Customer" Margin="48,0,0,0"/>
 
-                </StackPanel>
+            </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,11,0,0">
-                    <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Customer" VerticalAlignment="Top" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold"/>
-                    <TextBox x:Name="TBCustomer" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="194" Controls:TextBoxHelper.Watermark="Customer" Margin="48,0,0,0"/>
+                
+                    <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="Bicycle" VerticalAlignment="Center" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold" />
+                    <ComboBox x:Name="TBBikeName" HorizontalAlignment="Left" Height="23"  Text="" VerticalAlignment="Top" Width="195" Margin="64,0,0,0" Controls:TextBoxHelper.Watermark="Bicycle"/>
+                <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Booking Status" VerticalAlignment="Top" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold" Margin="10,0,0,0"/>
+                <ComboBox x:Name="TBBookingStatus" HorizontalAlignment="Left" Height="23"  Text="" VerticalAlignment="Top" Width="194" Controls:TextBoxHelper.Watermark="Booking Status" Margin="16,0,0,0">
+                    <ComboBoxItem Content="Active"/>
+                    <ComboBoxItem Content="Expired"/>
+                    <ComboBoxItem Content="Not Returned"/>
+                    <ComboBoxItem Content="Succesful"/>
+                    <ComboBoxItem Content="Renting"/>
 
-                    <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="Bicycle" VerticalAlignment="Center" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold" Margin="16,0,0,0"/>
-                    <TextBox x:Name="TBBikeName" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="195" Margin="53,0,0,0" Controls:TextBoxHelper.Watermark="Bicycle"/>
-                </StackPanel>
+                </ComboBox>
+            </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,11,0,0">
-                    <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Booking Status" VerticalAlignment="Top" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold"/>
-                    <TextBox x:Name="TBBookingStatus" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="194" Controls:TextBoxHelper.Watermark="Booking Status" Margin="18,0,0,0"/>
-                    <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Remark" VerticalAlignment="Top" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold" Margin="15,0,0,0"/>
-                    <TextBox x:Name="TBRemarks" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="194" Controls:TextBoxHelper.Watermark="Remark" Margin="49,0,0,0"/>
+                   
+                    <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Remark" VerticalAlignment="Top" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold"/>
+                    <TextBox x:Name="TBRemarks" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="194" Controls:TextBoxHelper.Watermark="Remark" Margin="60,0,0,0"/>
 
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,11,0,0">
@@ -144,7 +159,11 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,11,0,0">
                 <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Snack Status" VerticalAlignment="Top" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold" Margin="0,0,0,0"/>
-                <TextBox x:Name="TBSnackStatus" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="194" Controls:TextBoxHelper.Watermark="Snack Status" Margin="20,0,0,0"/>
+                <ComboBox x:Name="TBSnackStatus" HorizontalAlignment="Left" Height="23"  VerticalAlignment="Top" Width="194" Controls:TextBoxHelper.Watermark="Snack Status" Margin="20,0,0,0">
+                    <ComboBoxItem Content="Active"/>
+                    <ComboBoxItem Content="InActive"/>
+                    <ComboBoxItem Content="Out Of Stock"/>
+                </ComboBox>
             </StackPanel>
             
          
@@ -162,7 +181,9 @@
             <StackPanel Orientation="Horizontal" Margin="0,11,0,0">
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Bicycle" VerticalAlignment="Center" 
                           Foreground="White" FontWeight="Bold" Margin="0,0,0,0"/>
-                <TextBox x:Name="TBBicycle" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="195" Margin="60,0,0,0" Controls:TextBoxHelper.Watermark="Snack Name"/>
+                <ComboBox x:Name="TBBicycle" HorizontalAlignment="Left" Height="23"  VerticalAlignment="Top" Width="195" Margin="60,0,0,0" Controls:TextBoxHelper.Watermark="Snack Name">
+                  
+                </ComboBox>
 
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,11,0,0">
@@ -172,7 +193,11 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,11,0,0">
                 <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Service Status" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" Margin="0,0,0,0"/>
-                <TextBox x:Name="TBServiceStatus" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="194" Controls:TextBoxHelper.Watermark="Snack Status" Margin="20,0,0,0"/>
+                <ComboBox x:Name="TBServiceStatus" HorizontalAlignment="Left" Height="23"  VerticalAlignment="Top" Width="194" Controls:TextBoxHelper.Watermark="Snack Status" Margin="20,0,0,0">
+                    <ComboBoxItem Content="Succesful"/>
+                    <ComboBoxItem Content="InActive"/>
+                    <ComboBoxItem Content="Maintenance"/>
+                </ComboBox>
             </StackPanel>
 
 

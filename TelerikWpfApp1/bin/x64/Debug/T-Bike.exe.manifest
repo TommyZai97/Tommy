@@ -198,14 +198,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="T-Bike.exe" size="2139616">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="T-Bike.exe" size="2166752">
       <assemblyIdentity name="T-Bike" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>/c9lPTLlg9zRD1VztjRqlN4E1uE7mc6emifIEd1TQcg=</dsig:DigestValue>
+        <dsig:DigestValue>1MNGkaMDIIyfr1EUE6umBJMlqmzFvBxdbTCuq/0Fy5k=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -662,13 +662,13 @@
       <dsig:DigestValue>uPRnQeVVJoy+lgt0JKcKnaSBhlbz0HinFefbWe9R+P8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="T-Bike.exe.config" size="1697">
+  <file name="T-Bike.exe.config" size="1687">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>yGrNtXak7qXMFcLS4fBnez7ZCGjoPom8cKz2L1e7hGo=</dsig:DigestValue>
+      <dsig:DigestValue>J6P7hMl7TRAklzWJmnajagPn+d4elk4LQgTYgoJhzZk=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

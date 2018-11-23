@@ -309,7 +309,7 @@ namespace TBike
             }
             return BicycleID;
         }
-        public DataTable SelectAllBookingByDynamic(string BookingID, string BookingName, string Bicycle, string BookingStatus, string Customer, string Remark, string BicycleType)
+        public DataTable SelectAllBookingByDynamic(string BookingID, string Bicycle, string BookingStatus, string Customer, string Remark, string BicycleType)
         {
 
 
@@ -322,7 +322,7 @@ namespace TBike
 
             MyCmd.Parameters.AddWithValue("@BookingID", BookingID);
             MyCmd.Parameters.AddWithValue("@BicycleName", Bicycle);
-            MyCmd.Parameters.AddWithValue("@BookingName", BookingName);
+      
             MyCmd.Parameters.AddWithValue("@BookingStatus", BookingStatus);
             MyCmd.Parameters.AddWithValue("@Customer", Customer);
             MyCmd.Parameters.AddWithValue("@Remark", Remark);
@@ -399,14 +399,14 @@ namespace TBike
             return ListCustomers;
         }
 
-        public ListBox bindListBox(ListBox ListBooking)
+        public ListBox bindListBox(ListBox ListBooking , int month)
         {
             SqlConnection conn = new SqlConnection(constring);
-            SqlDataAdapter da = new SqlDataAdapter("SELECT BookingID From BikeBookingMaster WHERE BookingStatus='S'", conn);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT BookingID,BicycleType From BikeBookingMaster WHERE BookingStatus='S' AND (MONTH(BookingDate) = '" + month + "')", conn);
             DataSet ds = new DataSet();
             da.Fill(ds, "BikeBookingMaster");
             ListBooking.ItemsSource = ds.Tables[0].DefaultView;
-            ListBooking.DisplayMemberPath = ds.Tables[0].Columns["BookingID"].ToString();
+            ListBooking.DisplayMemberPath = ds.Tables[0].Columns["BicycleType"].ToString();
             ListBooking.SelectedValuePath = ds.Tables[0].Columns["BookingID"].ToString();
 
             return ListBooking;
@@ -422,6 +422,7 @@ namespace TBike
             DataTable ResultDataTable = new DataTable("ResultDataTable");
 
             MyCmd.Parameters.AddWithValue("BookingID", BookingID);
+            
 
             try
             {
@@ -439,6 +440,68 @@ namespace TBike
                 conn.Dispose();
                 MyCmd.Dispose();
 
+            }
+            return ResultDataTable;
+        }
+
+        public DataTable SelectBookingByMonthBicycle(string BicycleID, int month)
+        {
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelBookingByMonthBicycle", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+           
+            MyCmd.Parameters.AddWithValue("@month", month);
+            MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
+            try
+            {
+                MyCon.Open();
+
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelectBookingByMonthBicycle : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+        }
+
+        public DataTable SelectBookingByMonthType(string BicycleType , int month)
+        {
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelBookingByMonthType", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+           
+            MyCmd.Parameters.AddWithValue("@month", month);
+            MyCmd.Parameters.AddWithValue("@BicycleType", BicycleType);
+            try
+            {
+                MyCon.Open();
+
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelectBookingByMonthType : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
             }
             return ResultDataTable;
         }
@@ -959,6 +1022,8 @@ namespace TBike
 
                     MyCmd.ExecuteNonQuery();
                     MyCmd.Parameters.Clear();
+
+                
                 }
                 if (BicycleStatus == "R")
                 {
@@ -1098,6 +1163,19 @@ namespace TBike
             return ResultDataTable;
         }
 
+        public ComboBox BindSnackCombo(ComboBox ComboBox)
+        {
+            SqlConnection conn = new SqlConnection(constring);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT SnackID,SnackName From SnackTableMaster Where SnackStatus = 'A'", conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "SnackTableMaster");
+            ComboBox.ItemsSource = ds.Tables[0].DefaultView;
+            ComboBox.DisplayMemberPath = ds.Tables[0].Columns["SnackName"].ToString();
+            ComboBox.SelectedValuePath = ds.Tables[0].Columns["SnackID"].ToString();
+
+            return ComboBox;
+        }
+
         public DataTable SelectSnackByID(string SnackID)
         {
             SqlConnection MyCon = new SqlConnection(constring);
@@ -1228,6 +1306,158 @@ namespace TBike
                 MyCmd.Dispose();
             }
             return SnackID;
+        }
+
+        public string AddSnackSales(string SnackID, int Quantity, string Customer, double price,string CreatedBy,string BookingID)
+        {
+
+
+            SqlConnection conn = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("AddSnackSalesMaster", conn);
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+            try
+            {
+                if (BookingID == "")
+                {
+                    MyCmd.Parameters.AddWithValue("@SnackID", SnackID);
+                    MyCmd.Parameters.AddWithValue("@Quantity", Quantity);
+                    MyCmd.Parameters.AddWithValue("@price", price);
+                    MyCmd.Parameters.AddWithValue("@Customer", Customer);
+                    MyCmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                    MyCmd.ExecuteNonQuery();
+                    MyCmd.Parameters.Clear();
+            
+                    MyCmd.CommandText = "UpdSnackQuantity";
+                    MyCmd.Parameters.AddWithValue("@Quantity", Quantity);
+                    MyCmd.Parameters.AddWithValue("@SnackID", SnackID);
+                    MyCmd.ExecuteNonQuery();
+                    MyCmd.Parameters.Clear();
+                }
+                else
+                {
+                    MyCmd.CommandText = "AddExistBookSnackSalesMaster";
+                    MyCmd.Parameters.AddWithValue("@SnackID", SnackID);
+                    MyCmd.Parameters.AddWithValue("@BookingID", BookingID);
+                
+                    MyCmd.Parameters.AddWithValue("@Quantity", Quantity);
+                    MyCmd.Parameters.AddWithValue("@Customer", Customer);
+                    MyCmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                    MyCmd.ExecuteNonQuery();
+                    MyCmd.Parameters.Clear();
+
+                    MyCmd.CommandText = "UpdSnackQuantity";
+                    MyCmd.Parameters.AddWithValue("@Quantity", Quantity);
+                    MyCmd.Parameters.AddWithValue("@SnackID", SnackID);
+                    MyCmd.ExecuteNonQuery();
+                    MyCmd.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("DB Operation Error At UpdateSnackTable : " + e.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+                MyCmd.Dispose();
+            }
+            return SnackID;
+        }
+
+        public DataTable SelectSnackSalesByBookIDCustomer(string BookingID, string Customer) {
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelSnackSalesByBookIDCustomer ", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            MyCmd.Parameters.AddWithValue("@BookingID", BookingID);
+            MyCmd.Parameters.AddWithValue("@Customer", Customer);
+          
+
+            //we will use SQLAdaptor due to huge amount of column
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+            try
+            {
+                MyCon.Open();
+                //string SQLStatement = (string)MyCmd.ExecuteScalar();
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelectSnackSalesByBookIDCustomer : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+        }
+        public DataTable SelectSnackBySnackID(string SnackID)
+        {
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelSnackBySnackID", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            MyCmd.Parameters.AddWithValue("@SnackID", SnackID);
+
+
+            //we will use SQLAdaptor due to huge amount of column
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+            try
+            {
+                MyCon.Open();
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelectSnackBySnackID : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+        }
+
+        public DataTable SelectSnackSalesBySnackID(string SnackID)
+        {
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelSnackSalesbySnackID", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            MyCmd.Parameters.AddWithValue("@SnackID", SnackID);
+           
+
+            //we will use SQLAdaptor due to huge amount of column
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+            try
+            {
+                MyCon.Open();
+                   MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelSnackSalesBySnackID : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
         }
         #endregion
 

@@ -13,8 +13,8 @@
     </Controls:MetroWindow.Background>
     <Grid>
         <Rectangle Visibility="Visible" Width="468" Height="388" Fill="#7F000000" HorizontalAlignment="Center" VerticalAlignment="Center" RadiusY="18.919" RadiusX="18.919" Margin="106,6,77,52" />
-        <ComboBox x:Name="CBBicycle" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="200" MaxWidth="215" 
-                  Controls:TextBoxHelper.Watermark="Bicycle..." Controls:TextBoxHelper.UseFloatingWatermark="True" SelectionChanged="ComboBox_SelectionChanged" Height="37" Margin="142,20,296,393" Width="213"/>
+        <ComboBox x:Name="CBBicycle" IsEditable="True" IsTextSearchEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="200" MaxWidth="215" 
+                  Controls:TextBoxHelper.Watermark="Bicycle..." Controls:TextBoxHelper.UseFloatingWatermark="True" SelectionChanged="ComboBox_SelectionChanged" Height="40" Margin="142,20,296,393" Width="213"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
             <StackPanel Orientation="Horizontal"  Grid.Row="1">
                 <TextBlock Text="Bicycle Name : " Foreground="White" Margin="0,0,8,0" FontWeight="Bold" FontSize="14"/>

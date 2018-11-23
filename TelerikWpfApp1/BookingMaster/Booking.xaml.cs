@@ -60,6 +60,7 @@ namespace TBike
             try
             {
                
+
                 string BikeID = Convert.ToString(CBBike.SelectedValue).Trim();
                 TBikeDAL MyDAL = new TBikeDAL();
                 DateTime Start = Convert.ToDateTime(StartDate.SelectedDate.Value);
@@ -154,9 +155,9 @@ namespace TBike
                     insertCounter = 0;
                     pop.ShowDialog();
                 }
-             
 
 
+              
             }
             catch (Exception ex)
             {
@@ -169,6 +170,8 @@ namespace TBike
                 A = 0;
                 count = 0;
                 insertCounter = 0;
+                MainWindow main = new MainWindow();
+                main.Notification();
             }
 
         }

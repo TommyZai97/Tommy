@@ -18,26 +18,24 @@ using MahApps.Metro.Controls.Dialogs;
 using System.Threading.Tasks;
 using TBike.EmployeeMaster;
 using TBike.BookingMaster;
-using TBike;
+using TBike.Report;
 using System.Windows.Threading;
-
+using TBike.MessageBox;
 namespace TBike
 {
-    
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        public static int Max { get; set; }
 
 
         int RankID;
         string username;
         string id;
         string self;
-        DispatcherTimer timer;
-        int ctr = 0;
+
         public int MyValue { get; set; }
         public MainWindow()
         {
@@ -47,12 +45,14 @@ namespace TBike
             PopulateDataFromLogin("");
             CalculateDoneRentedTime();
             PopulateDataGrid();
+            Notification();
+        }
+
+        public void Notification()
+        {
             TBikeDAL MyDAL = new TBikeDAL();
             MyDAL.bindListBoxCustomer(LBRent);
-            timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 2);
-            timer.Tick += new EventHandler(timer_Tick);
-
+            button.Content = "Current Bookings" + " (" + LBRent.Items.Count.ToString() + ")";
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -113,7 +113,8 @@ namespace TBike
         }
         private void Store_Click(object sender, RoutedEventArgs e)
         {
-
+            Notification();
+            dataGrid1.Visibility = Visibility.Collapsed;
             Framework.Visibility = Visibility.Visible;
             //button for store
             InventoryManage newWin = new InventoryManage();
@@ -128,6 +129,7 @@ namespace TBike
 
         private async void create_Click(object sender, RoutedEventArgs e)
         {
+            Notification();
             if (RankID == 1)
             {
                 var res = await this.ShowMessageAsync("Error", "You have no access to this current Service");
@@ -228,7 +230,9 @@ namespace TBike
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            Notification();
             //Search button
+            dataGrid1.Visibility = Visibility.Collapsed;
             Framework.Visibility = Visibility.Visible;
             FinalizeReports search = new FinalizeReports();
             Framework.Content = search.Content;
@@ -238,16 +242,30 @@ namespace TBike
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
+            Notification();
+            dataGrid1.Visibility = Visibility.Collapsed;
             Framework.Visibility = Visibility.Visible;
             //Report button
-            Reports ala = new Reports();
-            Framework.Content = ala.Content;
+            ConfirmWindow pop = new ConfirmWindow(AppData.ImageType.Question,"Choose", "Please select report type","Booking","Snacks");
+            pop.ShowDialog();  
+            if (pop.Confirmed)
+            {
+                ReportCharts ala = new ReportCharts();
+                ala.SortCategory("Bicycle");
+                Framework.Content = ala.Content;
+            }
+            else
+            {
+                ReportCharts ala = new ReportCharts();
+                ala.SortCategory("Snack");
+                Framework.Content = ala.Content;
+            }
         }
 
         private void Book_Click(object sender, RoutedEventArgs e)
         {
-            
-            PopUpGrid.Visibility = Visibility.Hidden;
+            Notification();
+            dataGrid1.Visibility = Visibility.Collapsed;
             Framework.Visibility = Visibility.Visible;
             Booking book = new Booking();
             book.PopulateDataFromLogin(username);
@@ -256,6 +274,8 @@ namespace TBike
 
         private void Rent_Click(object sender, RoutedEventArgs e)
         {
+            Notification();
+            dataGrid1.Visibility = Visibility.Collapsed;
             Framework.Visibility = Visibility.Visible;
             rental rent = new rental();
             rent.PopulateDataFromLogin(username);
@@ -264,6 +284,8 @@ namespace TBike
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
+            Notification();
+            dataGrid1.Visibility = Visibility.Collapsed;
             Framework.Visibility = Visibility.Visible;
             Return retun = new Return();
             retun.PopulateDataFromLogin(username);
@@ -271,6 +293,8 @@ namespace TBike
         }
         private void Service_Click(object sender, RoutedEventArgs e)
         {
+            Notification();
+            dataGrid1.Visibility = Visibility.Collapsed;
             Framework.Visibility = Visibility.Visible;
             Service service = new Service();
             service.PopulateDataFromLogin(username);
@@ -279,6 +303,8 @@ namespace TBike
 
         private void EmpModify_Click(object sender, RoutedEventArgs e)
         {
+            Notification();
+            dataGrid1.Visibility = Visibility.Collapsed;
             //employee modification
             Framework.Visibility = Visibility.Hidden;
             dataGrid1.Visibility = Visibility.Visible;
@@ -361,8 +387,8 @@ namespace TBike
 
         private async void BtnRank_Click(object sender, RoutedEventArgs e)
         {
-
-
+            Notification();
+            dataGrid1.Visibility = Visibility.Collapsed;
 
             if (RankID >= 4)
             {
@@ -385,8 +411,10 @@ namespace TBike
 
         private void BtnHome_Click(object sender, RoutedEventArgs e)
         {
+            Notification();
             TBikeDAL MyDAL = new TBikeDAL();
-
+            dataGrid1.Visibility = Visibility.Collapsed;
+            Framework.Visibility = Visibility.Hidden;
         }
 
         private void LBRent_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -411,102 +439,42 @@ namespace TBike
             //popup button to refresh the listbox
             TBikeDAL MyDAL = new TBikeDAL();
             MyDAL.bindListBoxCustomer(LBRent);
-        }
 
-        //===============================================================================================
-        //===============================================================================================
-        //===============================================================================================
-        //===============================================================================================
-        //===============================================================================================
-        //===============================================================================================
-        //===============================================================================================
-
-        #region homepage
-        void timer_Tick(object sender, EventArgs e)
-        {
-
-
-            TBikeDAL MyDAl = new TBikeDAL();
-            DataTable ResultTable = MyDAl.ShowAllBikeTable();
-
-            ctr++;
-            if (ctr > ResultTable.Rows.Count)
+            if (button.IsChecked == true)
             {
-                ctr = 1;
+                button.Background = Brushes.White;
+                LBRent.Visibility = Visibility.Visible;
+                button.Foreground = Brushes.Black;
             }
-            PlaySlideShow(ctr);
-        }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            ctr = 1;
-            PlaySlideShow(ctr);
-        }
-        private void PlaySlideShow(int ctr)
-        {
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            string filename = ((ctr < 10) ? "Image/plane0" + ctr + ".jpg" : "Image/plane" + ctr + ".jpg");
-            image.UriSource = new Uri(filename, UriKind.Relative);
-            image.EndInit();
-            myImage.Source = image;
-            myImage.Stretch = Stretch.Uniform;
-            progressBar1.Value = ctr;
-        }
-        private void btnFirst_Click(object sender, RoutedEventArgs e)
-        {
-            ctr = 1;
-            PlaySlideShow(ctr);
-        }
-
-        private void btnPrevious_Click(object sender, RoutedEventArgs e)
-        {
-            TBikeDAL MyDAl = new TBikeDAL();
-            DataTable ResultTable = MyDAl.ShowAllBikeTable();
-
-            ctr--;
-            if (ctr < 1)
+            else if (button.IsChecked == false)
             {
-                ctr = ResultTable.Rows.Count;
+             
+                LBRent.Visibility = Visibility.Hidden;
+                button.Background = Brushes.Black;
+                button.Foreground = Brushes.White;
+
             }
-            PlaySlideShow(ctr);
         }
 
-        private void btnNext_Click(object sender, RoutedEventArgs e)
+        private void button_MouseEnter(object sender, MouseEventArgs e)
         {
+            button.Background = Brushes.Gray;
+        }
+
+        private void button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (button.IsChecked == true)
+            {
+                button.Background = Brushes.White;
+                button.Foreground = Brushes.Black;
+            }
+            else if (button.IsChecked == false)
+            {
+                button.Background = Brushes.Black;
+                button.Foreground = Brushes.White;
+
+            }
             
-
-            TBikeDAL MyDAl = new TBikeDAL();
-            DataTable ResultTable = MyDAl.ShowAllBikeTable();
-
-            Max = ResultTable.Rows.Count;
-
-            ctr++;
-            if (ctr > ResultTable.Rows.Count)
-            {
-                ctr = 1;
-            }
-            PlaySlideShow(ctr);
         }
-
-        private void btnLast_Click(object sender, RoutedEventArgs e)
-        {
-            TBikeDAL MyDAl = new TBikeDAL();
-            DataTable ResultTable = MyDAl.ShowAllBikeTable();
-
-            
-            ctr = ResultTable.Rows.Count;
-            PlaySlideShow(ctr);
-        }
-        private void chkAutoPlay_Click(object sender, RoutedEventArgs e)
-        {
-            timer.IsEnabled = chkAutoPlay.IsChecked.Value;
-            btnFirst.Visibility = (btnFirst.IsVisible == true) ? Visibility.Hidden : Visibility.Visible;
-            btnPrevious.Visibility = (btnPrevious.IsVisible == true) ? Visibility.Hidden : Visibility.Visible;
-            btnNext.Visibility = (btnNext.IsVisible == true) ? Visibility.Hidden : Visibility.Visible;
-            btnLast.Visibility = (btnLast.IsVisible == true) ? Visibility.Hidden : Visibility.Visible;
-        } 
-
-        
     }
 }
-#endregion

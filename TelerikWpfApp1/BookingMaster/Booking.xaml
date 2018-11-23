@@ -12,7 +12,7 @@
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="TBike.Booking"
         mc:Ignorable="d"
         
-        Title="Booking" MinHeight="539.237" MinWidth="800"  WindowStartupLocation="CenterScreen" Icon="/T-Bike;component/Image/logo.jpg" Width="765.726">
+        Title="Create Booking Date" MinHeight="500" MinWidth="800"  WindowStartupLocation="CenterScreen" Icon="/T-Bike;component/Image/logo.jpg" Width="765.726">
 
 
     <Grid Margin="0,0,-8,0">
@@ -35,11 +35,11 @@
 
         </DataGrid>
 
-        <Controls:DateTimePicker x:Name="StartDate" Height="49" MinWidth="282" MaxWidth="400" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="White" Margin="45,38,441,0"/>
+        <Controls:DateTimePicker x:Name="StartDate"  Height="49" MinWidth="282" MaxWidth="400" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="White" Margin="45,38,441,0" />
         <TextBox x:Name="TBCustomer"  HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="282" MaxWidth="400" Margin="45,105,443,0" FontSize="14"
                      Controls:TextBoxHelper.Watermark="Customer Name..."/>
 
-        <ComboBox x:Name="CBBike" ItemsSource="{Binding}" SelectedValue="BicycleID" DisplayMemberPath="BicycleName" HorizontalAlignment="Right" Margin="0,47,79,0" VerticalAlignment="Top" Width="215" Controls:TextBoxHelper.Watermark="Selec Bicycle..." Height="40" FontSize="14" SelectionChanged="CBBike_SelectionChanged" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True"/>
+        <ComboBox x:Name="CBBike" IsEditable="True" ItemsSource="{Binding}" SelectedValue="BicycleID" DisplayMemberPath="BicycleName" HorizontalAlignment="Right" Margin="0,47,79,0" VerticalAlignment="Top" Width="215" Controls:TextBoxHelper.Watermark="Selec Bicycle..." Height="40" FontSize="14" SelectionChanged="CBBike_SelectionChanged" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True"/>
 
         <TextBox x:Name="TBRemarks" HorizontalAlignment="Left" Height="67" Margin="45,156,0,0" TextWrapping="Wrap"  VerticalAlignment="Top"
                  MinWidth="200" Controls:TextBoxHelper.IsSpellCheckContextMenuEnabled="True" Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:TextBoxHelper.Watermark="Remarks..." Controls:TextBoxHelper.WatermarkAlignment="Center" Controls:TextBoxHelper.WatermarkTrimming="CharacterEllipsis" Width="506"/>
