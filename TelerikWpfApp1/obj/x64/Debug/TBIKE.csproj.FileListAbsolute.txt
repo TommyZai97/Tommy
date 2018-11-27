@@ -220,7 +220,6 @@ C:\Users\tomle\Source\Repos\Tommy\TelerikWpfApp1\obj\x64\Debug\LoginUser\LoginMe
 C:\Users\tomle\Source\Repos\Tommy\TelerikWpfApp1\obj\x64\Debug\MainWindow.g.cs
 C:\Users\tomle\Source\Repos\Tommy\TelerikWpfApp1\obj\x64\Debug\LoginUser\RegisterPassword.g.cs
 C:\Users\tomle\Source\Repos\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\rental.g.cs
-C:\Users\tomle\Source\Repos\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\RentalProcessing.g.cs
 C:\Users\tomle\Source\Repos\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\Return.g.cs
 C:\Users\tomle\Source\Repos\Tommy\TelerikWpfApp1\obj\x64\Debug\MessageBox\ConfirmWindow.g.cs
 C:\Users\tomle\Source\Repos\Tommy\TelerikWpfApp1\obj\x64\Debug\MessageBox\PopWindow.g.cs
@@ -242,7 +241,6 @@ C:\Users\tomle\Source\Repos\Tommy\TelerikWpfApp1\obj\x64\Debug\InventoryMaster\W
 C:\Users\tomle\Source\Repos\Tommy\TelerikWpfApp1\obj\x64\Debug\LoginUser\LoginMenu.baml
 C:\Users\tomle\Source\Repos\Tommy\TelerikWpfApp1\obj\x64\Debug\LoginUser\RegisterPassword.baml
 C:\Users\tomle\Source\Repos\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\rental.baml
-C:\Users\tomle\Source\Repos\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\RentalProcessing.baml
 C:\Users\tomle\Source\Repos\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\Return.baml
 C:\Users\tomle\Source\Repos\Tommy\TelerikWpfApp1\obj\x64\Debug\MessageBox\ConfirmWindow.baml
 C:\Users\tomle\Source\Repos\Tommy\TelerikWpfApp1\obj\x64\Debug\MessageBox\PopWindow.baml
