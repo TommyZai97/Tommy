@@ -14,7 +14,7 @@
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="49*"/>
         </Grid.ColumnDefinitions>
-     
+
         <Grid.Background>
             <ImageBrush ImageSource="/T-Bike;component/Image/background.jpg"/>
         </Grid.Background>
@@ -27,7 +27,7 @@
         </DockPanel>
         <TextBox x:Name="TBCustomer" HorizontalAlignment="Left" Height="23" Margin="29,185,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="158" Controls:TextBoxHelper.Watermark="New Customer..."/>
         <ComboBox x:Name="CBBicycle" HorizontalAlignment="Left" Margin="29,224,0,0" VerticalAlignment="Top" Width="158" Height="23"  Controls:TextBoxHelper.Watermark="Bicycle" RenderTransformOrigin="0.539,-0.561"/>
-        <Button x:Name="BTNNext" Content="Next" HorizontalAlignment="Left" Margin="30,0,0,26" VerticalAlignment="Bottom" Width="110" FontSize="14" FontWeight="Bold" FontFamily="Calibri" Click="Button_Click" Grid.Row="1" Height="21"/>
+        <Button x:Name="BTNNext" Content="Next" HorizontalAlignment="Left" Margin="30,0,0,26" VerticalAlignment="Bottom" Width="110" FontSize="14" FontFamily="Calibri" Click="Button_Click" Height="33"/>
         <TextBlock HorizontalAlignment="Left" Margin="29,20,0,0" TextWrapping="Wrap" Text="Select Customer if there is any booking" VerticalAlignment="Top" Foreground="White" FontStyle="Italic" TextDecorations="Underline" Height="16" Width="201"/>
         <TextBlock x:Name="LBNewTitle" HorizontalAlignment="Left" Margin="29,149,0,0" TextWrapping="Wrap" Text="New Customer" VerticalAlignment="Top" Foreground="White" TextDecorations="Underline" FontWeight="Bold" FontSize="18" Height="24" Width="125"/>
         <StackPanel  Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="94,0,0,0" Width="302" Grid.Row="1">

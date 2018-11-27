@@ -209,8 +209,6 @@
             <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="64,-33,19,18.667"/>
             <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="136,-42,0,20"/>
         </StackPanel>
-        <ComboBox Name="CBBike"  HorizontalAlignment="Right" Margin="0,20,10,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged" Controls:TextBoxHelper.Watermark="Bicycle"/>
-        <ComboBox Name="CBStatus" HorizontalAlignment="Right" Margin="0,20,144,0" VerticalAlignment="Top" Width="120" Controls:TextBoxHelper.Watermark="Status"/>
         <StackPanel x:Name="ProgressPanel" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#B2000000">
         <ProgressBar x:Name="PBsearch"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="30" Margin="10"/>
             <TextBlock x:Name="TBProgressText" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,10,10" MinWidth="150" FontSize="14" />

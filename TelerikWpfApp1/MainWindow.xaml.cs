@@ -31,7 +31,7 @@ namespace TBike
     {
 
 
-        int RankID;
+        public int RankID { get; set; }
         string username;
         string id;
         string self;
@@ -39,13 +39,16 @@ namespace TBike
         public int MyValue { get; set; }
         public MainWindow()
         {
-
-
+           
             InitializeComponent();
+          
+
             PopulateDataFromLogin("");
             CalculateDoneRentedTime();
             PopulateDataGrid();
             Notification();
+
+          
         }
 
         public void Notification()
@@ -130,7 +133,7 @@ namespace TBike
         private async void create_Click(object sender, RoutedEventArgs e)
         {
             Notification();
-            if (RankID == 1)
+            if (RankID <= 2)
             {
                 var res = await this.ShowMessageAsync("Error", "You have no access to this current Service");
 
@@ -163,7 +166,16 @@ namespace TBike
                 {
                     ExpanderEmployee.AllowDrop = false;
                     ExpanderEmployee.IsEnabled = false;
+
+                    ExpanderReports.IsEnabled = false;
+                    ExpanderStore.IsEnabled = false;
                 }
+                Framework.Visibility = Visibility.Visible;
+                FinalizeReports search = new FinalizeReports();
+                search.RankID = RankID;
+                search.username = username;
+                Framework.Content = search.Content;
+
             }
 
         }
@@ -228,17 +240,17 @@ namespace TBike
         //    }
         //}
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            Notification();
-            //Search button
-            dataGrid1.Visibility = Visibility.Collapsed;
-            Framework.Visibility = Visibility.Visible;
-            FinalizeReports search = new FinalizeReports();
-            Framework.Content = search.Content;
-            search.PopulateDataFromLogin(username);
+        //private void Button_Click_3(object sender, RoutedEventArgs e)
+        //{
+        //    Notification();
+        //    //Search button
+        //    dataGrid1.Visibility = Visibility.Collapsed;
+        //    Framework.Visibility = Visibility.Visible;
+        //    FinalizeReports search = new FinalizeReports();
+        //    Framework.Content = search.Content;
+        //    search.PopulateDataFromLogin(username);
 
-        }
+        //}
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
@@ -254,12 +266,14 @@ namespace TBike
                 ala.SortCategory("Bicycle");
                 Framework.Content = ala.Content;
             }
-            else
+            else if (pop.Confirmed == false)
             {
                 ReportCharts ala = new ReportCharts();
                 ala.SortCategory("Snack");
                 Framework.Content = ala.Content;
             }
+            
+          
         }
 
         private void Book_Click(object sender, RoutedEventArgs e)
@@ -308,7 +322,17 @@ namespace TBike
             //employee modification
             Framework.Visibility = Visibility.Hidden;
             dataGrid1.Visibility = Visibility.Visible;
-            PopulateEmployeeDetails();
+
+            //because test user is for testing therefore there will be no limitations for test user
+            if (username == "user")
+            {
+                PopulateEmployeeDetails();
+            }
+            else
+            {
+                //this will sort out by the rank level of each employee
+                PopulateEmployeeDetailsByRankLevel();
+            }
         }
 
         private void Framework_Navigated(object sender, NavigationEventArgs e)
@@ -321,6 +345,20 @@ namespace TBike
             TBikeDAL MyDAL = new TBikeDAL();
 
             DataTable ResultTable = MyDAL.ShowAllEmployeeDetails();
+
+
+            dataGrid1.ItemsSource = ResultTable.DefaultView;
+            dataGrid1.AutoGenerateColumns = false;
+            dataGrid1.CanUserAddRows = false;
+
+
+        }
+
+        public void PopulateEmployeeDetailsByRankLevel()
+        {
+            TBikeDAL MyDAL = new TBikeDAL();
+
+            DataTable ResultTable = MyDAL.SelectEmployeeDetailsByRankLevel(RankID);
 
 
             dataGrid1.ItemsSource = ResultTable.DefaultView;
@@ -399,7 +437,6 @@ namespace TBike
 
             }
 
-
             else
             {
                 var res = await this.ShowMessageAsync("Error", "Rank not high enough");
@@ -414,7 +451,10 @@ namespace TBike
             Notification();
             TBikeDAL MyDAL = new TBikeDAL();
             dataGrid1.Visibility = Visibility.Collapsed;
-            Framework.Visibility = Visibility.Hidden;
+            Framework.Visibility = Visibility.Visible;
+            FinalizeReports search = new FinalizeReports();
+            search.PopulateDataFromLogin(username);
+            Framework.Content = search.Content ;
         }
 
         private void LBRent_SelectionChanged(object sender, SelectionChangedEventArgs e)

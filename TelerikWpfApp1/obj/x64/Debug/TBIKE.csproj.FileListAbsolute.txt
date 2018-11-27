@@ -330,7 +330,6 @@ C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\EmployeeMaster\
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\EmployeeMaster\EmployeeModify.g.cs
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\EmployeeMaster\EmployeeRank.g.cs
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\InventoryMaster\InventoryManage.g.cs
-C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\InventoryMaster\Window1.g.cs
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\LoginUser\LoginMenu.g.cs
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\MainWindow.g.cs
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\LoginUser\RegisterPassword.g.cs
@@ -350,7 +349,6 @@ C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\EmployeeMaster\
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\EmployeeMaster\EmployeeModify.baml
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\EmployeeMaster\EmployeeRank.baml
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\InventoryMaster\InventoryManage.baml
-C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\InventoryMaster\Window1.baml
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\LoginUser\LoginMenu.baml
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\LoginUser\RegisterPassword.baml
 C:\Users\Intern001.it\Desktop\Tommy\TelerikWpfApp1\obj\x64\Debug\BookingMaster\rental.baml

@@ -20,9 +20,9 @@
 
         <TextBox x:Name="TBRankNo" PreviewTextInput="TBRankNo_PreviewTextInput" HorizontalAlignment="Left" Height="23" Margin="63,138,150,257" 
                  TextWrapping="Wrap"  VerticalAlignment="Center" Width="194" Controls:TextBoxHelper.Watermark="Rank Level (1-10)" Controls:TextBoxHelper.WatermarkTrimming="CharacterEllipsis" RenderTransformOrigin="0.575,-0.902"/>
-        <Button Content="Apply" HorizontalAlignment="Left" Margin="20,0,0,116" VerticalAlignment="Bottom" Width="92" Click="Button_Click_2"/>
+        <Button Content="Apply" HorizontalAlignment="Left" Margin="60,0,0,91" VerticalAlignment="Bottom" Width="92" Click="Button_Click_2"/>
         <ComboBox x:Name="CBRankDesc" Visibility="Hidden" HorizontalAlignment="Left" Margin="63,75,150,323" VerticalAlignment="Center" Width="194" SelectionChanged="CBRankDesc_SelectionChanged" Controls:TextBoxHelper.UseFloatingWatermark="False" Controls:TextBoxHelper.Watermark="Rank Description"/>
-        <Button Name="BTNModify" Content="Modify Existing" HorizontalAlignment="Left" Margin="217,0,0,116" VerticalAlignment="Bottom" Width="113" Click="Button_Click"/>
+        <Button Name="BTNModify" Content="Modify Existing" HorizontalAlignment="Left" Margin="217,0,0,91" VerticalAlignment="Bottom" Width="113" Click="Button_Click"/>
         <TextBlock Name="LBModify" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Add Mode" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Calibri" FontSize="20" Foreground="White" TextDecorations="Underline"/>
         <TextBox x:Name="TBRankDescModify" Visibility="Hidden" HorizontalAlignment="Center" Height="23"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="194" Controls:TextBoxHelper.Watermark="Rank Description" Controls:TextBoxHelper.WatermarkTrimming="CharacterEllipsis" RenderTransformOrigin="0.575,-0.902" Margin="63,203,150,192"/>
         <StackPanel  Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="32" Margin="4,0,0,-1" Width="302">

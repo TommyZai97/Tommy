@@ -18,6 +18,7 @@ using System.Data;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
+using TBike.EmployeeMaster;
 
 namespace TBike
 {
@@ -41,9 +42,10 @@ namespace TBike
         {
             //Verify Login Data
             TBikeDAL MyDal = new TBikeDAL();
-            SqlConnection conn = new SqlConnection(constring);
             try
             {
+               
+                SqlConnection conn = new SqlConnection(constring);
                 if (TBUsername.Text == "" && TBPassword.Password.ToString().Trim() == "")
                 {
                     var res = await this.ShowMessageAsync("Error","Please Fill in all text");
@@ -61,6 +63,8 @@ namespace TBike
                     int count = Convert.ToInt32(MyCmd.ExecuteScalar());
                     if (count == 1)
                     {
+                       
+                        
                         MainWindow main = new MainWindow();
                         main.PopulateDataFromLogin(TBUsername.Text);
                         main.Show();
@@ -81,7 +85,7 @@ namespace TBike
             catch (Exception ex)
             {
 
-                throw new Exception("DB Operation Error At VerfiyLoginD : " + ex.Message);
+                await this.ShowMessageAsync("Error at Certain operation",ex.Message);
 
             }
            

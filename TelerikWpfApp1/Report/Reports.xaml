@@ -105,21 +105,21 @@
             <Button x:Name="BTNPayment" Content="Monthly Earnings" Width="150" Height="35" Margin="10,10,0,0" FontWeight="DemiBold" Click="BTNPayment_Click"/>
             <Button x:Name="BTNTotalRent" Content="Total Rents This Month" Width="150" Height="35" Margin="10,10,0,0" FontWeight="DemiBold" Click="BTNTotalRent_Click"/>
         </StackPanel>
-        <StackPanel Name="MonthStack" Visibility="Visible" Grid.Column="2"  Grid.Row="1" >
+        <StackPanel Name="MonthStack" Visibility="Hidden" Grid.Column="2"  Grid.Row="1" >
             <StackPanel Orientation="Horizontal">
                 <TextBlock FontWeight="DemiBold" FontSize="14"  HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Monthly Earnings" VerticalAlignment="Top" Foreground="White" Height="19" Width="112"/>
                 <TextBlock Name="TBMonthly" FontSize="14"  HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Rm 0.00" VerticalAlignment="Top" Foreground="White" Height="19" Width="112"/>
 
             </StackPanel>
         </StackPanel>
-        <StackPanel Name="RentStack" Visibility="Visible" Grid.Column="2"  Grid.Row="1" >
+        <StackPanel Name="RentStack" Visibility="Hidden" Grid.Column="2"  Grid.Row="1" >
             <StackPanel Orientation="Horizontal">
                 <TextBlock FontWeight="DemiBold" FontSize="14"  HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Monthly Rent" VerticalAlignment="Top" Foreground="White" Height="19" Width="112"/>
                 <TextBlock Name="TBMonthlyRents" FontSize="14"  HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="ERROR:!@#!@#" VerticalAlignment="Top" Foreground="White" Height="19" Width="112"/>
 
             </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Column="3" >
+        <StackPanel Grid.Column="3" Margin="0,20,0,0">
             <TextBlock FontWeight="DemiBold" FontSize="14"  HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Width="137">
                 Most Rented Bike:
             </TextBlock>

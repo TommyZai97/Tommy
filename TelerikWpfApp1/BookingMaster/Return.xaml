@@ -18,11 +18,17 @@
         <ComboBox x:Name="CBBike"  IsEditable="True" IsTextSearchEnabled="True" HorizontalAlignment="Left" Margin="51,42,0,0" VerticalAlignment="Top" Width="193" Controls:TextBoxHelper.Watermark="Bicycle..." SelectionChanged="CBBike_SelectionChanged" Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True"/>
 
         <StackPanel Visibility="Hidden" x:Name="ExpiredStack" HorizontalAlignment="Right" MinHeight="321" Margin="0,15,10,83" VerticalAlignment="Stretch" Width="324" Background="#7FB6B6B6" Grid.RowSpan="2">
-            <ComboBox x:Name="CBCustomer" Margin="15,16,31,0" Height="25" Controls:TextBoxHelper.Watermark="Customer..." Background="White" SelectionChanged="CBCustomer_SelectionChanged"/>
-            <TextBlock x:Name="LBName" TextWrapping="Wrap" Margin="16,20,228,0" FontSize="14" Foreground="White" FontWeight="Bold" Background="#4C000000"/>
-            <TextBlock x:Name="LBDate" TextWrapping="Wrap" Margin="16,20,74,0" FontSize="14" Foreground="White" FontWeight="Bold" Background="#4C000000"/>
+            <ComboBox x:Name="CBCustomer" Margin="15,16,31,20" Height="25" Controls:TextBoxHelper.Watermark="Customer..." Background="White" SelectionChanged="CBCustomer_SelectionChanged"/>
+            <StackPanel Orientation="Horizontal" Margin="20,0,0,20">
+            <TextBlock  TextWrapping="Wrap" FontSize="14" Text="Customer: " Foreground="White" FontWeight="Bold" />
+            <TextBlock x:Name="LBName" TextWrapping="Wrap"  FontSize="14" Foreground="White" FontWeight="Bold" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,0,0,20">
+                <TextBlock  TextWrapping="Wrap" Text="Date: " FontSize="14" Foreground="White" FontWeight="Bold" />
+                <TextBlock x:Name="LBDate" TextWrapping="Wrap" FontSize="14" Foreground="White" FontWeight="Bold" />
+            </StackPanel>
             <ComboBox x:Name="ListBicycle" HorizontalAlignment="Left" Margin="17,17,0,30" VerticalAlignment="Top" Width="149" Controls:TextBoxHelper.Watermark="Bicycle..." />
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <TextBlock Visibility="Visible" HorizontalAlignment="Left" Foreground="White" TextWrapping="Wrap" Text="Damaged ?" VerticalAlignment="Top" FontWeight="Bold" Margin="20,0,0,0"/>
                 <CheckBox Visibility="Visible"  x:Name="CBStatus_Copy" HorizontalAlignment="Left" Margin="15,0,0,0"  VerticalAlignment="Top" FontSize="14" Width="19" Background="White" Checked="CBStatus_Checked" Unchecked="CBStatus_Checked" />
             </StackPanel>
@@ -35,17 +41,29 @@
             <TextBlock  x:Name="TLRankDesc"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="64,-33,19,18.667"/>
             <TextBlock  x:Name="TLUsername"   HorizontalAlignment="Left" TextWrapping="Wrap" Text="ID Not Found " VerticalAlignment="Bottom" Foreground="White" Margin="136,-42,0,20"/>
         </StackPanel>
-        <StackPanel Name="StackHelo" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <StackPanel Name="StackHelo" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,10,0,0">
             <TextBlock Visibility="Visible" HorizontalAlignment="Left" Foreground="White" Margin="51,84,0,0" TextWrapping="Wrap" Text="Damaged ?" VerticalAlignment="Top" FontWeight="Bold"/>
             <CheckBox Visibility="Visible"  x:Name="CBStatus" HorizontalAlignment="Left" Margin="15,83,0,0"  VerticalAlignment="Top" FontSize="14" Width="19" Background="White" Checked="CBStatus_Checked" Unchecked="CBStatus_Checked" >
 
             </CheckBox>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="51,124,0,69" MinHeight="179" >
-            <TextBlock x:Name="LBCustomer" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="250" TextWrapping="Wrap" Height="25" Text=""  FontSize="14" Foreground="White" FontWeight="Bold" Margin="0,0,0,20"/>
-            <TextBlock x:Name="LBRemarks" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="250" Height="25"  FontSize="14" Foreground="White" FontWeight="Bold" Grid.Row="1" Margin="0,0,0,20"/>
-            <TextBlock x:Name="LBBicycle" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="250" Height="25"  FontSize="14" Foreground="White" FontWeight="Bold" Margin="0,0,0,20"/>
-            <TextBlock x:Name="LBBookingDate" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="250" Text="" Height="25" FontSize="14" Foreground="White" FontWeight="Bold"/>
+        <StackPanel x:Name="StackReturn"  HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="51,124,0,69" MinHeight="179" >
+            <StackPanel Orientation="Horizontal">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Height="25" Text="Customer: "  FontSize="14" Foreground="White" FontWeight="Bold" Margin="0,0,0,20"/>
+            <TextBlock x:Name="LBCustomer" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="250" TextWrapping="Wrap" Height="25" Text=""  FontSize="14" Foreground="White" Margin="0,0,0,20"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Height="25" Text="Remark: "  FontSize="14" Foreground="White" FontWeight="Bold" Margin="0,0,0,20"/>
+                <TextBlock x:Name="LBRemarks" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="250" Height="25"  FontSize="14" Foreground="White"  Grid.Row="1" Margin="0,0,0,20"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top"  TextWrapping="Wrap" Height="25" Text="Bicycle: "  FontSize="14" Foreground="White" FontWeight="Bold" Margin="0,0,0,20"/>
+                <TextBlock x:Name="LBBicycle" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="250" Height="25"  FontSize="14" Foreground="White"  Margin="5,0,0,20"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top"  TextWrapping="Wrap" Height="25" Text="Date: "  FontSize="14" Foreground="White" FontWeight="Bold" Margin="0,0,0,20"/>
+                <TextBlock x:Name="LBBookingDate" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="250" Text="" Height="25" FontSize="14" Foreground="White" Margin="20,0,0,20"/>
+            </StackPanel>
             <TextBox x:Name="TBConditionReal" Visibility="Hidden" HorizontalAlignment="Left" Height="60"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" MinWidth="250" Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:TextBoxHelper.Watermark="Return Condition..." RenderTransformOrigin="0.423,0.186" />
 
         </StackPanel>

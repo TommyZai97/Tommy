@@ -113,7 +113,7 @@ namespace TBike
                     BindComboBox(CBBike);
                     CBBike.SelectedIndex = CBBike.Items.Count - 1;
                     LBCustomer.Text = Customer;
-
+                    StackReturn.Visibility = Visibility.Visible;
                     LBBookingDate.Text = Convert.ToString(ResultTable.Rows[0]["BookingDate"]);
                     LBBicycle.Text = Convert.ToString(ResultTable.Rows[0]["BicycleName"]);
                     LBRemarks.Text = Convert.ToString(ResultTable.Rows[0]["Remark"]);
@@ -128,10 +128,10 @@ namespace TBike
                     LBBookingDate.Visibility = Visibility.Hidden;
                     LBBicycle.Visibility = Visibility.Hidden;
                     LBRemarks.Visibility = Visibility.Hidden;
-
+                    StackReturn.Visibility = Visibility.Hidden;
                     BTNExpired.Foreground = Brushes.Red;
                     ExpiredStack.Visibility = Visibility.Visible;
-                  
+                   
                     LBName.Text = Convert.ToString(ResultTable.Rows[0]["Customer"]);
                     LBDate.Text = Convert.ToString(ResultTable.Rows[0]["BookingDate"]);
                 
@@ -241,6 +241,7 @@ namespace TBike
                 LBBookingDate.Visibility = Visibility.Visible;
                 LBBicycle.Visibility = Visibility.Visible;
                 LBRemarks.Visibility = Visibility.Visible;
+                StackReturn.Visibility = Visibility.Visible;
                 //if stack is visible set stack as hidden
                 ExpiredStack.Visibility = Visibility.Hidden;
                 BTNExpired.Foreground = Brushes.Black;
@@ -256,6 +257,7 @@ namespace TBike
                 BTNExpired.Foreground = Brushes.Red;
                 CBBike.Visibility = Visibility.Hidden;
                 LBCustomer.Visibility = Visibility.Hidden;
+                StackReturn.Visibility = Visibility.Hidden; 
                 //if stack is hidden set stack as visible
                 ExpiredStack.Visibility = Visibility.Visible;
             }
