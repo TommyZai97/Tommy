@@ -26,8 +26,8 @@ namespace TBike.EmployeeMaster
     /// </summary>
     public partial class FinalizeReports : MetroWindow
     {
-        string username;
-        int RankID;
+        public string username;
+        public int RankID { get; set; }
         string ItemStatus;
         int ComboIndex;
         BackgroundWorker MyStartupBackgroundWorker;
@@ -38,8 +38,7 @@ namespace TBike.EmployeeMaster
             MyDAL.BindAllBikeComboBox(TBBicycle);
             MyDAL.BindAllBikeComboBox(TBBikeName);
             MyDAL.BindAllBikeComboBox(TBBikeName2);
-         
-
+            
         }
         public void DetermineItemStatus()
         {
@@ -161,6 +160,7 @@ namespace TBike.EmployeeMaster
         }
         private void BTNsearch_Click(object sender, RoutedEventArgs e)
         {
+
             if (CBMode.SelectedValue.ToString().Trim() == "Employee")
             {
                 if (RankID >= 3)
@@ -169,7 +169,19 @@ namespace TBike.EmployeeMaster
                 }
                 else
                 {
-                    PopWindow pop = new PopWindow(ImageType.Error, "Rank too low", "Sorry You do not have access to this feature", "Ok");
+                    PopWindow pop = new PopWindow(ImageType.Warning, "Rank too low", "Sorry You do not have access to this feature", "Ok");
+                    pop.ShowDialog();
+                }
+            } 
+            if (CBMode.SelectedValue.ToString().Trim() == "Snacks" || CBMode.SelectedValue.ToString().Trim() == "Bicycle")
+            {
+                if (RankID >= 2)
+                {
+                    initializeWorker();
+                }
+                else
+                {
+                    PopWindow pop = new PopWindow(ImageType.Warning, "Rank too low", "Sorry You do not have access to this feature", "Ok");
                     pop.ShowDialog();
                 }
             }
@@ -177,8 +189,9 @@ namespace TBike.EmployeeMaster
             {
                 initializeWorker();
             }
-                
-           
+
+
+
         }
 
         public void SearchModule()

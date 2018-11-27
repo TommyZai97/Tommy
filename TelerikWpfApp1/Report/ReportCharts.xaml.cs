@@ -37,18 +37,21 @@ namespace TBike.Report
             PopulateBookGrd();
             if (Category == "Bicycle")
             {
-                BookPanel.Visibility = Visibility.Visible;
+                BookGrd.Visibility = Visibility.Visible;
                 BookDetailPanel.Visibility = Visibility.Visible;
+                detailSnackGrd.Visibility = Visibility.Hidden;
 
+                detailGrd.Visibility = Visibility.Visible;
                 SnackPanel.Visibility = Visibility.Hidden;
                 SnackDetailPanel.Visibility = Visibility.Hidden;
             }
             else if (Category == "Snack") 
             {
                 PopulateSnackGrd();
-                BookPanel.Visibility = Visibility.Hidden;
+                BookGrd.Visibility = Visibility.Hidden;
                 BookDetailPanel.Visibility = Visibility.Hidden;
-
+                detailGrd.Visibility = Visibility.Hidden;
+                detailSnackGrd.Visibility = Visibility.Visible;
                 SnackPanel.Visibility = Visibility.Visible;
                 SnackDetailPanel.Visibility = Visibility.Visible;
             }
@@ -96,13 +99,17 @@ namespace TBike.Report
             int month;
             TypeWindow type = new TypeWindow(ImageType.Question, "Select Month", "Please Choose Month", "OK", "Cancel");
             type.ShowDialog();
-            month = type.Month;
-            Reports rep = new Reports();
-          
-            rep.SortByMonth(month);
-            rep.TotalBookBike();
-            rep.TotalBikeType();
-            rep.ShowDialog();
+            if (type.Confirmed == true)
+            {
+                month = type.Month;
+                Reports rep = new Reports();
+
+                rep.SortByMonth(month);
+                rep.TotalBookBike();
+                rep.TotalBikeType();
+                rep.ShowDialog();
+            }
+           
         }
 
         private void detailGrd_Selected(object sender, RoutedEventArgs e)
@@ -227,5 +234,7 @@ namespace TBike.Report
                 detailSnackGrd.AutoGenerateColumns = false;
             }
         }
+
+    
     }
 }

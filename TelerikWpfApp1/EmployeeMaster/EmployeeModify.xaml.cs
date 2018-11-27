@@ -109,7 +109,7 @@ namespace TBike
             }
         }
 
-        private async void BTNDemote_Click(object sender, RoutedEventArgs e)
+        private void BTNDemote_Click(object sender, RoutedEventArgs e)
         {
             TBikeDAL MyDAL = new TBikeDAL();
             DataTable ResultTable = MyDAL.SelectEmployeeByEmployeeID(LBEmployeeID.Text);
@@ -120,8 +120,9 @@ namespace TBike
                 {
                     if (Rank > 0)
                     {
-                        var res = await this.ShowMessageAsync("Confirm", "Are you sure to Demote " + LBEmployeeName.Text + " ?", MessageDialogStyle.AffirmativeAndNegative);
-                        if (res == MessageDialogResult.Affirmative)
+                        ConfirmWindow com = new ConfirmWindow(ImageType.Question, "Confirm?", "Are you sure to Demote " + LBEmployeeName.Text + " ?", "Yes", "No");
+                        com.ShowDialog();
+                        if (com.Confirmed)
                         {
                             MyDAL.UpdateEmployeePromotion(LBEmployeeID.Text, Rank + -1, TLUsername.Text);
                             ResultTable = MyDAL.SelectEmployeeByEmployeeID(LBEmployeeID.Text);

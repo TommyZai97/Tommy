@@ -132,12 +132,8 @@ namespace TBike
             conn.Open();
             try
             {
-                
-      
-
                 MyCmd.Parameters.AddWithValue("@BicycleName", BicycleName);
                 MyCmd.Parameters.AddWithValue("@BicycleType", BicycleType);
-
                 MyCmd.Parameters.AddWithValue("@Price", Price);
                 MyCmd.Parameters.AddWithValue("@Color", Color);
                 MyCmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
@@ -285,11 +281,9 @@ namespace TBike
             {
 
                 MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
-
                 MyCmd.Parameters.AddWithValue("@BicycleName", BicycleName);
                 MyCmd.Parameters.AddWithValue("@BicycleType", BicycleType);
                 MyCmd.Parameters.AddWithValue("@BicycleStatus", ItemStatus);
-
                 MyCmd.Parameters.AddWithValue("@Price", Price);
                 MyCmd.Parameters.AddWithValue("@Color", Color);
                 MyCmd.Parameters.AddWithValue("@LastUpdatedBy", LastUpdatedBy);
@@ -576,6 +570,38 @@ namespace TBike
             return ResultDataTable;
 
         }
+        public DataTable SelectEmployeeDetailsByRankLevel(int RankID)
+        {
+
+
+            SqlConnection MyCon = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("SelEmployeeDetailsByRanklvl", MyCon);
+            MyCmd.CommandTimeout = 600;
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter MyDA = new SqlDataAdapter(MyCmd);
+            DataTable ResultDataTable = new DataTable("ResultDataTable");
+
+            MyCmd.Parameters.AddWithValue("@RankID", RankID);
+            try
+            {
+                MyCon.Open();
+
+                MyDA.Fill(ResultDataTable);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("DB Operation Error At SelectEmployeeDetailsByRankLevelTwo : " + e.Message);
+            }
+            finally
+            {
+                MyCon.Close();
+                MyCon.Dispose();
+                MyCmd.Dispose();
+            }
+            return ResultDataTable;
+
+        }
+
         public DataTable ShowEmployeeRankByID(string RankID)
         {
 
@@ -1310,8 +1336,6 @@ namespace TBike
 
         public string AddSnackSales(string SnackID, int Quantity, string Customer, double price,string CreatedBy,string BookingID)
         {
-
-
             SqlConnection conn = new SqlConnection(constring);
             SqlCommand MyCmd = new SqlCommand("AddSnackSalesMaster", conn);
             MyCmd.CommandType = CommandType.StoredProcedure;
@@ -1339,7 +1363,7 @@ namespace TBike
                     MyCmd.CommandText = "AddExistBookSnackSalesMaster";
                     MyCmd.Parameters.AddWithValue("@SnackID", SnackID);
                     MyCmd.Parameters.AddWithValue("@BookingID", BookingID);
-                
+                    MyCmd.Parameters.AddWithValue("@price", price);
                     MyCmd.Parameters.AddWithValue("@Quantity", Quantity);
                     MyCmd.Parameters.AddWithValue("@Customer", Customer);
                     MyCmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);

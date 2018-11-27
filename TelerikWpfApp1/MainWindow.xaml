@@ -21,7 +21,7 @@
             <ImageBrush ImageSource="/T-Bike;component/Image/background.jpg"/>
         </Grid.Background>
 
-        <DataGrid Visibility="Hidden" x:Name="dataGrid1" SelectionChanged="dataGrid1_SelectionChanged"  HorizontalAlignment="Stretch" MinHeight="281" Margin="223,29,25,72" VerticalAlignment="Stretch" MinWidth="544"  Background="#7FA8A8A8"
+        <DataGrid Visibility="Hidden" x:Name="dataGrid1" SelectionChanged="dataGrid1_SelectionChanged"  HorizontalAlignment="Stretch" MinHeight="281" Margin="223,50,25,72" VerticalAlignment="Stretch" MinWidth="544"  Background="#7FA8A8A8"
                      BorderBrush="#FF14568D" BorderThickness="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Employee ID" Binding="{Binding EmployeeID}"/>
@@ -226,17 +226,7 @@
             <DockPanel>
                 <Expander Header="Statistics" x:Name="ExpanderReports"  Margin="0,15,0,0" Foreground="White" FontSize="16" BorderBrush="#FF2B303B" Background="#FF2B303B">
                     <StackPanel>
-                        <Button Cursor="Hand" Background="Transparent" Click="Button_Click_3" BorderBrush="{x:Null}">
-                            <Button.Effect>
-                                <DropShadowEffect/>
-                            </Button.Effect>
-                    
-                            <DockPanel Margin="10,10">
-                                <Image Source="Image/stat.jpg" Width="40" Height="40" Margin="0,0,8,0"/>
-                                <TextBlock Text="Search" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="15px" FontWeight="DemiBold" Margin="15,0,0,0"/>
-                             </DockPanel>
-                        </Button>
-
+                      
                         <Button Cursor="Hand" Background="Transparent" Click="Button_Click_4" BorderBrush="{x:Null}">
                             <Button.Effect>
                                 <DropShadowEffect/>
