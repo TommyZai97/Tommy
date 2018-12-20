@@ -35,6 +35,10 @@
         <TextBox x:Name="TBColor" HorizontalAlignment="Left" Margin="109,224,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="14" Width="136" Background="White"/>
         <TextBlock x:Name="LBPrice" HorizontalAlignment="Left" Margin="46,189,0,0" TextWrapping="Wrap" Text="Price" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
         <TextBlock x:Name="LBColor" HorizontalAlignment="Left" Margin="46,232,0,0" TextWrapping="Wrap" Text="Color" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+        <Button Name="BtnDelete" Content="Delete" HorizontalAlignment="Right" Margin="0,0,95,10" VerticalAlignment="Bottom" Width="75" Click="BtnDelete_Click"/>
+        <TextBlock x:Name="LBQuantity" HorizontalAlignment="Left" Margin="46,268,0,0" TextWrapping="Wrap" Text="Quantity" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+        <TextBox x:Name="TBQuantity" HorizontalAlignment="Left" Margin="109,268,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="14" Width="136"/>
+
         <Button Name="BTNPro" Content="Update" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="Button_Click"/>
         <TextBlock Name="LBTitle" HorizontalAlignment="Left" Margin="29,24,0,0" TextWrapping="Wrap" Text="UnknownData" VerticalAlignment="Top" FontSize="18" Foreground="White" TextDecorations="Underline"/>
         <DataGrid Name="dataGrid1" HorizontalAlignment="Stretch" MinHeight="268" Margin="356,38,38,113" VerticalAlignment="Stretch" MinWidth="398" Background="#89232323" SelectionChanged="dataGrid1_SelectionChanged">
@@ -48,9 +52,10 @@
                 <DataGridTextColumn x:Name="Column7"  />
                 <DataGridTextColumn x:Name="Column8"  />
                 <DataGridTextColumn x:Name="Column9"  />
+                <DataGridTextColumn x:Name="Column10"  />
             </DataGrid.Columns>
         </DataGrid>
-        <ComboBox Visibility="Hidden"  x:Name="CBStatus" HorizontalAlignment="Left" Margin="109,265,0,0" Text="" VerticalAlignment="Top" FontSize="14" Width="136" Background="White" Controls:TextBoxHelper.Watermark="Bicycle Status..." Controls:TextBoxHelper.AutoWatermark="True" Controls:TextBoxHelper.UseFloatingWatermark="True">
+        <ComboBox Visibility="Hidden"  x:Name="CBStatus" HorizontalAlignment="Left" Margin="109,320,0,0" Text="" VerticalAlignment="Top" FontSize="14" Width="136" Background="White" Controls:TextBoxHelper.Watermark="Bicycle Status..." Controls:TextBoxHelper.AutoWatermark="True" Controls:TextBoxHelper.UseFloatingWatermark="True">
             <ComboBoxItem Content="Active" />
             <ComboBoxItem Content="Expired"/>
             <ComboBoxItem Content="Not Returned"/>
@@ -59,7 +64,7 @@
             <ComboBoxItem Content="Inactive"/>
             <ComboBoxItem Content="Maintenance"/>
         </ComboBox>
-        <TextBlock Visibility="Hidden" x:Name="LBStatus" HorizontalAlignment="Left" Margin="46,273,0,0" TextWrapping="Wrap" Text="Status" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold" />
+        <TextBlock Visibility="Hidden" x:Name="LBStatus" HorizontalAlignment="Left" Margin="46,320,0,0" TextWrapping="Wrap" Text="Status" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold" />
         <ComboBox Visibility="Hidden"  x:Name="CBSnackStatus" HorizontalAlignment="Left" Margin="109,265,0,0" Text="" VerticalAlignment="Top" FontSize="14" Width="136" Background="White" Controls:TextBoxHelper.Watermark="Snack Status..." Controls:TextBoxHelper.AutoWatermark="True" Controls:TextBoxHelper.UseFloatingWatermark="True">
             <ComboBoxItem Content="Active"/>
             <ComboBoxItem Content="InActive"/>

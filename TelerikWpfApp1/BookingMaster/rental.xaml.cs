@@ -57,7 +57,7 @@ namespace TBike
                     string BookingID = Convert.ToString(ResultTable.Rows[0]["BookingID"]).Trim();
                     //double Deposit = Convert.ToDouble(ResultTable.Rows[0]["BookingDeposit"]);
                     double Price = Convert.ToDouble(ResultTable.Rows[0]["Price"]);
-
+                  
                     //This is for booked rents
                     if (TPStart.SelectedTime < bookTime.TimeOfDay)
                     {

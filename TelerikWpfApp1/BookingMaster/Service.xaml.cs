@@ -47,7 +47,7 @@ namespace TBike.BookingMaster
             else if (LBStatus.Text == "I")
             {
                 LBStatus.Text = "InActive";
-                TBCondition.Text = Convert.ToString(ResultTable.Rows[0]["Remark"]);
+                TBCondition.Text = Convert.ToString(ResultBikeTable.Rows[0]["Condition"]);
             }
 
         }

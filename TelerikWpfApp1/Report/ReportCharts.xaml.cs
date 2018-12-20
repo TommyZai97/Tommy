@@ -125,7 +125,7 @@ namespace TBike.Report
             else
             {
                 string BicycleName =Convert.ToString(BicycleTable.Rows[index]["BicycleName"]).Trim();
-                DataTable ResultTable = MyDAL.SelectAllBookingByDynamic("",  BicycleName, "", "", "", "");
+                DataTable ResultTable = MyDAL.SelectAllBookingByDynamic("",  BicycleName, "", "", "","",null);
 
                 TBBicycleID.Text = "Booking Details By: " + Convert.ToString(BicycleTable.Rows[index]["BicycleName"]).Trim();
 

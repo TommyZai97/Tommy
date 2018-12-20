@@ -27,7 +27,7 @@
         </DataGrid>
 
         <Button Name="BTNsearch" IsDefault="True" Content="Search" HorizontalAlignment="Right" VerticalAlignment="Top" Width="100" Click="BTNsearch_Click" Margin="0,177,10,0" Height="33" FontFamily="Calibri" FontSize="14"/>
-        <ComboBox x:Name="CBMode"  SelectedValuePath="Content" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="10,10,0,0" Controls:TextBoxHelper.Watermark="Mode">
+        <ComboBox x:Name="CBMode"  SelectedValuePath="Content" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="10,10,0,0" Controls:TextBoxHelper.Watermark="Mode" SelectionChanged="CBMode_SelectionChanged">
             <ComboBoxItem Content="Employee"/>
             <ComboBoxItem Content="Service"/>
             <ComboBoxItem Content="Bicycle"/>
@@ -93,6 +93,8 @@
             <StackPanel Orientation="Horizontal" Margin="0,11,0,0">
                 <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Address" VerticalAlignment="Top" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold"/>
                 <TextBox x:Name="TBAddress" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="194" Controls:TextBoxHelper.Watermark="Address" Margin="18,0,0,0"/>
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="Email" VerticalAlignment="Center" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold" Margin="11,0,0,0"/>
+                <TextBox x:Name="TBEmail" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="195" Margin="78,0,0,0" Controls:TextBoxHelper.Watermark="Email Address"/>
 
             </StackPanel>
 
@@ -121,13 +123,15 @@
                     <ComboBoxItem Content="Renting"/>
 
                 </ComboBox>
+                    
             </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,11,0,0">
                    
                     <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Remark" VerticalAlignment="Top" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold"/>
                     <TextBox x:Name="TBRemarks" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="194" Controls:TextBoxHelper.Watermark="Remark" Margin="60,0,0,0"/>
-
-                </StackPanel>
+                <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Booking Date" VerticalAlignment="Top"  Foreground="White" FontWeight="Bold" Margin="10,0,0,0"/>
+                <DatePicker x:Name="DPBook" HorizontalAlignment="Stretch" Margin="26,0,0,0" Width="194"/>
+            </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,11,0,0">
                     <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Bicycle Type" VerticalAlignment="Top" RenderTransformOrigin="-0.172,0.463" Foreground="White" FontWeight="Bold"/>
                     <TextBox x:Name="TBBikeType" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="194" Controls:TextBoxHelper.Watermark="Bicycle Type" Margin="34,0,0,0"/>

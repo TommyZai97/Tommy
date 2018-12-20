@@ -377,9 +377,10 @@ namespace TBike
             if (index == -1)
             {
                 index = 0;
+                
             }
             //string cellValue = dataRow.Row.ItemArray[index].ToString();
-            DataTable ResultTable = MyDAL.ShowAllEmployeeDetails();
+            DataTable ResultTable = MyDAL.SelectEmployeeDetailsByRankLevel(RankID);
             id = Convert.ToString(ResultTable.Rows[index]["EmployeeID"]);
             self = Convert.ToString(ResultTable.Rows[index]["username"]);
 

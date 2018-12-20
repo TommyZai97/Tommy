@@ -172,8 +172,9 @@ namespace TBike.EmployeeMaster
                     PopWindow pop = new PopWindow(ImageType.Warning, "Rank too low", "Sorry You do not have access to this feature", "Ok");
                     pop.ShowDialog();
                 }
-            } 
-            if (CBMode.SelectedValue.ToString().Trim() == "Snacks" || CBMode.SelectedValue.ToString().Trim() == "Bicycle")
+            }
+
+            if (CBMode.SelectedValue.ToString().Trim() == "Snacks" || CBMode.SelectedValue.ToString().Trim() == "Bicycle" && CBMode.SelectedValue.ToString().Trim() != "Empoyee")
             {
                 if (RankID >= 2)
                 {
@@ -185,11 +186,13 @@ namespace TBike.EmployeeMaster
                     pop.ShowDialog();
                 }
             }
-            else
+            
+            else if (CBMode.SelectedValue.ToString().Trim() != "Employee")
             {
                 initializeWorker();
             }
-
+           
+            
 
 
         }
@@ -298,13 +301,15 @@ namespace TBike.EmployeeMaster
             Column5.Binding = new Binding("CurrentRenter");
             Column6.Header = "Color";
             Column6.Binding = new Binding("Color");
-            Column7.Header = "";
-            Column8.Header = "";
-            Column9.Header = "";
-            Column10.Header = "";
+            Column7.Header = "Total Rents";
+            Column7.Binding = new Binding("TotalRents");
+            Column8.Header = "Price (RM)";
+            Column8.Binding = new Binding("Price");
+            Column9.Header = "Condition";
+            Column9.Binding = new Binding("Condition");
+            Column10.Header = "CreatedBy";
+            Column10.Binding = new Binding("CreatedBy");
             TBIkeUtility.TranslateRecordStatusDescription(new List<string> { "BicycleStatus" }, ref ResultTable);
-
-
             dataGrid1.ItemsSource = ResultTable.DefaultView;
             dataGrid1.IsReadOnly = true;
             dataGrid1.AutoGenerateColumns = false;
@@ -315,7 +320,7 @@ namespace TBike.EmployeeMaster
 
             TBikeDAL MyDAL = new TBikeDAL();
             DetermineItemStatus();
-            DataTable ResultTable = MyDAL.SelectAllBookingByDynamic(TBBookID.Text,TBBikeName.Text, TBBookingStatus.Text, TBCustomer.Text, TBRemarks.Text, TBBikeType.Text);
+            DataTable ResultTable = MyDAL.SelectAllBookingByDynamic(TBBookID.Text,TBBikeName.Text, TBBookingStatus.Text, TBCustomer.Text, TBRemarks.Text, TBBikeType.Text,DPBook.SelectedDate);
 
 
             Column1.Header = "Booking ID";
@@ -356,7 +361,7 @@ namespace TBike.EmployeeMaster
       
             TBikeDAL MyDAL = new TBikeDAL();
             DetermineItemStatus();
-            DataTable ResultTable = MyDAL.SelectAllEmployeeByDynamic(TBID.Text, TBName.Text, TBRankDesc.Text, TBAddress.Text, TBCreatedBy.Text);
+            DataTable ResultTable = MyDAL.SelectAllEmployeeByDynamic(TBID.Text, TBName.Text, TBRankDesc.Text, TBAddress.Text, TBEmail.Text,TBCreatedBy.Text);
             Column1.Header = "Employee ID";
             Column1.Binding = new Binding("EmployeeID");
             Column2.Header = "Employee Name";
@@ -708,6 +713,51 @@ namespace TBike.EmployeeMaster
                 PopWindow pop = new PopWindow(ImageType.Error, "Error SQL", ex.Message, "OK");
                 pop.ShowDialog();
             }
+        }
+
+        private void CBMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CBMode.SelectedIndex == 0)
+            {
+                StackBook.Visibility = Visibility.Hidden;
+                StackBike.Visibility = Visibility.Hidden;
+                StackService.Visibility = Visibility.Hidden;
+                StackSnack.Visibility = Visibility.Hidden;
+                StackEmp.Visibility = Visibility.Visible;
+            }
+            else if (CBMode.SelectedIndex == 1)
+            {
+                StackBook.Visibility = Visibility.Hidden;
+                StackBike.Visibility = Visibility.Hidden;
+                StackService.Visibility = Visibility.Visible;
+                StackSnack.Visibility = Visibility.Hidden;
+                StackEmp.Visibility = Visibility.Hidden;
+            }
+            else if (CBMode.SelectedIndex == 2) 
+            {
+                StackBook.Visibility = Visibility.Hidden;
+                StackBike.Visibility = Visibility.Visible;
+                StackService.Visibility = Visibility.Hidden;
+                StackSnack.Visibility = Visibility.Hidden;
+                StackEmp.Visibility = Visibility.Hidden;
+            }
+            else if (CBMode.SelectedIndex == 3)
+            {
+                StackBook.Visibility = Visibility.Visible;
+                StackBike.Visibility = Visibility.Hidden;
+                StackService.Visibility = Visibility.Hidden;
+                StackSnack.Visibility = Visibility.Hidden;
+                StackEmp.Visibility = Visibility.Hidden;
+            }
+            else if (CBMode.SelectedIndex == 4)
+            {
+                StackBook.Visibility = Visibility.Hidden;
+                StackBike.Visibility = Visibility.Hidden;
+                StackService.Visibility = Visibility.Hidden;
+                StackSnack.Visibility = Visibility.Visible;
+                StackEmp.Visibility = Visibility.Hidden;
+            }  
+
         }
     }  
   

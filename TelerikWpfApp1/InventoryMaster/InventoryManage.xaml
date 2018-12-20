@@ -43,6 +43,7 @@
                 <DataGridTextColumn x:Name="Column9"  />
                 <DataGridTextColumn x:Name="Column10"  />
                 <DataGridTextColumn x:Name="Column11"  />
+                <DataGridTextColumn x:Name="Column12"  />
             </DataGrid.Columns>
 
         </DataGrid>

@@ -163,7 +163,7 @@ namespace TBike
                     {
 
                         MyDAL.UpdateBookingStatus("S", CBBike.SelectedValue.ToString().Trim(), Customer, TLUsername.Text);
-                        MyDAL.UpdateBikeStatus(CBBike.SelectedValue.ToString().Trim(), "", DamageStatus, TBCondition.Text, null, Convert.ToDateTime(null), TLUsername.Text);
+                        MyDAL.UpdateBikeStatus(CBBike.SelectedValue.ToString().Trim(), "", DamageStatus, TBConditionReal.Text, null, Convert.ToDateTime(null), TLUsername.Text);
                         PopWindow pop = new PopWindow(ImageType.Information, "Success","Bicycle: "+ CBBike.Text + " Returned","Thank You");
                         pop.ShowDialog();
                         BindComboBox(CBBike);

@@ -60,18 +60,20 @@ namespace TBike
             Column4.Binding = new Binding("BicycleStatusInFull");
             Column5.Header = "Current Renter";
             Column5.Binding = new Binding("CurrentRenter");
-            Column6.Header = "Total Rents";
-            Column6.Binding = new Binding("TotalRents");
-            Column7.Header = "Price";
-            Column7.Binding = new Binding("Price");
-            Column8.Header = "Color";
-            Column8.Binding = new Binding("Color");
-            Column9.Header = "Condition";
-            Column9.Binding = new Binding("Condition");
-            Column10.Header = "Last Date Booked";
-            Column10.Binding = new Binding("LastBookedDate");
-            Column11.Header = "Created By";
-            Column11.Binding = new Binding("CreatedBy");
+            Column6.Header = "Quantity";
+            Column6.Binding = new Binding("Quantity");
+            Column7.Header = "Total Rents";
+            Column7.Binding = new Binding("Total Rents");
+            Column8.Header = "Price";
+            Column8.Binding = new Binding("Price");
+            Column9.Header = "Color";
+            Column9.Binding = new Binding("Color");
+            Column10.Header = "Condition";
+            Column10.Binding = new Binding("Condition");
+            Column11.Header = "Last Date Booked";
+            Column11.Binding = new Binding("LastUpdatedAt");
+            Column12.Header = "Created By";
+            Column12.Binding = new Binding("CreatedBy");
 
 
 

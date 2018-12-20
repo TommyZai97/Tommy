@@ -123,7 +123,7 @@ namespace TBike
         }
 
        
-        public string AddBicycleTable(string BicycleName,string BicycleType, double Price, string Color, string CreatedBy)
+        public string AddBicycleTable(string BicycleName,string BicycleType, int Quantity,double Price, string Color, string CreatedBy)
         {
             string BicycleID = "";
             SqlConnection conn = new SqlConnection(constring);
@@ -134,6 +134,7 @@ namespace TBike
             {
                 MyCmd.Parameters.AddWithValue("@BicycleName", BicycleName);
                 MyCmd.Parameters.AddWithValue("@BicycleType", BicycleType);
+                MyCmd.Parameters.AddWithValue("@Quantity", Quantity);
                 MyCmd.Parameters.AddWithValue("@Price", Price);
                 MyCmd.Parameters.AddWithValue("@Color", Color);
                 MyCmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
@@ -270,7 +271,7 @@ namespace TBike
             return BookingID;
         }
 
-        public string UpdateBicycleTable(string BicycleID, string BicycleName,string BicycleType, string ItemStatus,double Price, string Color, string LastUpdatedBy)
+        public string UpdateBicycleTable(string BicycleID, string BicycleName,string BicycleType, int Quantity, string ItemStatus,double Price, string Color, string LastUpdatedBy)
         {
         
             SqlConnection conn = new SqlConnection(constring);
@@ -284,6 +285,7 @@ namespace TBike
                 MyCmd.Parameters.AddWithValue("@BicycleName", BicycleName);
                 MyCmd.Parameters.AddWithValue("@BicycleType", BicycleType);
                 MyCmd.Parameters.AddWithValue("@BicycleStatus", ItemStatus);
+                MyCmd.Parameters.AddWithValue("@Quantity", Quantity);
                 MyCmd.Parameters.AddWithValue("@Price", Price);
                 MyCmd.Parameters.AddWithValue("@Color", Color);
                 MyCmd.Parameters.AddWithValue("@LastUpdatedBy", LastUpdatedBy);
@@ -303,7 +305,7 @@ namespace TBike
             }
             return BicycleID;
         }
-        public DataTable SelectAllBookingByDynamic(string BookingID, string Bicycle, string BookingStatus, string Customer, string Remark, string BicycleType)
+        public DataTable SelectAllBookingByDynamic(string BookingID, string Bicycle, string BookingStatus, string Customer, string Remark, string BicycleType, DateTime? BookingDate)
         {
 
 
@@ -316,7 +318,15 @@ namespace TBike
 
             MyCmd.Parameters.AddWithValue("@BookingID", BookingID);
             MyCmd.Parameters.AddWithValue("@BicycleName", Bicycle);
-      
+
+            if (BookingDate.HasValue)
+            {
+                MyCmd.Parameters.AddWithValue("@BookingDate", BookingDate);
+            }
+            else
+            {
+                MyCmd.Parameters.AddWithValue("@BookingDate", DBNull.Value);
+            }
             MyCmd.Parameters.AddWithValue("@BookingStatus", BookingStatus);
             MyCmd.Parameters.AddWithValue("@Customer", Customer);
             MyCmd.Parameters.AddWithValue("@Remark", Remark);
@@ -500,10 +510,39 @@ namespace TBike
             return ResultDataTable;
         }
 
+        public string DeleteBicycleByID(string BicycleID)
+        {
+
+            SqlConnection conn = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("DelBicycleByID", conn);
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+            try
+            {
+
+                MyCmd.Parameters.AddWithValue("@BicycleID", BicycleID);
+           
+                MyCmd.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("DB Operation Error At DeleteBicycleByID : " + e.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+                MyCmd.Dispose();
+            }
+            return BicycleID;
+        }
+
         #endregion
 
         #region EmployeeMaster
-        public DataTable SelectAllEmployeeByDynamic(string EmployeeID, string EmployeeName, string RankDesc, string Address, string CreatedBy)
+        public DataTable SelectAllEmployeeByDynamic(string EmployeeID, string EmployeeName, string RankDesc, string Address,string Email, string CreatedBy)
         {
 
 
@@ -518,6 +557,7 @@ namespace TBike
             MyCmd.Parameters.AddWithValue("@EmployeeName", EmployeeName);
             MyCmd.Parameters.AddWithValue("@RankDesc", RankDesc);
             MyCmd.Parameters.AddWithValue("@Address", Address);
+            MyCmd.Parameters.AddWithValue("@Email", Email);
 
             MyCmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
             try
@@ -1155,6 +1195,36 @@ namespace TBike
         #endregion
 
         #region Snack
+
+        public string DeleteSnackByID(string SnackID)
+        {
+
+            SqlConnection conn = new SqlConnection(constring);
+            SqlCommand MyCmd = new SqlCommand("DelSnackByID", conn);
+            MyCmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+            try
+            {
+
+                MyCmd.Parameters.AddWithValue("@SnackID", SnackID);
+
+                MyCmd.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("DB Operation Error At DeleteSnackByID : " + e.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+                MyCmd.Dispose();
+            }
+            return SnackID;
+        }
+
         public DataTable SelectAllSnackByDynamic(string SnackID, string SnackName,string SnackStatus, string SnackType)
         {
             SqlConnection MyCon = new SqlConnection(constring);

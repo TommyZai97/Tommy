@@ -132,16 +132,18 @@ namespace TBike
             Column4.Binding = new Binding("BicycleStatusInFull");
             Column5.Header = "Current Renter";
             Column5.Binding = new Binding("CurrentRenter");
-            Column6.Header = "Total Rents";
-            Column6.Binding = new Binding("TotalRents");
-            Column7.Header = "Price";
-            Column7.Binding = new Binding("Price");
-            Column8.Header = "Color";
-            Column8.Binding = new Binding("Color");
+            Column6.Header = "Quantity";
+            Column6.Binding = new Binding("Quantity");
+            Column7.Header = "Total Rents";
+            Column7.Binding = new Binding("TotalRents");
+            Column8.Header = "Price";
+            Column8.Binding = new Binding("Price");
+            Column9.Header = "Bicycle Color";
+            Column9.Binding = new Binding("Color");
             Column9.Header = "Last Date Booked";
-            Column9.Binding = new Binding("LastBookedDate");
-            Column9.Header = "Created By";
-            Column9.Binding = new Binding("CreatedBy");
+            Column9.Binding = new Binding("LastUpdatedAt");
+            Column10.Header = "Created By";
+            Column10.Binding = new Binding("CreatedBy");
 
             TBIkeUtility.TranslateRecordStatusDescription(new List<string> { "BicycleStatus" }, ref ResultTable);
             dataGrid1.ItemsSource = ResultTable.DefaultView;
@@ -187,6 +189,8 @@ namespace TBike
             TBikeDAL MyDAL = new TBikeDAL();
             if (Status == "Modification")
             {
+                BTNPro.Content = "Update";
+                BtnDelete.Visibility = Visibility.Visible;
                 if (Category == "Bicycle")
                 {
                     LBTitle.Text = "Bicycle";
@@ -205,8 +209,44 @@ namespace TBike
                         TBType.Text = Convert.ToString(ResultTable.Rows[0]["BicycleType"]).Trim();
                         TBPrice.Text = Convert.ToString(ResultTable.Rows[0]["Price"]).Trim();
                         TBColor.Text = Convert.ToString(ResultTable.Rows[0]["Color"]).Trim();
-                        CBStatus.Text = Convert.ToString(ResultTable.Rows[0]["BicycleStatus"]).Trim();
-                        CBStatus.SelectedIndex = CBStatus.Items.Count - 1;
+                        string BikeStatus = Convert.ToString(ResultTable.Rows[0]["BicycleStatus"]).Trim();
+                        TBQuantity.Text = Convert.ToString(ResultTable.Rows[0]["Quantity"]).Trim();
+                        
+                        if (BikeStatus  == "A")
+                        {
+                            CBStatus.SelectedIndex = 0;
+                            ItemStatus = "A";
+                        }
+                        else if (BikeStatus  == "E")
+                        {
+                            CBStatus.SelectedIndex = 1;
+                            ItemStatus = "E";
+                        }
+                        else if (BikeStatus == "N")
+                        {
+                            CBStatus.SelectedIndex = 2;
+                            ItemStatus = "N";
+                        }
+                        else if (BikeStatus == "S")
+                        {
+                            CBStatus.SelectedIndex = 3;
+                            ItemStatus = "S";
+                        }
+                        else if (BikeStatus == "R")
+                        {
+                            CBStatus.SelectedIndex = 4;
+                            ItemStatus = "R";
+                        }
+                        else if (BikeStatus == "I")
+                        {
+                            CBStatus.SelectedIndex = 5;
+                            ItemStatus = "I";
+                        }
+                        else if (BikeStatus == "M")
+                        {
+                            CBStatus.SelectedIndex = 6;
+                            ItemStatus = "M";
+                        }
                         PopulateBikeDataTable();
                     }
                     else
@@ -247,6 +287,7 @@ namespace TBike
                 LBTitle.Text = Category;
                 LBID.Text = "** New **";
                 BTNPro.Content = "Add";
+                BtnDelete.Visibility = Visibility.Hidden;
                 if (Category == "Snacks")
                 {
                     LBColor.Text = "Quantity";
@@ -256,21 +297,23 @@ namespace TBike
                 {
                     PopulateBikeDataTable();
                 }
-
             }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+          
             //Update Button
             DetermineItemStatus();
             if (MainStatus == "Modification")
             {
                 UpdateAllItems();
+                
             }
             else if (MainStatus == "Add") 
             {
                 AddNewItems();
+                
             }
         }
         public void AddNewItems()
@@ -278,33 +321,41 @@ namespace TBike
             DetermineItemStatus();
             try
             {
-                if (LBTitle.Text == "Bicycle")
+                if (LBName.Text != "")
                 {
-                    PopulateBikeDataTable();
-                    if (LBID.Text != null)
+                    if (LBTitle.Text == "Bicycle")
                     {
+                        PopulateBikeDataTable();
+                        if (LBID.Text != null)
+                        {
+                            TBikeDAL MyDAL = new TBikeDAL();
+                            ConfirmWindow con = new ConfirmWindow(ImageType.Question, "Are you sure to add new data?", "Confirmation", "Yes", "No");
+                            con.ShowDialog();
+                            if (con.Confirmed)
+                            {
+                                MyDAL.AddBicycleTable(TBName.Text, TBType.Text, Convert.ToInt32(TBQuantity.Text),Convert.ToDouble(TBPrice.Text), TBColor.Text, TLUsername.Text);
+                                PopulateBikeDataTable();
+                            }
+                        }
+                    }
+                    else if (LBTitle.Text == "Snacks")
+                    {
+                        PopulateSnackDataTable();
                         TBikeDAL MyDAL = new TBikeDAL();
-                      ConfirmWindow con = new ConfirmWindow(ImageType.Question, "Are you sure to add new data?", "Confirmation","Yes","No");
+                        ConfirmWindow con = new ConfirmWindow(ImageType.Question, "Confirmation", "Are you sure to add new data?", "Add Please", "No, don't add please");
                         con.ShowDialog();
                         if (con.Confirmed)
                         {
-                            MyDAL.AddBicycleTable(TBName.Text, TBType.Text, Convert.ToDouble(TBPrice.Text), TBColor.Text, TLUsername.Text);
-                            PopulateBikeDataTable();
+                            MyDAL.AddSnackTable(TBName.Text, TBType.Text, Convert.ToDouble(TBPrice.Text), Convert.ToInt32(TBColor.Text), TLUsername.Text);
+                            PopulateSnackDataTable();
                         }
                     }
                 }
-                else if (LBTitle.Text == "Snacks")
+                else
                 {
-                    PopulateSnackDataTable();
-                    TBikeDAL MyDAL = new TBikeDAL();
-                    ConfirmWindow con = new ConfirmWindow(ImageType.Question,"Confirmation","Are you sure to add new data?", "Add Please", "No, don't add please");
+                    PopWindow con = new PopWindow(ImageType.Error, "No field", "Please fill in all", "OK");
                     con.ShowDialog();
-                    if (con.Confirmed)
-                    {
-                        MyDAL.AddSnackTable( TBName.Text, TBType.Text, Convert.ToDouble(TBPrice.Text), Convert.ToInt32(TBColor.Text), TLUsername.Text);
-                        PopulateSnackDataTable();
-                        con.Dispose();
-                    }
+
                 }
             }
             catch (Exception ex)
@@ -332,9 +383,10 @@ namespace TBike
                         con.ShowDialog();
                         if (con.Confirmed)
                         {
-                            MyDAL.UpdateBicycleTable(LBID.Text, TBName.Text, TBType.Text, ItemStatus,Convert.ToDouble(TBPrice.Text), TBColor.Text, TLUsername.Text);
+                            MyDAL.UpdateBicycleTable(LBID.Text, TBName.Text, TBType.Text, Convert.ToInt32(TBQuantity.Text),ItemStatus,Convert.ToDouble(TBPrice.Text), TBColor.Text, TLUsername.Text);
                             PopulateBikeDataTable();
-                          
+                            PopWindow pop = new PopWindow(ImageType.Information, "Success!", "Changes Made, Successfully!", "Ok");
+                            pop.ShowDialog();
                         }
                     }
                 }
@@ -348,7 +400,8 @@ namespace TBike
                     {
                         MyDAL.UpdateSnackTable(LBID.Text, TBName.Text, TBType.Text, Convert.ToDouble(TBPrice.Text), Convert.ToInt32(TBColor.Text), ItemStatus, TLUsername.Text);
                         PopulateSnackDataTable();
-                     
+                        PopWindow pop = new PopWindow(ImageType.Information, "Success!", "Changes Made, Successfully!", "Ok");
+                        pop.ShowDialog();
                     }
                 }
             }
@@ -392,6 +445,37 @@ namespace TBike
                 }
             }
 
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (LBTitle.Text == "Bicycle")
+            {
+                TBikeDAL MyDAL = new TBikeDAL();
+
+
+                ConfirmWindow confirm = new ConfirmWindow(ImageType.Question, "Delete?", "Are you sure to delete this bicycle?", "Yes", "No! Turn Back!");
+                if (confirm.Confirmed)
+                {
+                    MyDAL.DeleteBicycleByID(LBID.Text);
+                    PopulateBikeDataTable();
+                    PopWindow pop = new PopWindow(ImageType.Information, "Bicycle Deleted", "Bicycle: " + LBName.Text + " Has been Deleted By " + TLUsername.Text, "Okay");
+                    pop.ShowDialog();
+                }
+            }
+            else if (LBTitle.Text == "Snacks")
+            {
+                TBikeDAL MyDAL = new TBikeDAL();
+               
+                ConfirmWindow confirm = new ConfirmWindow(ImageType.Question, "Delete?", "Are you sure to delete this Snack?", "Yes", "No! Turn Back!");
+                if (confirm.Confirmed)
+                {
+                    MyDAL.DeleteSnackByID(LBID.Text);
+                    PopulateBikeDataTable();
+                    PopWindow pop = new PopWindow(ImageType.Information, "Snack Deleted", "Snack: " + LBName.Text + " Has been Deleted By " + TLUsername.Text, "Okay");
+                    pop.ShowDialog();
+                }
+            }
         }
     }
 }

@@ -28,12 +28,16 @@
 
         <DataGrid BorderBrush="White" BorderThickness="2" x:Name="dataGrid1"  HorizontalAlignment="Stretch" MinHeight="100" MaxHeight="600" VerticalAlignment="Stretch" MinWidth="500"  Margin="45,280,63,84" Background="#7FA8A8A8" Foreground="Black" Grid.ColumnSpan="2" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Booking ID" Binding="{Binding BookingID}"/>
-                <DataGridTextColumn Header="Booking Date" Binding="{Binding BookingDate}"/>
-                <DataGridTextColumn Header="Booking Status" Binding="{Binding BookingStatusInFull}"/>
-                <DataGridTextColumn Header="Bicycle" Binding="{Binding BicycleName}"/>
-                <DataGridTextColumn Header="Booking Deposit" Binding="{Binding BookingDeposit}"/>
-                <DataGridTextColumn Header="Renter" Binding="{Binding Customer}"/>
+                <DataGridTextColumn x:Name="Column1"  />
+                <DataGridTextColumn x:Name="Column2"  />
+                <DataGridTextColumn x:Name="Column3"  />
+                <DataGridTextColumn x:Name="Column4"  />
+                <DataGridTextColumn x:Name="Column5"  />
+                <DataGridTextColumn x:Name="Column6"  />
+                <DataGridTextColumn x:Name="Column7"  />
+                <DataGridTextColumn x:Name="Column8"  />
+                <DataGridTextColumn x:Name="Column9"  />
+                <DataGridTextColumn x:Name="Column10"  />
             </DataGrid.Columns>
 
 
@@ -43,7 +47,9 @@
         <TextBox x:Name="TBCustomer"  HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="282" MaxWidth="400" Margin="45,105,0,0" FontSize="14"
                      Controls:TextBoxHelper.Watermark="Customer Name..."/>
 
-        <ComboBox x:Name="CBBike" IsEditable="True" ItemsSource="{Binding}" SelectedValue="BicycleID" DisplayMemberPath="BicycleName" HorizontalAlignment="Right" Margin="0,47,79,0" VerticalAlignment="Top" Width="215" Controls:TextBoxHelper.Watermark="Selec Bicycle..." Height="40" FontSize="14" SelectionChanged="CBBike_SelectionChanged" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="CBBike" IsEditable="True" ItemsSource="{Binding}" SelectedValue="BicycleID" DisplayMemberPath="BicycleName" HorizontalAlignment="Right" Margin="0,47,79,0" VerticalAlignment="Top" Width="215" Controls:TextBoxHelper.Watermark="Selec Bicycle..." Height="40" FontSize="14" SelectionChanged="CBBike_SelectionChanged" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Grid.ColumnSpan="2">
+         
+        </ComboBox>
 
         <TextBox x:Name="TBRemarks" HorizontalAlignment="Left" Height="67" Margin="45,156,0,0" TextWrapping="Wrap"  VerticalAlignment="Top"
                  MinWidth="200" Controls:TextBoxHelper.IsSpellCheckContextMenuEnabled="True" Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:TextBoxHelper.Watermark="Remarks..." Controls:TextBoxHelper.WatermarkAlignment="Center" Controls:TextBoxHelper.WatermarkTrimming="CharacterEllipsis" Width="506"/>
@@ -57,8 +63,7 @@
 
 
 
-        <Button Content="Search" HorizontalAlignment="Right" Margin="0,0,79,41" VerticalAlignment="Bottom" Width="82" Height="24" Click="Button_Click" Grid.ColumnSpan="2"/>
-
+        
     </Grid>
 
 
